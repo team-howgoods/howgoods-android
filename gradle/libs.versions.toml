@@ -1,0 +1,24 @@
+[versions]
+agp = "8.10.1"
+kotlin = "2.1.21"
+coreKtx = "1.16.0"
+appcompat = "1.7.1"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+# build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+# internal
+cyanlch-android-application-compose = { id = "com.cyanlch.convention.application.compose", version = "unspecified"}
+
+
