@@ -6,9 +6,6 @@ android {
     namespace = "com.cyanlch.side99"
     defaultConfig {
         applicationId = "com.cyanlch.side99"
-
-        versionCode = 1
-        versionName = "1.0"
     }
 
     buildTypes {
