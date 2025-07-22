@@ -12,7 +12,7 @@ gradlePlugin {
     plugins {
         register("androidApplicationCompose") {
             id = "com.cyanlch.convention.application.compose"
-            implementationClass = "com.cyanlch.convention.AndroidApplicationComposeConventionPlugin"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
     }
 }

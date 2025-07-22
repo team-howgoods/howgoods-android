@@ -1,5 +1,7 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.cyanlch.convention.configureKotlinAndroid
+import com.cyanlch.convention.getBuildConfigValue
+import com.cyanlch.convention.impl
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -12,9 +14,19 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
             extensions.configure<ApplicationExtension> {
-                defaultConfig.targetSdk = 35
+                compileSdk = 35
+
+                defaultConfig {
+                    targetSdk = 35
+                    minSdk = 31
+                    versionCode = providers.gradleProperty("VERSION_CODE").map { it.toInt() }.get()
+                    versionName = providers.gradleProperty("VERSION_NAME").get()
+                }
                 configureKotlinAndroid(this)
             }
+
+            impl("material3")
+            impl("material")
         }
     }
 }

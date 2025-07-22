@@ -4,11 +4,8 @@ plugins {
 
 android {
     namespace = "com.cyanlch.side99"
-    compileSdk = 35
-
     defaultConfig {
         applicationId = "com.cyanlch.side99"
-        targetSdk = 35
 
         versionCode = 1
         versionName = "1.0"
@@ -22,9 +19,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.name
     }
 }
 
