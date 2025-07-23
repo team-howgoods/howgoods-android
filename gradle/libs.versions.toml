@@ -3,6 +3,9 @@ agp = "8.10.1"
 kotlin = "2.1.21"
 coreKtx = "1.16.0"
 appcompat = "1.7.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -15,6 +18,11 @@ material = { group = "com.google.android.material", name = "material", version =
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
+# test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -23,5 +31,6 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 # internal
 cyanlch-android-application-compose = { id = "com.cyanlch.convention.application.compose", version = "unspecified"}
+cyanlch-android-library-compose = { id = "com.cyanlch.convention.library.compose", version = "unspecified"}
 
 
