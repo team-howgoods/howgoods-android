@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.cyanlch.convention.configureKotlinAndroid
-import com.cyanlch.convention.getBuildConfigValue
 import com.cyanlch.convention.impl
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -21,6 +20,15 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
                     minSdk = 31
                     versionCode = providers.gradleProperty("VERSION_CODE").map { it.toInt() }.get()
                     versionName = providers.gradleProperty("VERSION_NAME").get()
+                }
+                buildTypes {
+                    getByName("release") {
+                        isMinifyEnabled = true
+                        proguardFiles(
+                            getDefaultProguardFile("proguard-android-optimize.txt"),
+                            "proguard-rules.pro"
+                        )
+                    }
                 }
                 configureKotlinAndroid(this)
             }
