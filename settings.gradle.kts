@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "Side99"
 include(":app")
 include(":core:domain")
+include(":feature:login")
