@@ -22,6 +22,6 @@ fun Project.debugImpl(alias: String) {
 
 fun Project.platform(alias: String) {
     libs.findLibrary(alias).ifPresent {
-        dependencies.platform(it)
+        dependencies.add("implementation", dependencies.platform(it))
     }
 }
