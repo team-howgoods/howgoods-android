@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.cyanlch.convention.configureAndroidCompose
 import com.cyanlch.convention.configureKotlinAndroid
 import com.cyanlch.convention.impl
 import org.gradle.api.Plugin
@@ -11,6 +12,7 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
             extensions.configure<ApplicationExtension> {
                 compileSdk = 35
@@ -31,9 +33,9 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
                     }
                 }
                 configureKotlinAndroid(this)
+                configureAndroidCompose(this)
             }
 
-            impl("material3")
             impl("material")
         }
     }
