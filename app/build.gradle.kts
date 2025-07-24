@@ -11,4 +11,5 @@ android {
 
 dependencies {
     implementation(libs.splashscreen)
+    implementation(project(":feature:login"))
 }

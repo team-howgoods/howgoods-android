@@ -9,6 +9,8 @@ class RoutingActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        this.startActivity(Intent(this, MainActivity::class.java))
+
     }
 
     override fun onNewIntent(intent: Intent) {
