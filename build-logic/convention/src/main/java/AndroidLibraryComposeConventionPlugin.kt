@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.LibraryExtension
+import com.cyanlch.convention.configureAndroidCompose
 import com.cyanlch.convention.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,6 +11,7 @@ class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
             extensions.configure<LibraryExtension> {
                 compileSdk = 35
@@ -18,7 +20,6 @@ class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
                     minSdk = 31
                     consumerProguardFiles("consumer-rules.pro")
                 }
-                configureKotlinAndroid(this)
                 buildTypes {
                     getByName("release") {
                         isMinifyEnabled = false
@@ -28,6 +29,8 @@ class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
                         )
                     }
                 }
+                configureKotlinAndroid(this)
+                configureAndroidCompose(this)
             }
         }
     }

@@ -13,3 +13,15 @@ fun Project.impl(alias: String) {
         dependencies.add("implementation", it)
     }
 }
+
+fun Project.debugImpl(alias: String) {
+    libs.findLibrary(alias).ifPresent {
+        dependencies.add("debugImplementation", it)
+    }
+}
+
+fun Project.platform(alias: String) {
+    libs.findLibrary(alias).ifPresent {
+        dependencies.platform(it)
+    }
+}
