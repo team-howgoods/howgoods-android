@@ -5,6 +5,7 @@ coreKtx = "1.16.0"
 appcompat = "1.7.1"
 composeBom = "2025.06.01"
 activityCompose = "1.10.1"
+circuit = "0.29.1"
 
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -17,6 +18,13 @@ material3 = { group = "androidx.compose.material3", name = "material3", version 
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
 androidx-browser = { group = "androidx.browser", name = "browser", version = "1.8.0" }
 
+# circuit
+circuit-foundation = { group = "com.slack.circuit", name = "circuit-foundation", version.ref = "circuit" }
+circuit-annotations = { group = "com.slack.circuit", name = "circuit-annotations", version.ref = "circuit" }
+circuit-runtime = { group = "com.slack.circuit", name = "circuit-runtime", version.ref = "circuit" }
+circuit-backstack = { group = "com.slack.circuit", name = "circuit-backstack", version.ref = "circuit" }
+
+# compose
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
@@ -49,5 +57,8 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 # internal
 cyanlch-android-application-compose = { id = "com.cyanlch.convention.application.compose", version = "unspecified"}
 cyanlch-android-library-compose = { id = "com.cyanlch.convention.library.compose", version = "unspecified"}
+cyanlch-circuit = { id = "com.cyanlch.convention.circuit", version = "unspecified"}
 
 
+[bundles]
+circuit = ["circuit-foundation", "circuit-annotations", "circuit-runtime", "circuit-backstack"]
