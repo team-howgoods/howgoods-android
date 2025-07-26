@@ -31,3 +31,9 @@ fun Project.ksp(alias: String) {
         dependencies.add("ksp", it)
     }
 }
+
+fun Project.bundle(alias: String) {
+    libs.findBundle(alias).ifPresent {
+        dependencies.add("implementation", it)
+    }
+}

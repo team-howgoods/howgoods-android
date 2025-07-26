@@ -1,20 +1,11 @@
 plugins {
     alias(libs.plugins.cyanlch.android.library.compose)
     alias(libs.plugins.cyanlch.circuit)
+    alias(libs.plugins.cyanlch.hilt)
 }
 
 android {
     namespace = "com.cyanlch.login"
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
 }
 
 dependencies {
@@ -25,5 +16,4 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.foundation)
-
 }

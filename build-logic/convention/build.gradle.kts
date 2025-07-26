@@ -7,6 +7,7 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
@@ -21,7 +22,11 @@ gradlePlugin {
         }
         register("circuitConvention") {
             id = "com.cyanlch.convention.circuit"
-            implementationClass = "CircuitConvention"
+            implementationClass = "CircuitConventionPlugin"
+        }
+        register("hiltConvention") {
+            id = "com.cyanlch.convention.hilt"
+            implementationClass = "HiltConventionPlugin"
         }
     }
 }
