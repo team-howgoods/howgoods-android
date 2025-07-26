@@ -25,3 +25,9 @@ fun Project.platform(alias: String) {
         dependencies.add("implementation", dependencies.platform(it))
     }
 }
+
+fun Project.ksp(alias: String) {
+    libs.findLibrary(alias).ifPresent {
+        dependencies.add("ksp", it)
+    }
+}
