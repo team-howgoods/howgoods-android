@@ -8,11 +8,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import com.cyanlch.login.LoginScreen
 import com.cyanlch.ui.circuit.NoState
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.slack.circuit.codegen.annotations.CircuitInject
+import androidx.compose.material3.CircularProgressIndicator
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
@@ -30,9 +29,9 @@ class MainPresenter @AssistedInject constructor(
 ) : Presenter<NoState> {
     @Composable
     override fun present(): NoState {
-        /*LaunchedEffect(Unit) {
+        LaunchedEffect(Unit) {
             navigator.goTo(LoginScreen())
-        }*/
+        }
         return NoState
     }
 
@@ -46,8 +45,7 @@ class MainPresenter @AssistedInject constructor(
 @CircuitInject(MainScreen::class, ActivityRetainedComponent::class)
 @Composable
 fun MainUi(state: NoState, modifier: Modifier) {
-    val context = LocalContext.current
     Box(modifier = modifier.fillMaxSize().background(Color.Gray), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator(context)
+        CircularProgressIndicator()
     }
 }
