@@ -1,5 +1,6 @@
 package com.cyanlch.side99.main
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import com.cyanlch.login.LoginScreen
 import com.cyanlch.ui.circuit.NoState
 import com.slack.circuit.codegen.annotations.CircuitInject
 import androidx.compose.material3.CircularProgressIndicator
+import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
@@ -22,17 +24,20 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-object MainScreen : Screen
+object MainScreen : Screen {
+    data object State : CircuitUiState
+}
 
 class MainPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator
-) : Presenter<NoState> {
+) : Presenter<MainScreen.State> {
     @Composable
-    override fun present(): NoState {
+    override fun present(): MainScreen.State {
         LaunchedEffect(Unit) {
             navigator.goTo(LoginScreen())
         }
-        return NoState
+
+        return MainScreen.State
     }
 
     @CircuitInject(MainScreen::class, ActivityRetainedComponent::class)
@@ -44,8 +49,8 @@ class MainPresenter @AssistedInject constructor(
 
 @CircuitInject(MainScreen::class, ActivityRetainedComponent::class)
 @Composable
-fun MainUi(state: NoState, modifier: Modifier) {
-    Box(modifier = modifier.fillMaxSize().background(Color.Gray), contentAlignment = Alignment.Center) {
+fun MainUi(state: MainScreen.State, modifier: Modifier) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()
     }
 }

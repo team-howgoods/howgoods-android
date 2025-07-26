@@ -8,6 +8,7 @@ import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.CircuitContent
+import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import com.slack.circuit.overlay.ContentWithOverlays
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +28,9 @@ class MainActivity: ComponentActivity() {
                 ContentWithOverlays {
                     val backStack = rememberSaveableBackStack(root = MainScreen)
                     val navigator = rememberCircuitNavigator(backStack)
-                    CircuitContent(
-                        screen = MainScreen,
-                        navigator = navigator
+                    NavigableCircuitContent(
+                        navigator = navigator,
+                        backStack = backStack
                     )
                 }
             }
