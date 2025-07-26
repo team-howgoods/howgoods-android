@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Side99">
         <activity
-            android:name=".RoutingActivity"
+            android:name=".main.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Side99.Splash">
@@ -23,7 +23,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity"/>
     </application>
 </manifest>

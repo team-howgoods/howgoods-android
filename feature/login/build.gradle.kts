@@ -1,7 +1,5 @@
 plugins {
-    alias(libs.plugins.cyanlch.android.library.compose)
-    alias(libs.plugins.cyanlch.circuit)
-    alias(libs.plugins.cyanlch.hilt)
+    alias(libs.plugins.cyanlch.feature)
 }
 
 android {

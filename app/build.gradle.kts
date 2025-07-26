@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.cyanlch.android.application.compose)
+    alias(libs.plugins.cyanlch.circuit)
+    alias(libs.plugins.cyanlch.hilt)
 }
 
 android {
@@ -13,5 +15,6 @@ dependencies {
     implementation(libs.splashscreen)
     implementation(libs.androidx.activity.compose)
 
-    implementation(project(":feature:login"))
+    implementation(projects.core.ui)
+    implementation(projects.feature.login)
 }
