@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import java.security.SecureRandom
 import java.util.Base64
 
-class AppleLoginWithCustomTabsActivity: ComponentActivity() {
+class AppleLoginWithCustomTabsActivity : ComponentActivity() {
 
     private var currentState: String? = null
 
@@ -47,13 +47,13 @@ class AppleLoginWithCustomTabsActivity: ComponentActivity() {
             }
 
             Scaffold(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             ) { padding ->
                 Box(
-                    modifier = Modifier.fillMaxSize().padding(padding).background(Color.Gray)
+                    modifier = Modifier.fillMaxSize().padding(padding).background(Color.Gray),
                 ) {
                     Text(
-                        text = loginText
+                        text = loginText,
                     )
                 }
             }

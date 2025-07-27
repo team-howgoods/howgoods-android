@@ -1,4 +1,3 @@
 package com.cyanlch.domain
 
-class MyClass {
-}
+class MyClass

@@ -27,12 +27,12 @@ fun CyanOutlinedButton(
         colors = colors,
         border = BorderStroke(
             width = SideButtonDefaults.OutlinedButtonBorderWidth,
-            color = Color.Black // TODO
+            color = Color.Black, // TODO
         ),
         contentPadding = contentPadding,
         onClick = onClick,
         content = content,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 

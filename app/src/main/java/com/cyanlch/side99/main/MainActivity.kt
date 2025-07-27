@@ -7,7 +7,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
-import com.slack.circuit.foundation.CircuitContent
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import com.slack.circuit.overlay.ContentWithOverlays
@@ -15,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity: ComponentActivity() {
+class MainActivity : ComponentActivity() {
     @Inject
     lateinit var circuit: Circuit
 
@@ -30,7 +29,7 @@ class MainActivity: ComponentActivity() {
                     val navigator = rememberCircuitNavigator(backStack)
                     NavigableCircuitContent(
                         navigator = navigator,
-                        backStack = backStack
+                        backStack = backStack,
                     )
                 }
             }

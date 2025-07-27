@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.CyanOutlinedButton
 import com.cyanlch.designsystem.WidthSpacer
 
-
 @Composable
 fun SocialButton(
     modifier: Modifier = Modifier,
@@ -52,6 +51,6 @@ fun SocialButton(
             }
         },
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     )
 }
