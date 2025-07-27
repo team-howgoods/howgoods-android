@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.cyanlch.android.application.compose)
+    alias(libs.plugins.cyanlch.android.application.firebase)
     alias(libs.plugins.cyanlch.circuit)
     alias(libs.plugins.cyanlch.hilt)
 }

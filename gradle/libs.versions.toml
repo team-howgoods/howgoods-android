@@ -10,6 +10,11 @@ circuit = "0.29.1"
 hilt = "2.56.2"
 lifecycle = "2.9.2"
 kotlinxSerialization = "1.8.1"
+googleServices = "4.4.3"
+firebasePerfPlugin = "2.0.0"
+firebaseCrashlyticsPlugin = "3.0.5"
+firebaseBom = "34.0.0"
+
 
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -54,12 +59,21 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
 
+# firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-cloud-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-config = { group = "com.google.firebase", name = "firebase-config" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
+
 # build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
-# hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
+firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
 
 # test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -74,9 +88,13 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
+firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
 
 # internal
 cyanlch-android-application-compose = { id = "com.cyanlch.convention.application.compose", version = "unspecified"}
+cyanlch-android-application-firebase = { id = "com.cyanlch.convention.application.firebase", version = "unspecified"}
 cyanlch-android-library-compose = { id = "com.cyanlch.convention.library.compose", version = "unspecified"}
 cyanlch-circuit = { id = "com.cyanlch.convention.circuit", version = "unspecified"}
 cyanlch-hilt = { id = "com.cyanlch.convention.hilt", version = "unspecified"}

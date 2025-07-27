@@ -8,6 +8,8 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.firebase.crashlytics.gradlePlugin)
+    compileOnly(libs.firebase.performance.gradlePlugin)
 }
 
 gradlePlugin {
@@ -31,6 +33,10 @@ gradlePlugin {
         register("featureConvention") {
             id = "com.cyanlch.convention.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
+        }
+        register("androidApplicationFirebase") {
+            id = "com.cyanlch.convention.application.firebase"
+            implementationClass = "AndroidApplicationFirebaseConventionPlugin"
         }
     }
 }
