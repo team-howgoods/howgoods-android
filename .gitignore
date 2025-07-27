@@ -10,3 +10,6 @@ local.properties
 *.jks
 *.keystore
 google-services.json
+assetlinks.json
+*.apk
+output-metadata.json
