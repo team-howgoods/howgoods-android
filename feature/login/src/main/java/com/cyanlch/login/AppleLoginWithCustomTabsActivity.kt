@@ -1,6 +1,5 @@
 package com.cyanlch.login
 
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -97,7 +96,10 @@ class AppleLoginWithCustomTabsActivity: ComponentActivity() {
 
     private fun parseUri(uri: Uri) {
         val token = uri.getQueryParameter("token")
-        Log.d(TAG, "token : $token")
+        token?.let {
+            loginInfo = "token : $token"
+            Log.d(TAG, "token : $token")
+        }
     }
 
     private fun generateState(): String {
