@@ -1,0 +1,17 @@
+# https:#editorconfig.org/
+# This configuration is used by ktlint when spotless invokes it
+
+[*.{kt,kts}]
+ij_kotlin_allow_trailing_comma=true                                 # 선언 위치에서 후행 쉼표(trailing comma) 사용을 허용합니다. 예를 들어, 클래스나 함수의 매개변수 목록 마지막에 쉼표를 붙일 수 있습니다.
+ij_kotlin_allow_trailing_comma_on_call_site=true                    # 함수 호출 위치에서 후행 쉼표 사용을 허용합니다.
+ktlint_function_naming_ignore_when_annotated_with=Composable, Test  # @Composable, @Test 어노테이션이 붙은 함수의 이름은 ktlint의 함수 명명 규칙 검사를 무시합니다.
+ktlint_standard_backing-property-naming = disabled                  # 백킹 프로퍼티(backing property)의 명명 규칙을 비활성화합니다.
+ktlint_standard_binary-expression-wrapping = disabled               # 이항 표현식(binary expression)의 줄 바꿈 규칙을 비활성화합니다.
+ktlint_standard_chain-method-continuation = disabled                # 여러 줄에 걸친 메서드 체인(chain method)의 연속성 규칙을 비활성화합니다.
+ktlint_standard_class-signature = disabled                          # 클래스 시그니처(class signature)의 형식 지정 규칙을 비활성화합니다.
+ktlint_standard_condition-wrapping = disabled                       # 조건문의 줄 바꿈 규칙을 비활성화합니다.
+ktlint_standard_function-expression-body = disabled                 # 함수 본문을 표현식으로 변환하는 규칙을 비활성화합니다.
+ktlint_standard_function-literal = disabled                         # 함수 리터럴(function literal)의 서식 규칙을 비활성화합니다.
+ktlint_standard_function-type-modifier-spacing = disabled           # 함수 타입의 변경자(modifier)와 타입 사이의 공백 규칙을 비활성화합니다.
+ktlint_standard_multiline-loop = disabled                           # 여러 줄의 루프(loop) 문에 대한 규칙을 비활성화합니다.
+ktlint_standard_function-signature = disabled                       # 함수 시그니처(function signature)의 형식 지정 규칙을 비활성화합니다.

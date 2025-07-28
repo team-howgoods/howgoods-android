@@ -1,5 +1,8 @@
 plugins {
     alias(libs.plugins.cyanlch.android.application.compose)
+    alias(libs.plugins.cyanlch.android.application.firebase)
+    alias(libs.plugins.cyanlch.circuit)
+    alias(libs.plugins.cyanlch.hilt)
 }
 
 android {
@@ -7,18 +10,18 @@ android {
     defaultConfig {
         applicationId = "com.cyanlch.side99"
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
 }
 
 dependencies {
+    implementation(projects.core.ui)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.navigation)
+    implementation(projects.feature.login)
+
     implementation(libs.splashscreen)
+    implementation(libs.androidx.activity.compose)
+
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.foundation)
 }

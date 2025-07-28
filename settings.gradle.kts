@@ -21,6 +21,11 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Side99"
 include(":app")
 include(":core:domain")
+include(":feature:login")
+include(":core:ui")
+include(":core:designsystem")
+include(":core:navigation")
