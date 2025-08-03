@@ -6,9 +6,9 @@ plugins {
 }
 
 android {
-    namespace = "com.cyanlch.side99"
+    namespace = "com.cyanlch.howgoods"
     defaultConfig {
-        applicationId = "com.cyanlch.side99"
+        applicationId = "com.cyanlch.howgoods"
     }
 }
 

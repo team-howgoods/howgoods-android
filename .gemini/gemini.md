@@ -1,4 +1,4 @@
-# Side99 Android 프로젝트
+# HowGoods Android 프로젝트
 
 ## 프로젝트 개요
 
