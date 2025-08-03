@@ -7,6 +7,6 @@ enum class SocialPlatform {
 }
 
 interface SocialLogin {
-    fun login(context: Context)
+    suspend fun login(context: Context): Result<String>
     fun logout()
 }
