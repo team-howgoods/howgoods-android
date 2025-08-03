@@ -15,11 +15,7 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
             extensions.configure<ApplicationExtension> {
-                compileSdk = 35
-
                 defaultConfig {
-                    targetSdk = 35
-                    minSdk = 31
                     versionCode = providers.gradleProperty("VERSION_CODE").map { it.toInt() }.get()
                     versionName = providers.gradleProperty("VERSION_NAME").get()
                 }

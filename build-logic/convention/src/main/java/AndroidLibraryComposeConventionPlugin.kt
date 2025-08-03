@@ -14,10 +14,7 @@ class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
             extensions.configure<LibraryExtension> {
-                compileSdk = 35
-
                 defaultConfig {
-                    minSdk = 31
                     consumerProguardFiles("consumer-rules.pro")
                 }
                 buildTypes {
