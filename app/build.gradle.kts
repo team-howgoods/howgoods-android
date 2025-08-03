@@ -21,6 +21,7 @@ dependencies {
     implementation(projects.feature.login)
 
     implementation(libs.splashscreen)
+    implementation(libs.androidx.startup)
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.compose.material3)
