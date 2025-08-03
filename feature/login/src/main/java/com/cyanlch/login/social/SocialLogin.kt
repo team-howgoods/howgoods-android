@@ -8,4 +8,5 @@ enum class SocialPlatform {
 
 interface SocialLogin {
     fun login(context: Context)
+    fun logout()
 }

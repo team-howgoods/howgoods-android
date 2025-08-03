@@ -44,4 +44,14 @@ class KakaoLoginHelper @Inject constructor(): SocialLogin {
             UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
         }
     }
+
+    override fun logout() {
+        UserApiClient.instance.logout { error ->
+            if (error != null) {
+                Log.e(TAG, "카카오계정 로그아웃 실패", error)
+            } else {
+                Log.i(TAG, "카카오계정 로그아웃 성공")
+            }
+        }
+    }
 }

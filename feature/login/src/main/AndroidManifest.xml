@@ -12,6 +12,8 @@
             tools:node="merge">
             <meta-data  android:name="com.cyanlch.login.social.kakao.KakaoInitializer"
                 android:value="androidx.startup" />
+            <meta-data  android:name="com.cyanlch.login.social.naver.NaverInitializer"
+                android:value="androidx.startup" />
         </provider>
     </application>
 </manifest>

@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
 
     implementation(libs.kakao.v2.user)
+    implementation(libs.naver.nid)
     implementation(libs.androidx.startup)
 
     androidTestImplementation(libs.junit)
