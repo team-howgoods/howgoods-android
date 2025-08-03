@@ -1,4 +1,4 @@
-package com.cyanlch.side99
+package com.cyanlch.howgoods
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

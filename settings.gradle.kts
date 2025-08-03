@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 }
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-rootProject.name = "Side99"
+rootProject.name = "HowGoods"
 include(":app")
 include(":core:domain")
 include(":feature:login")

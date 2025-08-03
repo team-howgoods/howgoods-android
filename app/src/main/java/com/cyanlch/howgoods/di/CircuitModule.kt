@@ -1,4 +1,4 @@
-package com.cyanlch.side99.di
+package com.cyanlch.howgoods.di
 
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.presenter.Presenter
