@@ -7,6 +7,7 @@ class AndroidFeatureConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
+                apply("com.cyanlch.convention.library")
                 apply("com.cyanlch.convention.library.compose")
                 apply("com.cyanlch.convention.circuit")
                 apply("com.cyanlch.convention.hilt")

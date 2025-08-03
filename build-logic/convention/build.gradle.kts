@@ -22,6 +22,10 @@ gradlePlugin {
             id = "com.cyanlch.convention.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "com.cyanlch.convention.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
         register("circuitConvention") {
             id = "com.cyanlch.convention.circuit"
             implementationClass = "CircuitConventionPlugin"

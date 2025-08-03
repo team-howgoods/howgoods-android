@@ -96,6 +96,7 @@ firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "fireb
 cyanlch-android-application-compose = { id = "com.cyanlch.convention.application.compose", version = "unspecified"}
 cyanlch-android-application-firebase = { id = "com.cyanlch.convention.application.firebase", version = "unspecified"}
 cyanlch-android-library-compose = { id = "com.cyanlch.convention.library.compose", version = "unspecified"}
+cyanlch-android-library = { id = "com.cyanlch.convention.library", version = "unspecified"}
 cyanlch-circuit = { id = "com.cyanlch.convention.circuit", version = "unspecified"}
 cyanlch-hilt = { id = "com.cyanlch.convention.hilt", version = "unspecified"}
 cyanlch-feature = { id = "com.cyanlch.convention.feature", version = "unspecified"}
