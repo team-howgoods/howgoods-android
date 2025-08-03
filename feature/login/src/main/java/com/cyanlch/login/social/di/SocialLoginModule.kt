@@ -5,22 +5,25 @@ import com.cyanlch.login.social.SocialPlatform
 import com.cyanlch.login.social.kakao.KakaoLoginHelper
 import com.cyanlch.login.social.naver.NaverLoginHelper
 import dagger.Binds
+import dagger.MapKey
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+
+@MapKey
+annotation class PlatformKey(val value: SocialPlatform)
 
 @Module
 @InstallIn(SingletonComponent::class)
 interface SocialLoginModule {
     @Binds
     @IntoMap
-    @ClassKey(SocialPlatform.Kakao::class)
+    @PlatformKey(SocialPlatform.KAKAO)
     fun bindKakao(impl: KakaoLoginHelper): SocialLogin
 
     @Binds
     @IntoMap
-    @ClassKey(SocialPlatform.Naver::class)
+    @PlatformKey(SocialPlatform.NAVER)
     fun bindNaver(impl: NaverLoginHelper): SocialLogin
 }

@@ -2,10 +2,10 @@ package com.cyanlch.login.social
 
 import android.content.Context
 
-sealed class SocialPlatform() {
-    object Kakao : SocialPlatform()
-    object Naver : SocialPlatform()
+enum class SocialPlatform {
+    KAKAO, NAVER
 }
+
 interface SocialLogin {
     fun login(context: Context)
 }

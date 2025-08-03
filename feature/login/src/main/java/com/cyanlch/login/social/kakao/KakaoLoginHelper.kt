@@ -7,8 +7,9 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import javax.inject.Inject
 
-class KakaoLoginHelper : SocialLogin {
+class KakaoLoginHelper @Inject constructor(): SocialLogin {
     companion object {
         private const val TAG = "KakaoLoginHelper"
     }
