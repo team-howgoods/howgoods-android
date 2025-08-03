@@ -13,3 +13,4 @@ google-services.json
 assetlinks.json
 *.apk
 output-metadata.json
+.kotlin/
