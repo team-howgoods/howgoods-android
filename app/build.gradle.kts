@@ -16,6 +16,8 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
     implementation(projects.core.navigation)
+    implementation(projects.core.data)
+
     implementation(projects.feature.login)
 
     implementation(libs.splashscreen)
