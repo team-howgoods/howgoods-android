@@ -18,34 +18,41 @@ class NaverLoginHelper @Inject constructor() : SocialLogin {
         return suspendCancellableCoroutine { continuation ->
             val oauthLoginCallback = object : OAuthLoginCallback {
                 override fun onSuccess() {
+                    if (!continuation.isActive) return
                     Log.e(TAG,
                         "NaverIdLoginSDK.getAccessToken(): " +
                                 "${NaverIdLoginSDK.getAccessToken()}"
                     )
                     val accessToken = NaverIdLoginSDK.getAccessToken()
                     if (!accessToken.isNullOrBlank()) {
-                        continuation.resume(Result.success(accessToken))
+                        if (continuation.isActive){
+                            continuation.resume(Result.success(accessToken))
+                        }
                     } else {
-                        continuation.resume(
-                            value = Result.failure(
-                                exception = IllegalArgumentException(
-                                    "accessToken is null"
+                        if (continuation.isActive) {
+                            continuation.resume(
+                                value = Result.failure(
+                                    exception = IllegalArgumentException(
+                                        "accessToken is null"
+                                    )
                                 )
                             )
-                        )
+                        }
                     }
                 }
                 override fun onFailure(httpStatus: Int, message: String) {
                     val errorCode = NaverIdLoginSDK.getLastErrorCode().code
                     val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
                     Log.e(TAG, "errorCode:$errorCode, errorDesc:$errorDescription")
-                    continuation.resume(
-                        value = Result.failure(
-                            exception = IllegalArgumentException(
-                                NaverIdLoginSDK.getLastErrorDescription()
+                    if (continuation.isActive) {
+                        continuation.resume(
+                            value = Result.failure(
+                                exception = IllegalArgumentException(
+                                    NaverIdLoginSDK.getLastErrorDescription()
+                                )
                             )
                         )
-                    )
+                    }
                 }
                 override fun onError(errorCode: Int, message: String) {
                     onFailure(errorCode, message)

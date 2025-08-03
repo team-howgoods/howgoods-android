@@ -21,10 +21,15 @@ class KakaoLoginHelper @Inject constructor(): SocialLogin {
             val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                 if (error != null) {
                     Log.e(TAG, "카카오계정으로 로그인 실패", error)
-                    continuation.resume(Result.failure(error))
+                    if (continuation.isActive) {
+                        continuation.resume(Result.failure(error))
+                    }
                 } else if (token != null) {
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                     continuation.resume(Result.success(token.accessToken))
+                    if (continuation.isActive) {
+                        continuation.resume(Result.success(token.accessToken))
+                    }
                 }
             }
 
@@ -32,12 +37,16 @@ class KakaoLoginHelper @Inject constructor(): SocialLogin {
                 UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
                     if (error != null) {
                         if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                            continuation.resume(Result.failure(error))
+                            if (continuation.isActive) {
+                                continuation.resume(Result.failure(error))
+                            }
                         }
                         UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
                     } else if (token != null) {
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
-                        continuation.resume(Result.success(token.accessToken))
+                        if (continuation.isActive) {
+                            continuation.resume(Result.success(token.accessToken))
+                        }
                     }
                 }
             } else {
