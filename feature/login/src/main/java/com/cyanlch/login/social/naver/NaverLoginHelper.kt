@@ -5,29 +5,54 @@ import android.util.Log
 import com.cyanlch.login.social.SocialLogin
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
+import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
+import kotlin.coroutines.resume
 
 class NaverLoginHelper @Inject constructor() : SocialLogin {
     companion object {
         const val TAG = "NaverLoginHelper"
     }
 
-    override fun login(context: Context) {
-        NaverIdLoginSDK.authenticate(context, oauthLoginCallback)
-    }
+    override suspend fun login(context: Context) : Result<String> {
+        return suspendCancellableCoroutine { continuation ->
+            val oauthLoginCallback = object : OAuthLoginCallback {
+                override fun onSuccess() {
+                    Log.e(TAG,
+                        "NaverIdLoginSDK.getAccessToken(): " +
+                                "${NaverIdLoginSDK.getAccessToken()}"
+                    )
+                    val accessToken = NaverIdLoginSDK.getAccessToken()
+                    if (!accessToken.isNullOrBlank()) {
+                        continuation.resume(Result.success(accessToken))
+                    } else {
+                        continuation.resume(
+                            value = Result.failure(
+                                exception = IllegalArgumentException(
+                                    "accessToken is null"
+                                )
+                            )
+                        )
+                    }
+                }
+                override fun onFailure(httpStatus: Int, message: String) {
+                    val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+                    val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+                    Log.e(TAG, "errorCode:$errorCode, errorDesc:$errorDescription")
+                    continuation.resume(
+                        value = Result.failure(
+                            exception = IllegalArgumentException(
+                                NaverIdLoginSDK.getLastErrorDescription()
+                            )
+                        )
+                    )
+                }
+                override fun onError(errorCode: Int, message: String) {
+                    onFailure(errorCode, message)
+                }
+            }
 
-    val oauthLoginCallback = object : OAuthLoginCallback {
-        override fun onSuccess() {
-            // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-            Log.e(TAG, "NaverIdLoginSDK.getAccessToken(): ${NaverIdLoginSDK.getAccessToken()}")
-        }
-        override fun onFailure(httpStatus: Int, message: String) {
-            val errorCode = NaverIdLoginSDK.getLastErrorCode().code
-            val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
-            Log.e(TAG, "errorCode:$errorCode, errorDesc:$errorDescription")
-        }
-        override fun onError(errorCode: Int, message: String) {
-            onFailure(errorCode, message)
+            NaverIdLoginSDK.authenticate(context, oauthLoginCallback)
         }
     }
 
