@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.cyanlch.android.library)
     alias(libs.plugins.cyanlch.android.library.compose)
 }
 
