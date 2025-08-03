@@ -1,4 +1,4 @@
-package com.cyanlch.login.kakao
+package com.cyanlch.login.social.kakao
 
 import android.content.Context
 import com.cyanlch.login.BuildConfig

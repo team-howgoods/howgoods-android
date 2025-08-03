@@ -21,4 +21,7 @@ dependencies {
 
     implementation(libs.kakao.v2.user)
     implementation(libs.androidx.startup)
+
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
 }
