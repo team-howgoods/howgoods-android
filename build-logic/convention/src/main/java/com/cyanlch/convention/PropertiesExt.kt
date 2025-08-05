@@ -42,3 +42,29 @@ fun getBuildConfigValue(project: Project, key: String): String {
     // 모두 없으면 빈 문자열 반환
     return "\"\""
 }
+
+/**
+ * signingConfigs에 사용할 값을 가져옵니다.
+ * getBuildConfigValue와 동일한 우선순위를 따르지만, 값에 따옴표를 추가하지 않습니다.
+ *
+ * 우선순위:
+ * 1. 시스템 프로퍼티 (CI/CD)
+ * 2. local.properties (secrets)
+ * 3. gradle.properties (config)
+ */
+fun getSigningValue(project: Project, key: String): String {
+    // 1. 시스템 프로퍼티에서 읽기
+    val systemProp = System.getProperty(key)
+    if (systemProp != null) {
+        return systemProp
+    }
+
+    // 2. local.properties에서 읽기
+    val localProp = getLocalProperty(project, key)
+    if (localProp.isNotEmpty()) {
+        return localProp
+    }
+
+    // 3. gradle.properties에서 읽기
+    return project.providers.gradleProperty(key).getOrElse("")
+}
