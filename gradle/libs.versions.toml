@@ -14,7 +14,8 @@ googleServices = "4.4.3"
 firebasePerfPlugin = "2.0.0"
 firebaseCrashlyticsPlugin = "3.0.5"
 firebaseBom = "34.0.0"
-kakao = "2.21.6"
+kakaoLogin = "2.21.6"
+naverLogin = "5.10.0"
 secrets = "2.0.1"
 
 junit = "4.13.2"
@@ -70,7 +71,8 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
 # third-party
-kakao-v2-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
+kakao-v2-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakaoLogin" }
+naver-nid = { group = "com.navercorp.nid", name = "oauth", version.ref = "naverLogin" }
 
 # build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

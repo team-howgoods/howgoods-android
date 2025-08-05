@@ -8,4 +8,5 @@ enum class SocialPlatform {
 
 interface SocialLogin {
     suspend fun login(context: Context): Result<String>
+    fun logout()
 }
