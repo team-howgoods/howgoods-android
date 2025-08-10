@@ -1,6 +1,8 @@
 import com.cyanlch.convention.libs
+import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 
 class AndroidFeatureConventionPlugin: Plugin<Project> {
@@ -11,6 +13,12 @@ class AndroidFeatureConventionPlugin: Plugin<Project> {
                 apply("com.cyanlch.convention.library.compose")
                 apply("com.cyanlch.convention.circuit")
                 apply("com.cyanlch.convention.hilt")
+            }
+
+            pluginManager.withPlugin("com.google.devtools.ksp") {
+                extensions.configure<KspExtension> {
+                    arg("dagger.experimentalDaggerErrorMessages", "enabled")
+                }
             }
 
             dependencies {

@@ -1,7 +1,7 @@
 package com.cyanlch.login.social.di
 
+import com.cyanlch.domain.model.auth.SocialPlatform
 import com.cyanlch.login.social.SocialLogin
-import com.cyanlch.login.social.SocialPlatform
 import com.cyanlch.login.social.kakao.KakaoLoginHelper
 import com.cyanlch.login.social.naver.NaverLoginHelper
 import dagger.Binds

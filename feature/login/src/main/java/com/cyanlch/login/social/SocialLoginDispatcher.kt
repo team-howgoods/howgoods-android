@@ -1,6 +1,7 @@
 package com.cyanlch.login.social
 
 import android.content.Context
+import com.cyanlch.domain.model.auth.SocialPlatform
 import javax.inject.Inject
 
 class SocialLoginDispatcher @Inject constructor(

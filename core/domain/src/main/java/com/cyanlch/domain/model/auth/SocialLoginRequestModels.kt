@@ -2,13 +2,12 @@ package com.cyanlch.domain.model.auth
 
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class NaverLoginRequest(
-    val code: String,
-    val state: String
-)
+enum class SocialPlatform {
+    KAKAO, NAVER
+}
 
 @Serializable
-data class KakaoLoginRequest(
+data class SocialLoginRequest(
+    val platform: SocialPlatform,
     val code: String
 )

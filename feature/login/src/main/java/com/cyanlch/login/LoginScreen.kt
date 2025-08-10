@@ -18,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import com.cyanlch.domain.model.auth.KakaoLoginRequest
-import com.cyanlch.domain.usecase.auth.KakaoLoginUseCase
+import com.cyanlch.domain.model.auth.SocialLoginRequest
+import com.cyanlch.domain.model.auth.SocialPlatform
+import com.cyanlch.domain.usecase.auth.SocialLoginUseCase
 import com.cyanlch.login.social.SocialLoginDispatcher
-import com.cyanlch.login.social.SocialPlatform
 import com.cyanlch.ui.R
 import com.cyanlch.ui.SocialButton
 import com.kakao.sdk.common.util.Utility
@@ -47,13 +47,13 @@ data class LoginScreen(val nextScreen: Screen? = null) : Screen {
 
     sealed interface Event : CircuitUiEvent {
         data class LaunchSocial(val platform: SocialPlatform) : Event
-        data class RequestLogin(val code: String) : Event
+        data class RequestLogin(val platform: SocialPlatform, val code: String) : Event
         data class Toast(val message: String) : Event
     }
 }
 
 class LoginPresenter @AssistedInject constructor(
-    private val kakaoLoginUseCase: KakaoLoginUseCase
+    private val socialLoginUseCase: SocialLoginUseCase
 ) : Presenter<LoginScreen.State> {
     @Composable
     override fun present(): LoginScreen.State {
@@ -71,7 +71,10 @@ class LoginPresenter @AssistedInject constructor(
                 }
                 is LoginScreen.Event.RequestLogin -> {
                     scope.launch {
-                        kakaoLoginUseCase(KakaoLoginRequest(event.code)).onSuccess {
+                        socialLoginUseCase(SocialLoginRequest(
+                            platform = event.platform,
+                            code = event.code
+                        )).onSuccess {
                             Log.e("LoginPresenter", it.email)
                             effect = LoginScreen.Event.Toast(it.email)
                         }.onFailure {
@@ -116,7 +119,7 @@ class LoginUi @Inject constructor(
                     scope.launch {
                         val providerToken = dispatcher.login(platform = it.platform, context = context).getOrNull()
                         providerToken ?: return@launch
-                        state.eventSink(LoginScreen.Event.RequestLogin(providerToken))
+                        state.eventSink(LoginScreen.Event.RequestLogin(it.platform, providerToken))
                     }
                 }
                 is LoginScreen.Event.Toast -> {
