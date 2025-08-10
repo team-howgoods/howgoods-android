@@ -2,7 +2,6 @@ package com.cyanlch.login.social
 
 import android.content.Context
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 class SocialLoginDispatcher @Inject constructor(
     private val loginMap: Map<
@@ -10,8 +9,8 @@ class SocialLoginDispatcher @Inject constructor(
         @JvmSuppressWildcards SocialLogin
     >
 ) {
-    fun login(platform: SocialPlatform, context: Context) {
-        loginMap[platform]?.login(context)
+    suspend fun login(platform: SocialPlatform, context: Context): Result<String> {
+        return loginMap[platform]?.login(context)
             ?: error("Unsupported social platform: $platform")
     }
 }
