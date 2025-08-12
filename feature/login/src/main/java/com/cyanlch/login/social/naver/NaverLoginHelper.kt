@@ -24,7 +24,6 @@ class NaverLoginHelper @Inject constructor() : SocialLogin {
                                 "${NaverIdLoginSDK.getAccessToken()}"
                     )
                     val accessToken = NaverIdLoginSDK.getAccessToken()
-                    val state = NaverIdLoginSDK.getState()
                     if (!accessToken.isNullOrBlank()) {
                         if (continuation.isActive){
                             continuation.resume(Result.success(accessToken))
