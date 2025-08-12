@@ -24,7 +24,6 @@ import com.cyanlch.domain.usecase.auth.SocialLoginUseCase
 import com.cyanlch.login.social.SocialLoginDispatcher
 import com.cyanlch.ui.R
 import com.cyanlch.ui.SocialButton
-import com.kakao.sdk.common.util.Utility
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
@@ -108,10 +107,6 @@ class LoginUi @Inject constructor(
     ) {
         val context = LocalContext.current
         val scope = rememberCoroutineScope()
-
-        LaunchedEffect(Unit) {
-            Toast.makeText(context, Utility.getKeyHash(context), Toast.LENGTH_SHORT).show()
-        }
 
         state.effect?.let {
             when (it) {
