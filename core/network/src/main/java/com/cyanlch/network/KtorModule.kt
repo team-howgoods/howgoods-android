@@ -55,7 +55,7 @@ object KtorModule {
         }
 
         engine {
-            requestTimeout = 60_000
+            requestTimeout = 15_000
 
             endpoint {
                 connectTimeout = 60_000
