@@ -9,6 +9,8 @@ class SocialLoginDispatcher @Inject constructor(
 ) {
     suspend fun login(platform: SocialPlatform, context: Context): Result<String> {
         return loginMap[platform]?.login(context)
-            ?: error("Unsupported social platform: $platform")
+            ?: Result.failure(
+                exception = IllegalStateException("Unsupported social platform: $platform")
+            )
     }
 }
