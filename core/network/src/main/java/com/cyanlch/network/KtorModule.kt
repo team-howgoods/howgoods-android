@@ -33,10 +33,8 @@ object KtorModule {
             val maxMessageSize = 4000
             logger = object : Logger {
                 override fun log(message: String) {
-                    for (i in 0..message.length / maxMessageSize) {
-                        val start = i * maxMessageSize
-                        val end = ((i + 1) * maxMessageSize).coerceAtMost(message.length)
-                        Log.i("KtorClient", message.substring(start, end))
+                    message.chunked(maxMessageSize).forEach {
+                        Log.i("KtorClient", it)
                     }
                 }
             }

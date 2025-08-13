@@ -74,6 +74,7 @@ class LoginPresenter @AssistedInject constructor(
                             platform = event.platform,
                             code = event.code
                         )).onSuccess {
+                            // TODO: remove 
                             Log.e("LoginPresenter", it.email)
                             effect = LoginScreen.Event.Toast(it.email)
                         }.onFailure {

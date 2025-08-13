@@ -22,6 +22,13 @@ class ApiException(
 suspend inline fun <reified T> HttpResponse.unwrap(): T {
     val env = body<ApiResponse<T>>()
     val data = env.data
-    if (env.code == 200 && data != null) return data
+    if (env.code in 200..299) {  
+        if (env.data != null) {  
+            return env.data  
+        } else if (Unit is T) {
+            return Unit as T
+        }
+    }
+    
     throw ApiException(env.code, env.message, env.validationErrors)
 }
