@@ -1,6 +1,7 @@
 package com.cyanlch.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,27 +11,29 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import com.cyanlch.domain.model.auth.SocialLoginRequest
+import com.cyanlch.domain.model.auth.SocialPlatform
+import com.cyanlch.domain.usecase.auth.SocialLoginUseCase
 import com.cyanlch.login.social.SocialLoginDispatcher
-import com.cyanlch.login.social.SocialPlatform
 import com.cyanlch.ui.R
 import com.cyanlch.ui.SocialButton
-import com.kakao.sdk.common.util.Utility
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiEvent
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
 import com.slack.circuit.runtime.ui.Ui
-import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.components.ActivityRetainedComponent
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
@@ -43,21 +46,21 @@ data class LoginScreen(val nextScreen: Screen? = null) : Screen {
 
     sealed interface Event : CircuitUiEvent {
         data class LaunchSocial(val platform: SocialPlatform) : Event
+        data class RequestLogin(val platform: SocialPlatform, val code: String) : Event
+        data class Toast(val message: String) : Event
     }
 }
 
-class LoginPresenter @AssistedInject constructor() : Presenter<LoginScreen.State> {
+class LoginPresenter @AssistedInject constructor(
+    private val socialLoginUseCase: SocialLoginUseCase
+) : Presenter<LoginScreen.State> {
     @Composable
     override fun present(): LoginScreen.State {
-        val context = LocalContext.current
         var effect by remember { mutableStateOf<LoginScreen.Event?>(null) }
+        val scope = rememberCoroutineScope()
         val currentEffect = effect
         LaunchedEffect(currentEffect) {
             effect = null
-        }
-
-        LaunchedEffect(Unit) {
-            Log.e("Cyan", "${Utility.getKeyHash(context)}")
         }
 
         fun handleEvent(event: LoginScreen.Event) {
@@ -65,6 +68,22 @@ class LoginPresenter @AssistedInject constructor() : Presenter<LoginScreen.State
                 is LoginScreen.Event.LaunchSocial -> {
                     effect = LoginScreen.Event.LaunchSocial(event.platform)
                 }
+                is LoginScreen.Event.RequestLogin -> {
+                    scope.launch {
+                        socialLoginUseCase(SocialLoginRequest(
+                            platform = event.platform,
+                            code = event.code
+                        )).onSuccess {
+                            // TODO: remove 
+                            Log.e("LoginPresenter", it.email)
+                            effect = LoginScreen.Event.Toast(it.email)
+                        }.onFailure {
+                            Log.e("LoginPresenter", it.message.toString())
+                            effect = LoginScreen.Event.Toast(it.message.toString())
+                        }
+                    }
+                }
+                is LoginScreen.Event.Toast -> {}
             }
         }
 
@@ -88,11 +107,21 @@ class LoginUi @Inject constructor(
         modifier: Modifier,
     ) {
         val context = LocalContext.current
+        val scope = rememberCoroutineScope()
+
         state.effect?.let {
             when (it) {
                 is LoginScreen.Event.LaunchSocial -> {
-                    dispatcher.login(platform = it.platform, context = context)
+                    scope.launch {
+                        val providerToken = dispatcher.login(platform = it.platform, context = context).getOrNull()
+                        providerToken ?: return@launch
+                        state.eventSink(LoginScreen.Event.RequestLogin(it.platform, providerToken))
+                    }
                 }
+                is LoginScreen.Event.Toast -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
         }
 
