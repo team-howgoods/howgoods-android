@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.cyanlch.data.datasource.usertoken.UserTokenDataStore
+import com.cyanlch.data.datasource.auth.UserTokenDataStore
 import com.cyanlch.datastore.UserTokenDataStoreImpl
 import dagger.Binds
 import dagger.Module

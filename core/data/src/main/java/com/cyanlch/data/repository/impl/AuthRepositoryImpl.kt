@@ -1,7 +1,7 @@
 package com.cyanlch.data.repository.impl
 
 import com.cyanlch.data.datasource.auth.AuthDataSource
-import com.cyanlch.data.datasource.usertoken.UserTokenDataStore
+import com.cyanlch.data.datasource.auth.UserTokenDataStore
 import com.cyanlch.domain.model.auth.SocialLoginRequest
 import com.cyanlch.domain.model.auth.UserToken
 import com.cyanlch.domain.repository.AuthRepository

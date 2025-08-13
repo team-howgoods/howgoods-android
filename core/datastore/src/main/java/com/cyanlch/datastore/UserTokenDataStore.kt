@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.cyanlch.data.datasource.usertoken.UserTokenDataStore
+import com.cyanlch.data.datasource.auth.UserTokenDataStore
 import com.cyanlch.domain.model.auth.UserToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
