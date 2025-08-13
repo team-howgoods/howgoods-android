@@ -29,11 +29,11 @@ object DataStoreModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataSourceModule {
+interface DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun bindUserTokenDataStore(
+    fun bindUserTokenDataStore(
         userTokenDataStoreImpl: UserTokenDataStoreImpl
     ): UserTokenDataStore
 }
