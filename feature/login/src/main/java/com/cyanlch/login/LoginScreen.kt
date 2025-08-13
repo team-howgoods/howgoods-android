@@ -48,6 +48,7 @@ data class LoginScreen(val nextScreen: Screen? = null) : Screen {
         data class LaunchSocial(val platform: SocialPlatform) : Event
         data class RequestLogin(val platform: SocialPlatform, val code: String) : Event
         data class Toast(val message: String) : Event
+        // data object NavigateToMain : Event
     }
 }
 
