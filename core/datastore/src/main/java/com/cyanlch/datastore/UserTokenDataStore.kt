@@ -17,7 +17,9 @@ import javax.inject.Singleton
 class UserTokenDataStoreImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : UserTokenDataStore {
-    private val userTokenKey = stringPreferencesKey("user_token")
+    companion object {
+        private val userTokenKey = stringPreferencesKey("user_token")
+    }
 
     override val userTokenFlow: Flow<UserToken?> = dataStore.data
         .map { preferences ->
