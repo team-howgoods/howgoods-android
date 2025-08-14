@@ -1,4 +1,4 @@
-package com.cyanlch.howgoods.main
+package com.cyanlch.howgoods.app
 
 import android.content.Intent
 import android.os.Bundle
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf(_stackedScreens)
                 }*/
                 ContentWithOverlays {
-                    val backStack = rememberSaveableBackStack(root = MainScreen)
+                    val backStack = rememberSaveableBackStack(root = AppScreen)
                     val navigator = rememberCircuitNavigator(backStack)
                     NavigableCircuitContent(
                         navigator = navigator,

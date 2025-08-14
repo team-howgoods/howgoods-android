@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".SApplication"
+        android:name=".HgApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HowGoods">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".app.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Theme.HowGoods.Splash">

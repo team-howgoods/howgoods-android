@@ -1,4 +1,4 @@
-package com.cyanlch.howgoods.main
+package com.cyanlch.howgoods.app
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.cyanlch.domain.usecase.auth.GetUserLoginStateUseCase
+import com.cyanlch.domain.usecase.auth.LoginState
 import com.cyanlch.login.LoginScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiState
@@ -20,32 +22,40 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-object MainScreen : Screen {
+object AppScreen : Screen {
     data object State : CircuitUiState
 }
 
-class MainPresenter @AssistedInject constructor(
+class AppPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
-) : Presenter<MainScreen.State> {
+    private val getUserLoginStateUseCase: GetUserLoginStateUseCase
+) : Presenter<AppScreen.State> {
     @Composable
-    override fun present(): MainScreen.State {
+    override fun present(): AppScreen.State {
+
+
         LaunchedEffect(Unit) {
-            navigator.goTo(LoginScreen())
+            val loginState = getUserLoginStateUseCase()
+            if (loginState is LoginState.Login) {
+                navigator.goTo(LoginScreen())
+            } else {
+                navigator.goTo(LoginScreen())
+            }
         }
 
-        return MainScreen.State
+        return AppScreen.State
     }
 
-    @CircuitInject(MainScreen::class, ActivityRetainedComponent::class)
+    @CircuitInject(AppScreen::class, ActivityRetainedComponent::class)
     @AssistedFactory
     interface Factory {
-        fun create(navigator: Navigator): MainPresenter
+        fun create(navigator: Navigator): AppPresenter
     }
 }
 
-@CircuitInject(MainScreen::class, ActivityRetainedComponent::class)
+@CircuitInject(AppScreen::class, ActivityRetainedComponent::class)
 @Composable
-fun MainUi(state: MainScreen.State, modifier: Modifier) {
+fun AppUi(state: AppScreen.State, modifier: Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()
     }
