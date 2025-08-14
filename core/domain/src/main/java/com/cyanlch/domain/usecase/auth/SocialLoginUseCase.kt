@@ -15,7 +15,9 @@ class SocialLoginUseCase @Inject constructor(
     ): Result<UserToken> {
         return withContext(Dispatchers.IO) {
             runCatching {
-                authRepository.loginSocial(socialLoginRequest)
+                val userToken = authRepository.loginSocial(socialLoginRequest)
+                authRepository.saveUserToken(userToken)
+                userToken
             }
         }
     }
