@@ -32,8 +32,6 @@ class AppPresenter @AssistedInject constructor(
 ) : Presenter<AppScreen.State> {
     @Composable
     override fun present(): AppScreen.State {
-
-
         LaunchedEffect(Unit) {
             val loginState = getUserLoginStateUseCase()
             if (loginState is LoginState.Login) {
