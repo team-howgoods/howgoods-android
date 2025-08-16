@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import com.cyanlch.domain.usecase.auth.GetUserLoginStateUseCase
 import com.cyanlch.domain.usecase.auth.LoginState
 import com.cyanlch.login.LoginScreen
+import com.cyanlch.main.MainShellScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Navigator
@@ -35,7 +36,7 @@ class AppPresenter @AssistedInject constructor(
         LaunchedEffect(Unit) {
             val loginState = getUserLoginStateUseCase()
             if (loginState is LoginState.Login) {
-                navigator.goTo(LoginScreen())
+                navigator.goTo(MainShellScreen)
             } else {
                 navigator.goTo(LoginScreen())
             }

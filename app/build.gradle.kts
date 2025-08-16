@@ -21,6 +21,7 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.datastore)
 
+    implementation(projects.feature.shell.main)
     implementation(projects.feature.login)
 
     implementation(libs.splashscreen)
