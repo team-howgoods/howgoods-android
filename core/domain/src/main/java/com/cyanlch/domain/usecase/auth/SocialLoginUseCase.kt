@@ -8,10 +8,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SocialLoginUseCase @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) {
     suspend operator fun invoke(
-        socialLoginRequest: SocialLoginRequest
+        socialLoginRequest: SocialLoginRequest,
     ): Result<UserToken> {
         return withContext(Dispatchers.IO) {
             runCatching {

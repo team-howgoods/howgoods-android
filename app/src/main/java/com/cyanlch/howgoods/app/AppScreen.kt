@@ -29,7 +29,7 @@ object AppScreen : Screen {
 
 class AppPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
-    private val getUserLoginStateUseCase: GetUserLoginStateUseCase
+    private val getUserLoginStateUseCase: GetUserLoginStateUseCase,
 ) : Presenter<AppScreen.State> {
     @Composable
     override fun present(): AppScreen.State {

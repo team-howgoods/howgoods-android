@@ -9,7 +9,7 @@ data class TabSpec(
     val root: Screen,
     @field:StringRes val labelResId: Int,
     @field:DrawableRes val iconResId: Int,
-    val order: Int = 0
+    val order: Int = 0,
 )
 
 @Qualifier annotation class MainTabs

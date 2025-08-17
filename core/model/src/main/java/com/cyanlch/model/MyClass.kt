@@ -1,4 +1,3 @@
 package com.cyanlch.model
 
-class MyClass {
-}
+class MyClass
