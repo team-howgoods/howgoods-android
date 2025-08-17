@@ -27,7 +27,7 @@ abstract class DataStoreModule {
     @Binds
     @Singleton
     abstract fun bindUserTokenDataStore(
-        userTokenDataStoreImpl: UserTokenDataStoreImpl
+        userTokenDataStoreImpl: UserTokenDataStoreImpl,
     ): UserTokenDataStore
 
     companion object {
@@ -41,7 +41,7 @@ abstract class DataStoreModule {
                 },
                 migrations = emptyList(),
                 produceFile = { context.preferencesDataStoreFile("user_preferences") },
-                scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+                scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             )
         }
     }

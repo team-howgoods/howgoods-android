@@ -49,10 +49,12 @@ class MainShellUi @Inject constructor() : Ui<MainShellScreen.State> {
                         NavigationBarItem(
                             selected = i == idx,
                             onClick = { state.onTabSelected(i) },
-                            icon = { Icon(
-                                painter = painterResource(tab.iconResId),
-                                contentDescription = null
-                            ) },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(tab.iconResId),
+                                    contentDescription = null,
+                                )
+                            },
                             label = { Text(stringResource(tab.labelResId)) },
                         )
                     }
@@ -62,7 +64,7 @@ class MainShellUi @Inject constructor() : Ui<MainShellScreen.State> {
             NavigableCircuitContent(
                 navigator = currentNavigator,
                 backStack = currentBackStack,
-                modifier = modifier.padding(inner)
+                modifier = modifier.padding(inner),
             )
         }
     }

@@ -7,8 +7,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.components.ActivityRetainedComponent
 
-class HomePresenter @AssistedInject constructor(
-) : Presenter<HomeScreen.State> {
+class HomePresenter @AssistedInject constructor() : Presenter<HomeScreen.State> {
     @Composable
     override fun present(): HomeScreen.State {
         return HomeScreen.State

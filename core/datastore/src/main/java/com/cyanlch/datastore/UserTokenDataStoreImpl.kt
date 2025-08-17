@@ -18,7 +18,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UserTokenDataStoreImpl @Inject constructor(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) : UserTokenDataStore {
     companion object {
         private val userTokenKey = stringPreferencesKey("user_token")

@@ -11,7 +11,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 import kotlin.coroutines.resume
 
-class KakaoLoginHelper @Inject constructor(): SocialLogin {
+class KakaoLoginHelper @Inject constructor() : SocialLogin {
     companion object {
         private const val TAG = "KakaoLoginHelper"
     }

@@ -10,6 +10,6 @@ data object MainShellScreen : Screen {
     data class State(
         val tabs: List<TabSpec>,
         val currentIndex: Int,
-        val onTabSelected: (Int) -> Unit
-    ): CircuitUiState
+        val onTabSelected: (Int) -> Unit,
+    ) : CircuitUiState
 }

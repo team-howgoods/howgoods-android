@@ -14,7 +14,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import javax.inject.Inject
 
 @CircuitInject(HomeScreen::class, ActivityRetainedComponent::class)
-class MainUi @Inject constructor() : Ui<HomeScreen.State> {
+class HomeUi @Inject constructor() : Ui<HomeScreen.State> {
     @Composable
     override fun Content(
         state: HomeScreen.State,
@@ -30,4 +30,3 @@ class MainUi @Inject constructor() : Ui<HomeScreen.State> {
         }
     }
 }
-

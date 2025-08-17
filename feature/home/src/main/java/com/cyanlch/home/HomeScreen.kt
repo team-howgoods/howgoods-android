@@ -7,5 +7,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data object HomeScreen : Screen {
     data object State : CircuitUiState
-
 }

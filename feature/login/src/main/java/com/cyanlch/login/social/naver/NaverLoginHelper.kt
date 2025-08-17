@@ -14,18 +14,19 @@ class NaverLoginHelper @Inject constructor() : SocialLogin {
         const val TAG = "NaverLoginHelper"
     }
 
-    override suspend fun login(context: Context) : Result<String> {
+    override suspend fun login(context: Context): Result<String> {
         return suspendCancellableCoroutine { continuation ->
             val oauthLoginCallback = object : OAuthLoginCallback {
                 override fun onSuccess() {
                     if (!continuation.isActive) return
-                    Log.e(TAG,
+                    Log.e(
+                        TAG,
                         "NaverIdLoginSDK.getAccessToken(): " +
-                                "${NaverIdLoginSDK.getAccessToken()}"
+                            "${NaverIdLoginSDK.getAccessToken()}",
                     )
                     val accessToken = NaverIdLoginSDK.getAccessToken()
                     if (!accessToken.isNullOrBlank()) {
-                        if (continuation.isActive){
+                        if (continuation.isActive) {
                             continuation.resume(Result.success(accessToken))
                         }
                     } else {
@@ -33,9 +34,9 @@ class NaverLoginHelper @Inject constructor() : SocialLogin {
                             continuation.resume(
                                 value = Result.failure(
                                     exception = IllegalArgumentException(
-                                        "accessToken is null"
-                                    )
-                                )
+                                        "accessToken is null",
+                                    ),
+                                ),
                             )
                         }
                     }
@@ -48,9 +49,9 @@ class NaverLoginHelper @Inject constructor() : SocialLogin {
                         continuation.resume(
                             value = Result.failure(
                                 exception = IllegalArgumentException(
-                                    NaverIdLoginSDK.getLastErrorDescription()
-                                )
-                            )
+                                    NaverIdLoginSDK.getLastErrorDescription(),
+                                ),
+                            ),
                         )
                     }
                 }

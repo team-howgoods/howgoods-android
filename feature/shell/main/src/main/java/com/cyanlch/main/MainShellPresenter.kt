@@ -15,7 +15,7 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.components.ActivityRetainedComponent
 
 class MainShellPresenter @AssistedInject constructor(
-    @param:MainTabs private val tabs: Set<@JvmSuppressWildcards TabSpec>
+    @param:MainTabs private val tabs: Set<@JvmSuppressWildcards TabSpec>,
 ) : Presenter<MainShellScreen.State> {
     @Composable
     override fun present(): MainShellScreen.State {
@@ -24,7 +24,7 @@ class MainShellPresenter @AssistedInject constructor(
             return MainShellScreen.State(
                 tabs = emptyList(),
                 onTabSelected = {},
-                currentIndex = 0
+                currentIndex = 0,
             )
         }
 
@@ -34,7 +34,7 @@ class MainShellPresenter @AssistedInject constructor(
         return MainShellScreen.State(
             tabs = ordered,
             onTabSelected = { currentIndex = it },
-            currentIndex = currentIndex
+            currentIndex = currentIndex,
         )
     }
 
