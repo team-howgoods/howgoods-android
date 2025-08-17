@@ -21,7 +21,9 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.datastore)
 
+    implementation(projects.feature.shell.main)
     implementation(projects.feature.login)
+    implementation(projects.feature.home)
 
     implementation(libs.splashscreen)
     implementation(libs.androidx.startup)

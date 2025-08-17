@@ -8,11 +8,10 @@ import com.cyanlch.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
-    private val userTokenDataStore: UserTokenDataStore
-): AuthRepository {
+    private val userTokenDataStore: UserTokenDataStore,
+) : AuthRepository {
     override suspend fun loginSocial(socialLoginRequest: SocialLoginRequest): UserToken {
         return authDataSource.loginSocial(socialLoginRequest)
     }

@@ -5,6 +5,6 @@ import com.cyanlch.domain.model.auth.UserToken
 
 interface AuthDataSource {
     suspend fun loginSocial(
-        socialLoginRequest: SocialLoginRequest
+        socialLoginRequest: SocialLoginRequest,
     ): UserToken
 }

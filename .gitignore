@@ -14,3 +14,7 @@ assetlinks.json
 *.apk
 output-metadata.json
 .kotlin/
+
+app/release
+app/debug
+build/

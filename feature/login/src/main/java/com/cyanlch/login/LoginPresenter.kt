@@ -1,6 +1,5 @@
 package com.cyanlch.login
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -10,15 +9,20 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import com.cyanlch.domain.model.auth.SocialLoginRequest
 import com.cyanlch.domain.usecase.auth.SocialLoginUseCase
+import com.cyanlch.login.postLogin.PostLoginDestination
 import com.slack.circuit.codegen.annotations.CircuitInject
+import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
+import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.components.ActivityRetainedComponent
 import kotlinx.coroutines.launch
 
 class LoginPresenter @AssistedInject constructor(
-    private val socialLoginUseCase: SocialLoginUseCase
+    @Assisted private val navigator: Navigator,
+    private val socialLoginUseCase: SocialLoginUseCase,
+    private val postLoginDestination: PostLoginDestination,
 ) : Presenter<LoginScreen.State> {
     @Composable
     override fun present(): LoginScreen.State {
@@ -36,15 +40,15 @@ class LoginPresenter @AssistedInject constructor(
                 }
                 is LoginScreen.Event.RequestLogin -> {
                     scope.launch {
-                        socialLoginUseCase(SocialLoginRequest(
-                            platform = event.platform,
-                            code = event.code
-                        )).onSuccess {
-                            // TODO: remove
-                            Log.e("LoginPresenter", it.email)
+                        socialLoginUseCase(
+                            SocialLoginRequest(
+                                platform = event.platform,
+                                code = event.code,
+                            ),
+                        ).onSuccess {
                             effect = LoginScreen.Event.Toast(it.email)
+                            navigator.resetRoot(postLoginDestination.screen())
                         }.onFailure {
-                            Log.e("LoginPresenter", it.message.toString())
                             effect = LoginScreen.Event.Toast(it.message.toString())
                         }
                     }
@@ -59,6 +63,6 @@ class LoginPresenter @AssistedInject constructor(
     @CircuitInject(LoginScreen::class, ActivityRetainedComponent::class)
     @AssistedFactory
     interface Factory {
-        fun create(): LoginPresenter
+        fun create(navigator: Navigator): LoginPresenter
     }
 }

@@ -8,5 +8,5 @@ data class UserToken(
     val accessToken: String,
     val refreshToken: String,
     @SerialName("memberEmail")
-    val email: String
+    val email: String,
 )

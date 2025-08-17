@@ -1,8 +1,8 @@
 package com.cyanlch.login.social.naver
 
 import android.content.Context
-import com.cyanlch.login.BuildConfig
 import androidx.startup.Initializer
+import com.cyanlch.login.BuildConfig
 import com.navercorp.nid.NaverIdLoginSDK
 
 class NaverInitializer : Initializer<Unit> {
@@ -13,7 +13,7 @@ class NaverInitializer : Initializer<Unit> {
             context = context,
             clientId = BuildConfig.NAVER_CLIENT_ID,
             clientSecret = BuildConfig.NAVER_CLIENT_SECRET,
-            clientName = appName
+            clientName = appName,
         )
     }
     override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
