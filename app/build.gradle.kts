@@ -23,6 +23,7 @@ dependencies {
 
     implementation(projects.feature.shell.main)
     implementation(projects.feature.login)
+    implementation(projects.feature.home)
 
     implementation(libs.splashscreen)
     implementation(libs.androidx.startup)
