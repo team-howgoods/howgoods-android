@@ -6,37 +6,41 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import com.cyanlch.main.model.TabState
+import com.cyanlch.navigation.MainTabs
 import com.cyanlch.navigation.TabSpec
-import com.slack.circuit.backstack.rememberSaveableBackStack
-import com.slack.circuit.foundation.NavigableCircuitContent
-import com.slack.circuit.foundation.rememberCircuitNavigator
+import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.presenter.Presenter
-import javax.inject.Inject
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.components.ActivityRetainedComponent
 
-class MainShellPresenter @Inject constructor(
-    private val tabs: Set<@JvmSuppressWildcards TabSpec>
+class MainShellPresenter @AssistedInject constructor(
+    @param:MainTabs private val tabs: Set<@JvmSuppressWildcards TabSpec>
 ) : Presenter<MainShellScreen.State> {
     @Composable
     override fun present(): MainShellScreen.State {
         val ordered = remember(tabs) { tabs.sortedBy { it.order } }
-        var currentIndex by rememberSaveable { mutableIntStateOf(0) }
-        val backStacks =
-            ordered.map { rememberSaveableBackStack(root = it.root) }
-        val currentBackStack = backStacks[currentIndex]
-        val navigator = rememberCircuitNavigator(currentBackStack)
-        val content: @Composable (Modifier) -> Unit = { modifier ->
-            NavigableCircuitContent(navigator, currentBackStack, modifier)
+        if (ordered.isEmpty()) {
+            return MainShellScreen.State(
+                tabs = emptyList(),
+                onTabSelected = {},
+                currentIndex = 0
+            )
         }
 
+        var currentIndex by rememberSaveable { mutableIntStateOf(0) }
+        if (currentIndex !in ordered.indices) currentIndex = 0
+
         return MainShellScreen.State(
-            tabs = ordered.mapIndexed { index, tabSpec -> TabState(
-                tabSpec.labelResId,
-                tabSpec.iconResId,
-                index == currentIndex) },
+            tabs = ordered,
             onTabSelected = { currentIndex = it },
-            content = content
+            currentIndex = currentIndex
         )
+    }
+
+    @CircuitInject(MainShellScreen::class, ActivityRetainedComponent::class)
+    @AssistedFactory
+    interface Factory {
+        fun create(): MainShellPresenter
     }
 }
