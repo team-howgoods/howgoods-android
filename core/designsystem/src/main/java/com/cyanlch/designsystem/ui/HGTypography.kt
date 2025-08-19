@@ -5,12 +5,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.Typography
 
-/**
- * HowGoods Design System Typography.
- * Figma에 정의된 이름과 값을 1:1로 매핑한 객체입니다.
- * 사용법: HGTypography.title1
- */
 @Immutable
 object HGTypography {
 
@@ -114,5 +110,24 @@ object HGTypography {
         fontSize = 11.sp,
         lineHeight = 14.sp,
         letterSpacing = 0.02.em
+    )
+}
+
+fun HGTypography.toMaterialTypography(): Typography {
+    return Typography(
+        displayLarge = title1,       // 32sp
+        displayMedium = title2,      // 28sp
+        headlineLarge = heading1,    // 22sp
+        headlineMedium = heading2,   // 20sp
+        headlineSmall = headline1,   // 18sp
+        titleLarge = headline2,      // 17sp
+        titleMedium = body1Normal,   // 16sp
+        titleSmall = body2Reading,   // 15sp
+        bodyLarge = body1Normal,     // 16sp
+        bodyMedium = label1Normal,   // 14sp
+        bodySmall = label2,          // 13sp
+        labelLarge = label1Normal,   // 14sp
+        labelMedium = caption1,      // 12sp
+        labelSmall = caption2        // 11sp
     )
 }
