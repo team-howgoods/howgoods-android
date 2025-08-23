@@ -14,7 +14,7 @@ import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.ui.HGTheme
 
 @Composable
-fun BookmarkBadgeIcon(
+fun HgBookmarkBadgeIcon(
     modifier: Modifier = Modifier,
     size: Int = 24,
     checked: Boolean,
@@ -45,15 +45,15 @@ fun BookmarkBadgeIcon(
 
 @Preview
 @Composable
-fun BookmarkIconPreview() {
+fun HgBookmarkIconPreview() {
     Column {
         HGTheme(darkTheme = false) {
-            BookmarkBadgeIcon(checked = false)
-            BookmarkBadgeIcon(checked = true)
+            HgBookmarkBadgeIcon(checked = false)
+            HgBookmarkBadgeIcon(checked = true)
         }
         HGTheme(darkTheme = true) {
-            BookmarkBadgeIcon(checked = false)
-            BookmarkBadgeIcon(checked = true)
+            HgBookmarkBadgeIcon(checked = false)
+            HgBookmarkBadgeIcon(checked = true)
         }
     }
 }
