@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -16,26 +17,27 @@ import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.ui.HGColors
 import com.cyanlch.designsystem.ui.HGTheme
 
+enum class CloseButtonBackground(val color: Color) {
+    Primary(HGColors.primary),
+    Delete(HGColors.bgDelete),
+}
+
 @Composable
 fun HgCloseButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    background: CloseButtonBackground = CloseButtonBackground.Primary,
     enabled: Boolean = true,
     size: Dp = 18.dp,
 ) {
     val colors = HGTheme.colors
     val extras = HGTheme.extras
 
-    val bgColor = when (enabled) {
-        true -> colors.primary
-        false -> extras.bgDelete
-    }
-
     Surface(
         onClick = onClick,
         enabled = enabled,
         shape = CircleShape,
-        color = bgColor,
+        color = background.color,
         contentColor = HGColors.white,
         modifier = modifier.size(size),
     ) {
@@ -54,11 +56,11 @@ private fun HgCloseButtonPreview() {
     Row {
         HGTheme(darkTheme = false) {
             HgCloseButton(onClick = {})
-            HgCloseButton(onClick = {}, enabled = false)
+            HgCloseButton(onClick = {}, background = CloseButtonBackground.Delete, enabled = false)
         }
         HGTheme(darkTheme = true) {
             HgCloseButton(onClick = {})
-            HgCloseButton(onClick = {}, enabled = false)
+            HgCloseButton(onClick = {}, background = CloseButtonBackground.Delete, enabled = false)
         }
     }
 }
