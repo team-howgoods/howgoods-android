@@ -5,11 +5,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -39,7 +39,7 @@ fun HgImageSelector(
     painter: Painter,
     contentDescription: String?,
     selected: Boolean,
-    onClick: () -> Unit,
+    onClick: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     imageSize: ImageSelectorSize = ImageSelectorSize.Small,
@@ -64,10 +64,11 @@ fun HgImageSelector(
             .clip(shape)
             .then(if (border != null) Modifier.border(border, shape) else Modifier)
             .background(placeholderColor)
-            .clickable(
+            .toggleable(
+                value = selected,
                 enabled = enabled,
                 role = Role.Checkbox,
-                onClick = onClick,
+                onValueChange = onClick,
             )
             .semantics { this.selected = selected },
     ) {
