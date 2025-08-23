@@ -42,6 +42,9 @@ object HGColors {
     val lineAlternativeDark = gray800
     val lineAssistiveDark = gray900
 
+    // Semantic (default)
+    val bgPrimary = Color(0x1449B88A)
+
     // System
     val warning = Color(0xFFFF6F6F)
     val success = Color(0xFF72B8FF)
