@@ -50,11 +50,11 @@ fun HgImageSelector(
     captionColor: Color = Color.White,
     captionPadding: PaddingValues = PaddingValues(
         horizontal = 16.dp,
-        vertical = 8.dp
+        vertical = 8.dp,
     ),
     gradientCoverage: Float = 0.40f,
     gradientAlpha: Float = 0.80f,
-    placeholderColor: Color = Color(0xFFD9D9D9)
+    placeholderColor: Color = Color(0xFFD9D9D9),
 ) {
     val colors = ImageSelectorDefaults.colors(selected)
     val border = if (selected) BorderStroke(borderWidth, colors.border) else null
@@ -88,11 +88,11 @@ fun HgImageSelector(
                         Brush.verticalGradient(
                             colorStops = arrayOf(
                                 0.0f to Color.Transparent,
-                                stop  to Color.Transparent,
-                                1.0f to Color.Black.copy(alpha = gradientAlpha)
-                            )
-                        )
-                    )
+                                stop to Color.Transparent,
+                                1.0f to Color.Black.copy(alpha = gradientAlpha),
+                            ),
+                        ),
+                    ),
             )
 
             Text(
@@ -103,7 +103,7 @@ fun HgImageSelector(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(captionPadding)
+                    .padding(captionPadding),
             )
         }
     }
@@ -138,7 +138,7 @@ object ImageSelectorDefaults {
     }
 
     fun geometry(size: ImageSelectorSize): ImageSelectorGeometry = ImageSelectorGeometry(
-        shape = RoundedCornerShape(size.border)
+        shape = RoundedCornerShape(size.border),
     )
 }
 
@@ -174,7 +174,6 @@ fun HgImageSelectorPreview() {
     }
 }
 
-
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
@@ -205,4 +204,3 @@ fun HgImageSelectorNonCaptionLargePreview() {
         )
     }
 }
-
