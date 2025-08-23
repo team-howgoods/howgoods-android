@@ -85,5 +85,22 @@ fun PreviewHgButtonsLight() {
 )
 @Composable
 fun PreviewHgButtonsDark() {
-    PreviewHgButtonsLight()
+    HGTheme(darkTheme = true) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            HgSolidButton(onClick = {}) {
+                Text("Solid Button (Primary)")
+            }
+            HgSolidButton(
+                enabled = false,
+                onClick = {},
+            ) {
+                Text("Disabled Solid")
+            }
+        }
+    }
 }
