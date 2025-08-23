@@ -21,7 +21,7 @@ fun HgCloseButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    size: Dp = 18.dp
+    size: Dp = 18.dp,
 ) {
     val colors = HGTheme.colors
     val extras = HGTheme.extras
@@ -37,13 +37,13 @@ fun HgCloseButton(
         shape = CircleShape,
         color = bgColor,
         contentColor = HGColors.white,
-        modifier = modifier.size(size)
+        modifier = modifier.size(size),
     ) {
         Icon(
             painter = painterResource(R.drawable.ic_close_8),
             contentDescription = null,
             tint = HGColors.white,
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.padding(5.dp),
         )
     }
 }

@@ -43,13 +43,13 @@ fun HgTextSelector(
             .background(colors.container)
             .border(BorderStroke((1.5).dp, colors.border), shape)
             .clickable(enabled = enabled, onClick = onClick)
-            .padding(horizontal = 12.dp, vertical = 10.dp)
+            .padding(horizontal = 12.dp, vertical = 10.dp),
     ) {
         if (iconVisible) {
             Icon(
                 painter = painterResource(R.drawable.ic_plus_12),
                 contentDescription = null,
-                tint = colors.icon
+                tint = colors.icon,
             )
             WidthSpacer(2)
         }
@@ -57,7 +57,7 @@ fun HgTextSelector(
         Text(
             text = text,
             color = colors.content,
-            style = HGTheme.typography.labelLarge
+            style = HGTheme.typography.labelLarge,
         )
     }
 }
@@ -66,27 +66,27 @@ data class HgSelectorColors(
     val container: Color,
     val content: Color,
     val border: Color,
-    val icon: Color
+    val icon: Color,
 )
 
 object HgTextSelectorDefaults {
     @Composable
     fun colors(
-        selected: Boolean
+        selected: Boolean,
     ): HgSelectorColors {
         return if (selected) {
             HgSelectorColors(
                 container = HGColors.bgPrimary,
                 content = HGColors.textDefault,
                 border = HGColors.primary,
-                icon = HGColors.primary
+                icon = HGColors.primary,
             )
         } else {
             HgSelectorColors(
                 container = HGColors.bgDefault,
                 content = HGColors.textDefault,
                 border = HGColors.lineDefault,
-                icon = HGColors.textDefault
+                icon = HGColors.textDefault,
             )
         }
     }

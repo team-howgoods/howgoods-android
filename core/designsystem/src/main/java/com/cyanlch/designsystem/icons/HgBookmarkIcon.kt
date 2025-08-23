@@ -23,8 +23,8 @@ fun HgBookmarkBadgeIcon(
     val extras = HGTheme.extras
 
     val fillTint = when {
-        checked  -> colors.primary
-        else     -> extras.lineDefault
+        checked -> colors.primary
+        else -> extras.lineDefault
     }
 
     Box(modifier.size(size.dp)) {
@@ -32,7 +32,7 @@ fun HgBookmarkBadgeIcon(
             painter = painterResource(R.drawable.ic_bookmark_fill_24),
             contentDescription = null,
             tint = fillTint,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.matchParentSize(),
         )
         Icon(
             painter = painterResource(R.drawable.ic_bookmark_stroke_24),

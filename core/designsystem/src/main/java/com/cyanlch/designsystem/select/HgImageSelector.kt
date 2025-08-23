@@ -9,7 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,21 +49,21 @@ fun HgImageSelector(
             .clickable(
                 enabled = enabled,
                 role = Role.Checkbox,
-                onClick = onClick
+                onClick = onClick,
             )
-            .semantics { this.selected = selected }
+            .semantics { this.selected = selected },
     ) {
         Image(
             painter = painter,
             contentDescription = contentDescription,
             contentScale = contentScale,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.matchParentSize(),
         )
     }
 }
 
 data class ImageSelectorColors(
-    val border: Color
+    val border: Color,
 )
 
 object ImageSelectorDefaults {
@@ -93,7 +92,7 @@ fun HgImageSelectorSelectedPreview() {
             contentDescription = "샘플 이미지",
             selected = true,
             onClick = {},
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier.size(50.dp),
         )
     }
 }
@@ -108,7 +107,7 @@ fun HgImageSelectorPreview() {
             contentDescription = "샘플 이미지",
             selected = false,
             onClick = {},
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier.size(50.dp),
         )
     }
 }
