@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cyanlch.designsystem.ui.HGColor
-import com.cyanlch.designsystem.ui.HGColors
 import com.cyanlch.designsystem.ui.HGTheme
 
 @Composable
@@ -49,14 +47,14 @@ object HgButtonDefaults {
         @Composable get() = ButtonDefaults.buttonColors(
             containerColor = HGTheme.colors.primary,
             contentColor = Color.White,
-            disabledContainerColor = HGColor.Gray200,
-            disabledContentColor = Color.White
+            disabledContainerColor = HGTheme.extras.lineDefault,
+            disabledContentColor = Color.White,
         )
 }
 
 @Preview(
     name = "Hg Buttons - Light",
-    showBackground = true
+    showBackground = true,
 )
 @Composable
 fun PreviewHgButtonsLight() {
@@ -65,14 +63,14 @@ fun PreviewHgButtonsLight() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             HgSolidButton(onClick = {}) {
                 Text("Solid Button (Primary)")
             }
             HgSolidButton(
                 enabled = false,
-                onClick = {}
+                onClick = {},
             ) {
                 Text("Disabled Solid")
             }
@@ -83,7 +81,7 @@ fun PreviewHgButtonsLight() {
 @Preview(
     name = "Hg Buttons - Dark",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true
+    showBackground = true,
 )
 @Composable
 fun PreviewHgButtonsDark() {
