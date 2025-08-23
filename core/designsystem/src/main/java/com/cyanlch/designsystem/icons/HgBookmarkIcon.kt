@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.ui.HGTheme
@@ -16,7 +17,7 @@ import com.cyanlch.designsystem.ui.HGTheme
 @Composable
 fun HgBookmarkBadgeIcon(
     modifier: Modifier = Modifier,
-    size: Int = 24,
+    size: Dp = 24.dp,
     checked: Boolean,
 ) {
     val colors = HGTheme.colors
@@ -27,7 +28,7 @@ fun HgBookmarkBadgeIcon(
         else -> extras.lineDefault
     }
 
-    Box(modifier.size(size.dp)) {
+    Box(modifier.size(size)) {
         Icon(
             painter = painterResource(R.drawable.ic_bookmark_fill_24),
             contentDescription = null,
