@@ -34,7 +34,7 @@ fun HgTextSelector(
     enabled: Boolean = true,
 ) {
     val colors = HgTextSelectorDefaults.colors(selected)
-    val shape = RoundedCornerShape(24.dp)
+    val shape = RoundedCornerShape(55.dp)
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
