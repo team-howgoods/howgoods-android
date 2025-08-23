@@ -9,125 +9,138 @@ import androidx.compose.material3.Typography
 
 @Immutable
 object HGTypography {
-
     // Title
-    val title1 = TextStyle(
+    val title1SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 32.sp,
-        lineHeight = 48.sp,
-        letterSpacing = (-0.02).em
+        lineHeight = 48.sp
     )
-    val title2 = TextStyle(
+    val title1Medium = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
+        fontSize = 32.sp,
+        lineHeight = 44.sp
+    )
+
+    val title2SemiBold = TextStyle(
+        fontFamily = suit,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 28.sp,
-        lineHeight = 38.sp,
-        letterSpacing = (-0.01).em
+        lineHeight = 38.sp
+    )
+    val title2Medium = TextStyle(
+        fontFamily = suit,
+        fontWeight = FontWeight.Medium,
+        fontSize = 28.sp,
+        lineHeight = 36.sp
     )
 
     // Heading
-    val heading1 = TextStyle(
+    val heading22SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 22.sp,
-        lineHeight = 30.sp,
-        letterSpacing = (-0.0002).em
+        lineHeight = 30.sp
     )
-    val heading2 = TextStyle(
+    val heading20SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
-        lineHeight = 28.sp,
-        letterSpacing = (-0.012).em
+        lineHeight = 28.sp
     )
 
     // Headline
-    val headline1 = TextStyle(
+    val headlineSemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp,
-        lineHeight = 26.sp,
-        letterSpacing = (-0.002).em
+        lineHeight = 26.sp
     )
-    val headline2 = TextStyle(
+    val headlineMedium = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.01.em
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 24.sp
     )
 
     // Body
-    val body1Normal = TextStyle(
+    val body1SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = (-0.002).em
-    )
-    val body1Reading = body1Normal.copy(
         lineHeight = 26.sp
     )
-    val body2Reading = TextStyle(
+    val body1Medium = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 26.sp
+    )
+
+    val body2SemiBold = TextStyle(
+        fontFamily = suit,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 15.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.002.em
+        lineHeight = 24.sp
+    )
+    val body2Medium = TextStyle(
+        fontFamily = suit,
+        fontWeight = FontWeight.Medium,
+        fontSize = 15.sp,
+        lineHeight = 24.sp
     )
 
     // Label
-    val label1Normal = TextStyle(
+    val label1SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = (-0.002).em
-    )
-    val label1Reading = label1Normal.copy(
         lineHeight = 22.sp
     )
-    val label2 = TextStyle(
+    val label1Medium = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 22.sp
+    )
+
+    val label2SemiBold = TextStyle(
+        fontFamily = suit,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 13.sp,
-        lineHeight = 18.sp,
-        letterSpacing = 0.008.em
+        lineHeight = 18.sp
     )
 
     // Caption
-    val caption1 = TextStyle(
+    val caption12SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.012.em
+        lineHeight = 16.sp
     )
-    val caption2 = TextStyle(
+    val caption11SemiBold = TextStyle(
         fontFamily = suit,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 11.sp,
-        lineHeight = 14.sp,
-        letterSpacing = 0.02.em
+        lineHeight = 14.sp
     )
 }
 
-fun HGTypography.toMaterialTypography(): Typography {
-    return Typography(
-        displayLarge = title1,       // 32sp
-        displayMedium = title2,      // 28sp
-        headlineLarge = heading1,    // 22sp
-        headlineMedium = heading2,   // 20sp
-        headlineSmall = headline1,   // 18sp
-        titleLarge = headline2,      // 17sp
-        titleMedium = body1Normal,   // 16sp
-        titleSmall = body2Reading,   // 15sp
-        bodyLarge = body1Normal,     // 16sp
-        bodyMedium = label1Normal,   // 14sp
-        bodySmall = label2,          // 13sp
-        labelLarge = label1Normal,   // 14sp
-        labelMedium = caption1,      // 12sp
-        labelSmall = caption2        // 11sp
-    )
-}
+fun HGTypography.toMaterialTypography(): Typography = Typography(
+    displayLarge  = title1SemiBold,     // 32 / 48
+    displayMedium = title2SemiBold,     // 28 / 38
+    headlineLarge = heading22SemiBold,  // 22 / 30
+    headlineMedium= heading20SemiBold,  // 20 / 28
+    headlineSmall = headlineSemiBold,   // 18 / 26
+    titleLarge    = headlineMedium,     // 16 / 24
+    titleMedium   = body1Medium,        // 16 / 26
+    titleSmall    = body2Medium,        // 15 / 24
+    bodyLarge     = body1Medium,        // 16 / 26
+    bodyMedium    = body2Medium,        // 15 / 24
+    bodySmall     = label1Medium,       // 14 / 22
+    labelLarge    = label1SemiBold,     // 14 / 22
+    labelMedium   = label2SemiBold,     // 13 / 18
+    labelSmall    = caption12SemiBold   // 12 / 16  (필요시 11로 교체)
+)
+
