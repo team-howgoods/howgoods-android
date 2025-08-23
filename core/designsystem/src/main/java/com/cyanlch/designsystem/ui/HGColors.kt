@@ -23,6 +23,7 @@ object HGColors {
     // Semantic (light)
     val bgDefault = white
     val bgAlternative = gray10
+    val bgDelete = gray300
     val textDefault = gray900
     val textAlternative = gray700
     val textAssistive = gray500
@@ -33,12 +34,16 @@ object HGColors {
     // Semantic (dark)
     val bgDefaultDark = black
     val bgAlternativeDark = gray900
+    val bgDeleteDark = gray700
     val textDefaultDark = gray10
     val textAlternativeDark = gray300
     val textAssistiveDark = gray600
     val lineDefaultDark = gray700
     val lineAlternativeDark = gray800
     val lineAssistiveDark = gray900
+
+    // Semantic (default)
+    val bgPrimary = Color(0x1449B88A)
 
     // System
     val warning = Color(0xFFFF6F6F)
