@@ -62,7 +62,7 @@ fun hgExtraColors(dark: Boolean) = if (dark) {
     HGExtraColors(
         textAssistive = HGColors.textAssistiveDark,
         lineAssistive = HGColors.lineAssistiveDark,
-        lineDefault = HGColors.lineDefault,
+        lineDefault = HGColors.lineDefaultDark,
         warning = HGColors.warning,
         success = HGColors.success,
         dim = HGColors.dim,
