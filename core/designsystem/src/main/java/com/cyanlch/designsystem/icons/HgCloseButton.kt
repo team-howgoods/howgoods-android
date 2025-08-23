@@ -8,7 +8,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -39,7 +38,7 @@ fun HgCloseButton(
 
     val bgColor = when (background) {
         CloseButtonBackground.Primary -> colors.primary
-        CloseButtonBackground.Delete  -> extras.bgDelete
+        CloseButtonBackground.Delete -> extras.bgDelete
     }
 
     Surface(
