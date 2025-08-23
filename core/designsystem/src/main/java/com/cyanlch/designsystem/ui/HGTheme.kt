@@ -52,6 +52,7 @@ fun hgDarkColorScheme() = darkColorScheme(
 data class HGExtraColors(
     val textAssistive: Color,
     val lineAssistive: Color,
+    val lineAlternative: Color,
     val lineDefault: Color,
     val bgDelete: Color,
     val warning: Color,
@@ -63,6 +64,7 @@ fun hgExtraColors(dark: Boolean) = if (dark) {
     HGExtraColors(
         textAssistive = HGColors.textAssistiveDark,
         lineAssistive = HGColors.lineAssistiveDark,
+        lineAlternative = HGColors.lineAlternativeDark,
         lineDefault = HGColors.lineDefaultDark,
         bgDelete = HGColors.bgDeleteDark,
         warning = HGColors.warning,
@@ -73,6 +75,7 @@ fun hgExtraColors(dark: Boolean) = if (dark) {
     HGExtraColors(
         textAssistive = HGColors.textAssistive,
         lineAssistive = HGColors.lineAssistive,
+        lineAlternative = HGColors.lineAlternative,
         lineDefault = HGColors.lineDefault,
         bgDelete = HGColors.bgDelete,
         warning = HGColors.warning,
