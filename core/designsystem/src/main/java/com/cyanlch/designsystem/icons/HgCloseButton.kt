@@ -10,6 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -17,9 +21,9 @@ import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.ui.HGColors
 import com.cyanlch.designsystem.ui.HGTheme
 
-enum class CloseButtonBackground(val color: Color) {
-    Primary(HGColors.primary),
-    Delete(HGColors.bgDelete),
+enum class CloseButtonBackground {
+    Primary,
+    Delete,
 }
 
 @Composable
@@ -33,13 +37,23 @@ fun HgCloseButton(
     val colors = HGTheme.colors
     val extras = HGTheme.extras
 
+    val bgColor = when (background) {
+        CloseButtonBackground.Primary -> colors.primary
+        CloseButtonBackground.Delete  -> extras.bgDelete
+    }
+
     Surface(
         onClick = onClick,
         enabled = enabled,
         shape = CircleShape,
-        color = background.color,
+        color = bgColor,
         contentColor = HGColors.white,
-        modifier = modifier.size(size),
+        modifier = modifier
+            .size(size)
+            .semantics {
+                contentDescription = "Close Button"
+                role = Role.Button
+            },
     ) {
         Icon(
             painter = painterResource(R.drawable.ic_close_8),
