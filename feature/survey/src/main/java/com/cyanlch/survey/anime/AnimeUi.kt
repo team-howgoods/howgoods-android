@@ -65,7 +65,7 @@ fun AnimeScreenContent(
         LazyColumn(
             modifier = Modifier
                 .padding(horizontal = 16.dp),
-            contentPadding = PaddingValues(top = 48.dp, bottom = 120.dp)
+            contentPadding = PaddingValues(top = 48.dp, bottom = 120.dp),
         ) {
             stickyHeader {
                 Column(
@@ -101,8 +101,8 @@ fun AnimeScreenContent(
                             text = anime.name,
                             selected = state.selectedAnimeIds.contains(anime.id),
                             onClick = { state.onToggleAnime(anime.id) },
-                            enabled = state.canSelectMore
-                                    || state.selectedAnimeIds.contains(anime.id),
+                            enabled = state.canSelectMore ||
+                                state.selectedAnimeIds.contains(anime.id),
                         )
                     }
                 }

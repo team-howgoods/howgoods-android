@@ -18,7 +18,7 @@ import com.cyanlch.designsystem.ui.HGTheme
 @Composable
 fun HgBasicTopBar(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     TopAppBar(
         title = {},

@@ -83,8 +83,11 @@ class SurveyStore @Inject constructor(
         if (!SurveySelectionPolicy.isCharacterAllowed(
                 selectedAnimeIds = form.selectedAnimeIds,
                 characterListsByAnime = form.characterListsByAnime,
-                candidateId = characterId
-        )) return
+                candidateId = characterId,
+            )
+        ) {
+            return
+        }
 
         updateForm { f ->
             val next = f.selectedCharacterIds.toMutableSet()

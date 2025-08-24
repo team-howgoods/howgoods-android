@@ -27,10 +27,12 @@ object SurveyValidator {
 
         val chosen = form.selectedCharacterIds
         val errors = buildList {
-            if (chosen.size !in MIN_CHARACTER..MAX_CHARACTER)
+            if (chosen.size !in MIN_CHARACTER..MAX_CHARACTER) {
                 add(FieldError(FormFieldKey.CharacterSelection, "캐릭터는 1~3개 선택"))
-            if (!chosen.all { it in pool })
+            }
+            if (!chosen.all { it in pool }) {
                 add(FieldError(FormFieldKey.CharacterSelection, "선택한 애니의 캐릭터만 가능"))
+            }
         }
         return ValidationResult(errors.isEmpty(), errors)
     }
