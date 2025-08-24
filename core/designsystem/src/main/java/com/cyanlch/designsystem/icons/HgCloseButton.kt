@@ -34,11 +34,11 @@ fun HgCloseButton(
     size: Dp = 18.dp,
 ) {
     val colors = HGTheme.colors
-    val extras = HGTheme.extras
+    val tokens = HGTheme.tokens
 
     val bgColor = when (background) {
         CloseButtonBackground.Primary -> colors.primary
-        CloseButtonBackground.Delete -> extras.bgDelete
+        CloseButtonBackground.Delete -> tokens.bgDelete
     }
 
     Surface(

@@ -47,7 +47,7 @@ object HgButtonDefaults {
         @Composable get() = ButtonDefaults.buttonColors(
             containerColor = HGTheme.colors.primary,
             contentColor = Color.White,
-            disabledContainerColor = HGTheme.extras.lineDefault,
+            disabledContainerColor = HGTheme.tokens.lineDefault,
             disabledContentColor = Color.White,
         )
 }
