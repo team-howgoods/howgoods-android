@@ -40,25 +40,7 @@ fun HgText(
     styleOverride: TextStyle = TextStyle.Default,
     onTextLayout: (TextLayoutResult) -> Unit = {},
 ) {
-    val base = LocalTextStyle.current
-        .merge(style)
-        .merge(styleOverride)
-
-    val color = if (base.color.isSpecified) {
-        base.color
-    } else {
-        when (tone) {
-            HgTextTone.Unspecified -> Color.Unspecified
-            HgTextTone.Default -> HGTheme.tokens.textDefault
-            HgTextTone.Alternative -> HGTheme.tokens.textAlternative
-            HgTextTone.Assistive -> HGTheme.tokens.textAssistive
-            HgTextTone.Inverse -> HGTheme.tokens.bgDefault
-            HgTextTone.Warning -> HGTheme.tokens.warning
-            HgTextTone.Success -> HGTheme.tokens.success
-            HgTextTone.BrandPrimary -> HGTheme.tokens.brandPrimary
-            HgTextTone.BrandSecondary -> HGTheme.tokens.brandSecondary
-        }
-    }
+    val (base, color) = resolveTextColor(style, styleOverride, tone)
     Text(
         text = text,
         modifier = modifier,
@@ -87,6 +69,27 @@ fun HgText(
     inlineContent: Map<String, InlineTextContent> = emptyMap(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
 ) {
+    val (base, color) = resolveTextColor(style, styleOverride, tone)
+    Text(
+        text = text,
+        modifier = modifier,
+        style = base.copy(color = color),
+        inlineContent = inlineContent,
+        maxLines = maxLines,
+        minLines = minLines,
+        overflow = overflow,
+        textAlign = textAlign,
+        softWrap = softWrap,
+        onTextLayout = onTextLayout,
+    )
+}
+
+@Composable
+private fun resolveTextColor(
+    style: TextStyle,
+    styleOverride: TextStyle,
+    tone: HgTextTone,
+): Pair<TextStyle, Color> {
     val base = LocalTextStyle.current
         .merge(style)
         .merge(styleOverride)
@@ -106,16 +109,5 @@ fun HgText(
             HgTextTone.BrandSecondary -> HGTheme.tokens.brandSecondary
         }
     }
-    Text(
-        text = text,
-        modifier = modifier,
-        style = base.copy(color = color),
-        inlineContent = inlineContent,
-        maxLines = maxLines,
-        minLines = minLines,
-        overflow = overflow,
-        textAlign = textAlign,
-        softWrap = softWrap,
-        onTextLayout = onTextLayout,
-    )
+    return Pair(base, color)
 }
