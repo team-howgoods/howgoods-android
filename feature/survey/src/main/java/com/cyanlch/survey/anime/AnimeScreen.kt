@@ -7,7 +7,7 @@ import com.slack.circuit.runtime.screen.Screen
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class AnimeScreen : Screen {
+data object AnimeScreen : Screen {
     data class State(
         val animeCatalog: List<Anime>,
         val selectedAnimeIds: Set<AnimeId>,
