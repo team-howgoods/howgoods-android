@@ -40,6 +40,10 @@ class AnimePresenter @AssistedInject constructor(
             }
         }
 
+        fun onSkip() {
+            navigator.pop()
+        }
+
         return AnimeScreen.State(
             animeCatalog = storeState.form.animeCatalog,
             selectedAnimeIds = storeState.form.selectedAnimeIds,
@@ -47,6 +51,7 @@ class AnimePresenter @AssistedInject constructor(
             isLoading = storeState.isLoading,
             onToggleAnime = store::selectOrDeselectAnime,
             onNext = ::handleNext,
+            onSkip = ::onSkip,
         )
     }
 

@@ -2,10 +2,10 @@ package com.cyanlch.designsystem.text
 
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
@@ -13,18 +13,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.cyanlch.designsystem.ui.HGTheme
-import com.cyanlch.designsystem.ui.LocalHGColors
 
-enum class HgTextVariant {
-    Display,
-    Headline,
-    TitleLarge,
-    Title,
-    Body,
-    Label,
-}
 
 enum class HgTextTone {
+    Unspecified,
     Default,
     Alternative,
     Assistive,
@@ -36,32 +28,8 @@ enum class HgTextTone {
 }
 
 @Composable
-private fun variantToStyle(variant: HgTextVariant): TextStyle = when (variant) {
-    HgTextVariant.Display -> MaterialTheme.typography.displaySmall
-    HgTextVariant.Headline -> MaterialTheme.typography.headlineSmall
-    HgTextVariant.TitleLarge -> MaterialTheme.typography.titleLarge
-    HgTextVariant.Title -> MaterialTheme.typography.titleMedium
-    HgTextVariant.Body -> MaterialTheme.typography.bodyMedium
-    HgTextVariant.Label -> MaterialTheme.typography.labelMedium
-}
-
-@Composable
-private fun toneColor(tone: HgTextTone) = with(LocalHGColors.current) {
-    when (tone) {
-        HgTextTone.Default -> textDefault
-        HgTextTone.Alternative -> textAlternative
-        HgTextTone.Assistive -> textAssistive
-        HgTextTone.Inverse -> bgDefault
-        HgTextTone.Warning -> warning
-        HgTextTone.Success -> success
-        HgTextTone.BrandPrimary -> brandPrimary
-        HgTextTone.BrandSecondary -> brandSecondary
-    }
-}
-
-@Composable
 fun HgText(
-    text: AnnotatedString,
+    text: String,
     style: TextStyle,
     modifier: Modifier = Modifier,
     tone: HgTextTone = HgTextTone.Default,
@@ -81,6 +49,7 @@ fun HgText(
         base.color
     } else {
         when (tone) {
+            HgTextTone.Unspecified -> Color.Unspecified
             HgTextTone.Default -> HGTheme.tokens.textDefault
             HgTextTone.Alternative -> HGTheme.tokens.textAlternative
             HgTextTone.Assistive -> HGTheme.tokens.textAssistive
@@ -127,6 +96,7 @@ fun HgText(
         base.color
     } else {
         when (tone) {
+            HgTextTone.Unspecified -> Color.Unspecified
             HgTextTone.Default -> HGTheme.tokens.textDefault
             HgTextTone.Alternative -> HGTheme.tokens.textAlternative
             HgTextTone.Assistive -> HGTheme.tokens.textAssistive

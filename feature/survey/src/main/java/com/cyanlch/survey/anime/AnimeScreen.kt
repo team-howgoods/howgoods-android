@@ -15,5 +15,6 @@ class AnimeScreen : Screen {
         val isLoading: Boolean,
         val onToggleAnime: (AnimeId) -> Unit,
         val onNext: () -> Unit,
+        val onSkip: () -> Unit,
     ) : CircuitUiState
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.cyanlch.designsystem.ui.HGColors
 import com.cyanlch.designsystem.ui.HGTheme
 
 @Composable
@@ -40,13 +41,21 @@ fun HgSolidButton(
 }
 
 object HgButtonDefaults {
-    val SolidButtonPadding = PaddingValues(vertical = 14.dp, horizontal = 28.dp)
+    val SolidButtonPadding = PaddingValues(vertical = 14.dp, horizontal = 8.dp)
     val SolidButtonShape = RoundedCornerShape(8.dp)
 
     val SolidButtonColors: ButtonColors
         @Composable get() = ButtonDefaults.buttonColors(
             containerColor = HGTheme.colors.primary,
             contentColor = Color.White,
+            disabledContainerColor = HGTheme.tokens.lineDefault,
+            disabledContentColor = Color.White,
+        )
+
+    val SolidButtonAlternativeColors: ButtonColors
+        @Composable get() = ButtonDefaults.buttonColors(
+            containerColor = HGColors.gray50,
+            contentColor = HGTheme.tokens.textAlternative,
             disabledContainerColor = HGTheme.tokens.lineDefault,
             disabledContentColor = Color.White,
         )
