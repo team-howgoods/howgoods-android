@@ -1,11 +1,11 @@
 package com.cyanlch.survey.model
 
-object SurveyValidator {
-    private const val MIN_ANIME = 1
-    private const val MAX_ANIME = 3
-    private const val MIN_CHARACTER = 1
-    private const val MAX_CHARACTER = 3
+import com.cyanlch.domain.policy.SurveySelectionPolicy.MAX_ANIME
+import com.cyanlch.domain.policy.SurveySelectionPolicy.MAX_CHARACTER
+import com.cyanlch.domain.policy.SurveySelectionPolicy.MIN_ANIME
+import com.cyanlch.domain.policy.SurveySelectionPolicy.MIN_CHARACTER
 
+object SurveyValidator {
     fun validateAnime(form: SurveyForm): ValidationResult {
         val n = form.selectedAnimeIds.size
         return if (n in MIN_ANIME..MAX_ANIME) {

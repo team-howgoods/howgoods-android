@@ -3,6 +3,7 @@ package com.cyanlch.survey.anime
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -67,15 +68,20 @@ fun AnimeScreenContent(
             contentPadding = PaddingValues(top = 48.dp, bottom = 120.dp)
         ) {
             stickyHeader {
-                HgText(
-                    text = "좋아하는 굿즈, 더 똑똑하게 살 수 있어요!",
-                    style = HGTypography.body1Medium,
-                )
-                HgText(
-                    text = "원하는 상품의 최저가 정보를 알려드릴게요",
-                    style = HGTypography.label1Medium,
-                    tone = HgTextTone.Assistive,
-                )
+                Column(
+                    modifier = Modifier
+                        .background(LocalHGColors.current.bgDefault),
+                ) {
+                    HgText(
+                        text = "좋아하는 굿즈, 더 똑똑하게 살 수 있어요!",
+                        style = HGTypography.body1Medium,
+                    )
+                    HgText(
+                        text = "원하는 상품의 최저가 정보를 알려드릴게요",
+                        style = HGTypography.label1Medium,
+                        tone = HgTextTone.Assistive,
+                    )
+                }
             }
             item { HeightSpacer(44) }
             item {

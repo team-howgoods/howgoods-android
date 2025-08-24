@@ -6,6 +6,9 @@ import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.domain.usecase.survey.FetchAnimeCatalogUseCase
 import com.cyanlch.domain.usecase.survey.FetchCharactersByAnimeUseCase
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -45,16 +48,24 @@ class SurveyStore @Inject constructor(
         }
         setLoading(true)
         val updated = form.charactersByAnime.toMutableMap()
-        for (animeId in need) {
-            val list = fetchCharactersByAnime(animeId).fold(
-                onSuccess = { it },
-                onFailure = {
-                    setErrorMessage(it.message ?: "Error")
-                    emptyList()
-                },
-            )
-            updated[animeId] = list
+
+        coroutineScope {
+            val characters = need.map { animeId ->
+                async {
+                    fetchCharactersByAnime(animeId).fold(
+                        onSuccess = { it },
+                        onFailure = {
+                            setErrorMessage(it.message ?: "Error")
+                            emptyList()
+                        },
+                    )
+                }
+            }.awaitAll()
+            need.forEachIndexed { index, animeId ->
+                updated[animeId] = characters[index]
+            }
         }
+
         updateForm { it.copy(charactersByAnime = updated) }
         setLoading(false)
         pruneCharacters()
