@@ -110,7 +110,7 @@ object HgSearchFieldDefaults {
     val minHeight: Dp = 44.dp
     val shape = RoundedCornerShape(8.dp)
     val container = HGColors.white
-    val border: Color @Composable get() = HGTheme.extras.lineAlternative
+    val border: Color @Composable get() = HGTheme.tokens.lineAlternative
     val borderWidth: Dp = 2.dp
     val horizontalPadding: Dp = 12.dp
     val iconTint = HGColors.gray500

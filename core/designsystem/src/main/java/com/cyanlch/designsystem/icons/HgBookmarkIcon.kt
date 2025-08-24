@@ -21,11 +21,11 @@ fun HgBookmarkBadgeIcon(
     checked: Boolean,
 ) {
     val colors = HGTheme.colors
-    val extras = HGTheme.extras
+    val tokens = HGTheme.tokens
 
     val fillTint = when {
         checked -> colors.primary
-        else -> extras.lineDefault
+        else -> tokens.lineDefault
     }
 
     Box(modifier.size(size)) {
