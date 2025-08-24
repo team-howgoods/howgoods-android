@@ -1,9 +1,6 @@
 package com.cyanlch.survey.character
 
 import com.cyanlch.domain.model.anime.Anime
-import com.cyanlch.domain.model.anime.AnimeCharacter
-import com.cyanlch.domain.model.anime.AnimeCharacterList
-import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.screen.Screen
@@ -26,10 +23,10 @@ data class CharacterRowItem(
     val name: String,
     val imageUrl: String,
     val isSelected: Boolean,
-    val isEnabled: Boolean
+    val isEnabled: Boolean,
 )
 
 data class AnimeCharactersGroup(
     val anime: Anime,
-    val items: List<CharacterRowItem>
+    val items: List<CharacterRowItem>,
 )

@@ -13,7 +13,7 @@ object SurveySelectionPolicy {
     fun isCharacterAllowed(
         selectedAnimeIds: Set<AnimeId>,
         characterListsByAnime: Map<AnimeId, AnimeCharacterList>,
-        candidateId: CharacterId
+        candidateId: CharacterId,
     ): Boolean = selectedAnimeIds.any { aid ->
         characterListsByAnime[aid]?.characters.orEmpty().any { it.id == candidateId }
     }
@@ -21,7 +21,7 @@ object SurveySelectionPolicy {
     fun pruneCharactersNotIn(
         selectedAnimeIds: Set<AnimeId>,
         characterListsByAnime: Map<AnimeId, AnimeCharacterList>,
-        chosenCharacterIds: Set<CharacterId>
+        chosenCharacterIds: Set<CharacterId>,
     ): Set<CharacterId> {
         val allowed: Set<CharacterId> = selectedAnimeIds
             .flatMap { aid -> characterListsByAnime[aid]?.characters.orEmpty() }
