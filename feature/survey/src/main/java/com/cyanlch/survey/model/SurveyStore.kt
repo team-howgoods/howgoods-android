@@ -26,7 +26,13 @@ class SurveyStore @Inject constructor(
     suspend fun loadAnimeCatalogIfEmpty() {
         if (form.animeCatalog.isNotEmpty()) return
         setLoading(true)
-        val list = fetchAnimeCatalog().getOrDefault(emptyList())
+        val list = fetchAnimeCatalog().fold(
+            onSuccess = { it },
+            onFailure = {
+                setErrorMessage(it.message ?: "Error")
+                emptyList()
+            },
+        )
         updateForm { it.copy(animeCatalog = list) }
         setLoading(false)
     }
@@ -40,8 +46,13 @@ class SurveyStore @Inject constructor(
         setLoading(true)
         val updated = form.charactersByAnime.toMutableMap()
         for (animeId in need) {
-            val list = fetchCharactersByAnime(animeId)
-                .getOrDefault(emptyList())
+            val list = fetchCharactersByAnime(animeId).fold(
+                onSuccess = { it },
+                onFailure = {
+                    setErrorMessage(it.message ?: "Error")
+                    emptyList()
+                },
+            )
             updated[animeId] = list
         }
         updateForm { it.copy(charactersByAnime = updated) }
@@ -112,5 +123,9 @@ class SurveyStore @Inject constructor(
     }
     private fun setLoading(b: Boolean) {
         _uiState.update { it.copy(isLoading = b, lastErrorMessage = null) }
+    }
+
+    private fun setErrorMessage(message: String) {
+        _uiState.update { it.copy(lastErrorMessage = message) }
     }
 }
