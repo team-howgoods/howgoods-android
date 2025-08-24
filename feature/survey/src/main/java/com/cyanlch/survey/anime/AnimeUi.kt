@@ -9,11 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +44,7 @@ class AnimeUi @Inject constructor() : Ui<AnimeScreen.State> {
                 AnimeScreenContent(
                     state = state,
                     modifier = modifier
-                        .padding(inner)
+                        .padding(inner),
                 )
             }
         }
@@ -62,7 +59,7 @@ fun AnimeScreenContent(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(LocalHGColors.current.bgDefault)
+            .background(LocalHGColors.current.bgDefault),
     ) {
         Column(
             modifier = Modifier
@@ -90,7 +87,7 @@ fun AnimeScreenContent(
 
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             ) {
                 item {
                     FlowRow(
@@ -132,7 +129,7 @@ fun AnimeScreenContent(
                 HgSolidButton(
                     onClick = state.onNext,
                     modifier = Modifier
-                        .weight(1f)
+                        .weight(1f),
                 ) {
                     HgText(
                         text = "완료",

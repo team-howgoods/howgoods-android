@@ -23,7 +23,7 @@ class FetchAnimeCatalogUseCase @Inject constructor(
                     Anime(id = "7", name = "헌터x헌터"),
                     Anime(id = "8", name = "스파이 패밀리"),
                     Anime(id = "9", name = "체인소우맨"),
-                    Anime(id = "10", name = "블리치")
+                    Anime(id = "10", name = "블리치"),
                 )
                 // repository.fetchAnimeCatalog()
             }

@@ -14,7 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.cyanlch.designsystem.ui.HGTheme
 
-
 enum class HgTextTone {
     Unspecified,
     Default,
