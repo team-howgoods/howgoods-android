@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,8 +32,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.ui.HGTheme
+import androidx.compose.ui.platform.LocalContext
+import coil.request.ImageRequest
 
 @Composable
 fun HgImageSelector(
@@ -48,17 +52,112 @@ fun HgImageSelector(
     caption: String? = null,
     captionStyle: TextStyle = MaterialTheme.typography.labelLarge,
     captionColor: Color = Color.White,
-    captionPadding: PaddingValues = PaddingValues(
-        horizontal = 16.dp,
-        vertical = 8.dp,
-    ),
+    captionPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
     gradientCoverage: Float = 0.40f,
     gradientAlpha: Float = 0.80f,
     placeholderColor: Color = Color(0xFFD9D9D9),
 ) {
+    HgImageSelectorLayout(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        imageSize = imageSize,
+        borderWidth = borderWidth,
+        caption = caption,
+        captionStyle = captionStyle,
+        captionColor = captionColor,
+        captionPadding = captionPadding,
+        gradientCoverage = gradientCoverage,
+        gradientAlpha = gradientAlpha,
+        placeholderColor = placeholderColor,
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = contentDescription,
+            contentScale = contentScale,
+            modifier = Modifier.matchParentSize(),
+        )
+    }
+}
+
+@Composable
+fun HgImageSelector(
+    imageUrl: Any?,
+    contentDescription: String? = null,
+    selected: Boolean,
+    onClick: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    imageSize: ImageSelectorSize = ImageSelectorSize.Small,
+    contentScale: ContentScale = ContentScale.Crop,
+    borderWidth: Dp = 5.dp,
+    caption: String? = null,
+    captionStyle: TextStyle = MaterialTheme.typography.labelLarge,
+    captionColor: Color = Color.White,
+    captionPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+    gradientCoverage: Float = 0.40f,
+    gradientAlpha: Float = 0.80f,
+    placeholderColor: Color = Color(0xFFD9D9D9),
+    placeholder: Painter? = null,
+    error: Painter? = null,
+    fallback: Painter? = null,
+    crossfade: Boolean = true,
+) {
+    HgImageSelectorLayout(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        imageSize = imageSize,
+        borderWidth = borderWidth,
+        caption = caption,
+        captionStyle = captionStyle,
+        captionColor = captionColor,
+        captionPadding = captionPadding,
+        gradientCoverage = gradientCoverage,
+        gradientAlpha = gradientAlpha,
+        placeholderColor = placeholderColor,
+    ) {
+        val request = ImageRequest.Builder(LocalContext.current)
+            .data(imageUrl)
+            .crossfade(crossfade)
+            .build()
+
+        AsyncImage(
+            model = request,
+            contentDescription = contentDescription,
+            placeholder = placeholder,
+            error = error,
+            fallback = fallback,
+            contentScale = contentScale,
+            modifier = Modifier.matchParentSize(),
+        )
+    }
+}
+
+@Composable
+private fun HgImageSelectorLayout(
+    selected: Boolean,
+    onClick: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    imageSize: ImageSelectorSize = ImageSelectorSize.Small,
+    borderWidth: Dp = 5.dp,
+    caption: String? = null,
+    captionStyle: TextStyle = MaterialTheme.typography.labelLarge,
+    captionColor: Color = Color.White,
+    captionPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+    gradientCoverage: Float = 0.40f,
+    gradientAlpha: Float = 0.80f,
+    placeholderColor: Color = Color(0xFFD9D9D9),
+    imageContent: @Composable BoxScope.() -> Unit,
+) {
     val colors = ImageSelectorDefaults.colors(selected)
-    val border = if (selected) BorderStroke(borderWidth, colors.border) else null
     val shape = ImageSelectorDefaults.geometry(imageSize).shape
+    val border = if (selected) BorderStroke(borderWidth, colors.border) else null
+    val stop = (1f - gradientCoverage).coerceIn(0f, 1f)
+
     Box(
         modifier = modifier
             .clip(shape)
@@ -72,16 +171,9 @@ fun HgImageSelector(
             )
             .semantics { this.selected = selected },
     ) {
-        Image(
-            painter = painter,
-            contentDescription = contentDescription,
-            contentScale = contentScale,
-            modifier = Modifier.matchParentSize(),
-        )
+        imageContent()
 
         if (!caption.isNullOrEmpty()) {
-            val stop = (1f - gradientCoverage).coerceIn(0f, 1f)
-
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -95,7 +187,6 @@ fun HgImageSelector(
                         ),
                     ),
             )
-
             Text(
                 text = caption,
                 color = captionColor,
@@ -109,6 +200,7 @@ fun HgImageSelector(
         }
     }
 }
+
 
 data class ImageSelectorColors(
     val border: Color,
