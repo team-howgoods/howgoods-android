@@ -58,6 +58,7 @@ private fun toneColor(tone: HgTextTone) = with(LocalHGColors.current) {
         HgTextTone.BrandSecondary -> brandSecondary
     }
 }
+
 @Composable
 fun HgText(
     text: AnnotatedString,
@@ -76,15 +77,19 @@ fun HgText(
         .merge(style)
         .merge(styleOverride)
 
-    val color = if (base.color.isSpecified) base.color else when (tone) {
-        HgTextTone.Default        -> HGTheme.tokens.textDefault
-        HgTextTone.Alternative    -> HGTheme.tokens.textAlternative
-        HgTextTone.Assistive      -> HGTheme.tokens.textAssistive
-        HgTextTone.Inverse        -> HGTheme.tokens.bgDefault
-        HgTextTone.Warning        -> HGTheme.tokens.warning
-        HgTextTone.Success        -> HGTheme.tokens.success
-        HgTextTone.BrandPrimary   -> HGTheme.tokens.brandPrimary
-        HgTextTone.BrandSecondary -> HGTheme.tokens.brandSecondary
+    val color = if (base.color.isSpecified) {
+        base.color
+    } else {
+        when (tone) {
+            HgTextTone.Default -> HGTheme.tokens.textDefault
+            HgTextTone.Alternative -> HGTheme.tokens.textAlternative
+            HgTextTone.Assistive -> HGTheme.tokens.textAssistive
+            HgTextTone.Inverse -> HGTheme.tokens.bgDefault
+            HgTextTone.Warning -> HGTheme.tokens.warning
+            HgTextTone.Success -> HGTheme.tokens.success
+            HgTextTone.BrandPrimary -> HGTheme.tokens.brandPrimary
+            HgTextTone.BrandSecondary -> HGTheme.tokens.brandSecondary
+        }
     }
     Text(
         text = text,
@@ -95,7 +100,7 @@ fun HgText(
         overflow = overflow,
         textAlign = textAlign,
         softWrap = softWrap,
-        onTextLayout = onTextLayout
+        onTextLayout = onTextLayout,
     )
 }
 
@@ -118,15 +123,19 @@ fun HgText(
         .merge(style)
         .merge(styleOverride)
 
-    val color = if (base.color.isSpecified) base.color else when (tone) {
-        HgTextTone.Default        -> HGTheme.tokens.textDefault
-        HgTextTone.Alternative    -> HGTheme.tokens.textAlternative
-        HgTextTone.Assistive      -> HGTheme.tokens.textAssistive
-        HgTextTone.Inverse        -> HGTheme.tokens.bgDefault
-        HgTextTone.Warning        -> HGTheme.tokens.warning
-        HgTextTone.Success        -> HGTheme.tokens.success
-        HgTextTone.BrandPrimary   -> HGTheme.tokens.brandPrimary
-        HgTextTone.BrandSecondary -> HGTheme.tokens.brandSecondary
+    val color = if (base.color.isSpecified) {
+        base.color
+    } else {
+        when (tone) {
+            HgTextTone.Default -> HGTheme.tokens.textDefault
+            HgTextTone.Alternative -> HGTheme.tokens.textAlternative
+            HgTextTone.Assistive -> HGTheme.tokens.textAssistive
+            HgTextTone.Inverse -> HGTheme.tokens.bgDefault
+            HgTextTone.Warning -> HGTheme.tokens.warning
+            HgTextTone.Success -> HGTheme.tokens.success
+            HgTextTone.BrandPrimary -> HGTheme.tokens.brandPrimary
+            HgTextTone.BrandSecondary -> HGTheme.tokens.brandSecondary
+        }
     }
     Text(
         text = text,
@@ -138,6 +147,6 @@ fun HgText(
         overflow = overflow,
         textAlign = textAlign,
         softWrap = softWrap,
-        onTextLayout = onTextLayout
+        onTextLayout = onTextLayout,
     )
 }
