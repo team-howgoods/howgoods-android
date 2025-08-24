@@ -110,39 +110,43 @@ val LocalHGColors = staticCompositionLocalOf<HGColorTokens> {
 }
 
 fun HGColorTokens.toMaterialColorScheme(isDark: Boolean) =
-    if (isDark) darkColorScheme(
-        primary = brandPrimary,
-        onPrimary = HGColors.white,
-        secondary = brandSecondary,
-        onSecondary = HGColors.gray900,
-        background = bgDefault,
-        onBackground = textDefault,
-        surface = bgDefault,
-        onSurface = textDefault,
-        surfaceVariant = bgAlternative,
-        onSurfaceVariant = textAlternative,
-        outline = lineDefault,
-        outlineVariant = lineAlternative,
-        error = warning,
-        onError = HGColors.white,
-        scrim = dim,
-    ) else lightColorScheme(
-        primary = brandPrimary,
-        onPrimary = HGColors.white,
-        secondary = brandSecondary,
-        onSecondary = HGColors.gray900,
-        background = bgDefault,
-        onBackground = textDefault,
-        surface = bgDefault,
-        onSurface = textDefault,
-        surfaceVariant = bgAlternative,
-        onSurfaceVariant = textAlternative,
-        outline = lineDefault,
-        outlineVariant = lineAlternative,
-        error = warning,
-        onError = HGColors.white,
-        scrim = dim,
-    )
+    if (isDark) {
+        darkColorScheme(
+            primary = brandPrimary,
+            onPrimary = HGColors.white,
+            secondary = brandSecondary,
+            onSecondary = HGColors.gray900,
+            background = bgDefault,
+            onBackground = textDefault,
+            surface = bgDefault,
+            onSurface = textDefault,
+            surfaceVariant = bgAlternative,
+            onSurfaceVariant = textAlternative,
+            outline = lineDefault,
+            outlineVariant = lineAlternative,
+            error = warning,
+            onError = HGColors.white,
+            scrim = dim,
+        )
+    } else {
+        lightColorScheme(
+            primary = brandPrimary,
+            onPrimary = HGColors.white,
+            secondary = brandSecondary,
+            onSecondary = HGColors.gray900,
+            background = bgDefault,
+            onBackground = textDefault,
+            surface = bgDefault,
+            onSurface = textDefault,
+            surfaceVariant = bgAlternative,
+            onSurfaceVariant = textAlternative,
+            outline = lineDefault,
+            outlineVariant = lineAlternative,
+            error = warning,
+            onError = HGColors.white,
+            scrim = dim,
+        )
+    }
 
 @Composable
 fun HGTheme(
