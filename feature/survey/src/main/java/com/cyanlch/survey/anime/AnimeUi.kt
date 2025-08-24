@@ -3,8 +3,8 @@ package com.cyanlch.survey.anime
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -61,46 +61,41 @@ fun AnimeScreenContent(
             .fillMaxSize()
             .background(LocalHGColors.current.bgDefault),
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .padding(horizontal = 16.dp),
+            contentPadding = PaddingValues(top = 48.dp, bottom = 120.dp)
         ) {
-            HeightSpacer(48)
-            HgText(
-                text = "좋아하는 굿즈, 더 똑똑하게 살 수 있어요!",
-                style = HGTypography.body1Medium,
-            )
-            HgText(
-                text = "원하는 상품의 최저가 정보를 알려드릴게요",
-                style = HGTypography.label1Medium,
-                tone = HgTextTone.Assistive,
-            )
-
-            HeightSpacer(44)
-
-            HgText(
-                text = "먼저 가장 좋아하는 애니메이션을 골라주세요!",
-                style = HGTypography.headlineSemiBold,
-            )
-
-            HeightSpacer(16)
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-            ) {
-                item {
-                    FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(5.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        state.animeCatalog.forEach { anime ->
-                            HgTextSelector(
-                                text = anime.name,
-                                selected = state.selectedAnimeIds.contains(anime.id),
-                                onClick = { state.onToggleAnime(anime.id) },
-                            )
-                        }
+            stickyHeader {
+                HgText(
+                    text = "좋아하는 굿즈, 더 똑똑하게 살 수 있어요!",
+                    style = HGTypography.body1Medium,
+                )
+                HgText(
+                    text = "원하는 상품의 최저가 정보를 알려드릴게요",
+                    style = HGTypography.label1Medium,
+                    tone = HgTextTone.Assistive,
+                )
+            }
+            item { HeightSpacer(44) }
+            item {
+                HgText(
+                    text = "먼저 가장 좋아하는 애니메이션을 골라주세요!",
+                    style = HGTypography.headlineSemiBold,
+                )
+            }
+            item { HeightSpacer(16) }
+            item {
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(5.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    state.animeCatalog.forEach { anime ->
+                        HgTextSelector(
+                            text = anime.name,
+                            selected = state.selectedAnimeIds.contains(anime.id),
+                            onClick = { state.onToggleAnime(anime.id) },
+                        )
                     }
                 }
             }
