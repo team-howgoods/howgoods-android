@@ -95,6 +95,8 @@ fun AnimeScreenContent(
                             text = anime.name,
                             selected = state.selectedAnimeIds.contains(anime.id),
                             onClick = { state.onToggleAnime(anime.id) },
+                            enabled = state.canSelectMore
+                                    || state.selectedAnimeIds.contains(anime.id),
                         )
                     }
                 }
