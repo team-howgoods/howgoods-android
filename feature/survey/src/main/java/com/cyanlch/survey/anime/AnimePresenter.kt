@@ -7,6 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.policy.SurveySelectionPolicy
+import com.cyanlch.survey.model.SurveyStep
+import com.cyanlch.survey.model.SurveyStore
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter

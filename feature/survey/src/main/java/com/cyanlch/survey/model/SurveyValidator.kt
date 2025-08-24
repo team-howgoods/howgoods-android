@@ -1,4 +1,4 @@
-package com.cyanlch.survey.anime
+package com.cyanlch.survey.model
 
 object SurveyValidator {
     private const val MIN_ANIME = 1

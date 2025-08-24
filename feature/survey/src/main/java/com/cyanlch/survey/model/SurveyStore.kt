@@ -1,4 +1,4 @@
-package com.cyanlch.survey.anime
+package com.cyanlch.survey.model
 
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
