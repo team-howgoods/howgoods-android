@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.cyanlch.designsystem.HeightSpacer
 import com.cyanlch.designsystem.button.HgSolidButton
 import com.cyanlch.designsystem.decoration.WhiteFadeBar
@@ -43,14 +46,13 @@ class CharacterUi @Inject constructor() : Ui<CharacterScreen.State> {
             Scaffold(
                 topBar = { HgBasicTopBar(onBackClick = state.onBack) },
                 bottomBar = {
-                    Column(
+                    Box(
                         modifier = Modifier
                             .background(LocalHGColors.current.bgDefault)
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
                             .padding(bottom = 16.dp),
                     ) {
-                        WhiteFadeBar()
                         Row {
                             HgSolidButton(
                                 onClick = state.onNext,
@@ -67,6 +69,14 @@ class CharacterUi @Inject constructor() : Ui<CharacterScreen.State> {
                                 )
                             }
                         }
+                        WhiteFadeBar(
+                            horizontal = false,
+                            modifier = Modifier
+                                .align(Alignment.TopCenter)
+                                .height(24.dp)
+                                .offset(y = (-24).dp)
+                                .zIndex(1f)
+                        )
                     }
                 }
             ) { inner ->
@@ -97,6 +107,7 @@ fun AnimeCharacterContent(
             stickyHeader {
                 Column(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .background(LocalHGColors.current.bgDefault),
                 ) {
                     HgText(

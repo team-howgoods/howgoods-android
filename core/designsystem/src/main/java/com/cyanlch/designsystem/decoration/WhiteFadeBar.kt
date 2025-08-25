@@ -31,7 +31,6 @@ fun WhiteFadeBar(
     Box(
         modifier
             .fillMaxWidth()
-            .height(24.dp)
             .background(brush)
     )
 }
@@ -39,10 +38,10 @@ fun WhiteFadeBar(
 @Preview
 @Composable
 private fun WhiteFadeBarPreview() {
-    Box(Modifier.background(Color.Green).height(60.dp)) {
+    Box(Modifier.background(Color.Green).height(120.dp)) {
         WhiteFadeBar(
             horizontal = false,
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier.height(82.dp).align(Alignment.BottomCenter)
         )
     }
 }

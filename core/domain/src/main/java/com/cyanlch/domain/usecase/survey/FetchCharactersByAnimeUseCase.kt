@@ -16,6 +16,8 @@ class FetchCharactersByAnimeUseCase @Inject constructor(
         val onePiece = Anime(id = 1, name = "원피스")
         val naruto = Anime(id = 2, name = "나루토")
         val dragon = Anime(id = 3, name = "드래곤볼")
+        val d4 = Anime(id = 4, name = "데몬슬레이어")
+        val d5 = Anime(id = 5, name = "공격의 거인")
         fun ph(id: Int) = "https://picsum.photos/seed/$id/256/256"
 
         mapOf(
@@ -37,6 +39,22 @@ class FetchCharactersByAnimeUseCase @Inject constructor(
             ),
             3 to AnimeCharacterList(
                 anime = dragon,
+                characters = listOf(
+                    AnimeCharacter(id = 301, animeId = 3, name = "손오공", imageUrl = ph(301)),
+                    AnimeCharacter(id = 302, animeId = 3, name = "베지터", imageUrl = ph(302)),
+                    AnimeCharacter(id = 303, animeId = 3, name = "피콜로", imageUrl = ph(303)),
+                ),
+            ),
+            4 to AnimeCharacterList(
+                anime = d4,
+                characters = listOf(
+                    AnimeCharacter(id = 301, animeId = 3, name = "손오공", imageUrl = ph(301)),
+                    AnimeCharacter(id = 302, animeId = 3, name = "베지터", imageUrl = ph(302)),
+                    AnimeCharacter(id = 303, animeId = 3, name = "피콜로", imageUrl = ph(303)),
+                ),
+            ),
+            5 to AnimeCharacterList(
+                anime = d5,
                 characters = listOf(
                     AnimeCharacter(id = 301, animeId = 3, name = "손오공", imageUrl = ph(301)),
                     AnimeCharacter(id = 302, animeId = 3, name = "베지터", imageUrl = ph(302)),
