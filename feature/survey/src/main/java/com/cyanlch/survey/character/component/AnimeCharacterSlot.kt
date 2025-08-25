@@ -3,6 +3,7 @@ package com.cyanlch.survey.character.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -23,24 +24,25 @@ fun AnimeCharacterSlot(
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(bottom = 24.dp),
     ) {
         HgText(
             text = characterGroup.anime.name,
             style = HGTypography.body1SemiBold,
         )
-    }
-
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        items(characterGroup.items) { character ->
-            HgImageSelector(
-                imageUrl = character.imageUrl,
-                selected = character.isSelected,
-                onClick = { onToggleCharacter(character.id) },
-                modifier = Modifier.size(108.dp),
-            )
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            items(characterGroup.items) { character ->
+                HgImageSelector(
+                    imageUrl = character.imageUrl,
+                    caption = character.name,
+                    selected = character.isSelected,
+                    onClick = { onToggleCharacter(character.id) },
+                    modifier = Modifier.size(108.dp),
+                )
+            }
         }
     }
 }

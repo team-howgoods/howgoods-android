@@ -10,6 +10,7 @@ import kotlinx.parcelize.Parcelize
 data object CharacterScreen : Screen {
     data class State(
         val groups: List<AnimeCharactersGroup>,
+        val selectedCharacterCount: Int,
         val canSelectMore: Boolean,
         val isLoading: Boolean,
         val onToggleAnimeCharacter: (CharacterId) -> Unit,
@@ -21,9 +22,9 @@ data object CharacterScreen : Screen {
 data class CharacterRowItem(
     val id: CharacterId,
     val name: String,
-    val imageUrl: String,
-    val isSelected: Boolean,
-    val isEnabled: Boolean,
+    val imageUrl: String = "",
+    val isSelected: Boolean = false,
+    val isEnabled: Boolean = false,
 )
 
 data class AnimeCharactersGroup(

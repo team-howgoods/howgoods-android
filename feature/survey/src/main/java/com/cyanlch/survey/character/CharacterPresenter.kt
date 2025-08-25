@@ -72,6 +72,7 @@ class CharacterPresenter @AssistedInject constructor(
 
         return CharacterScreen.State(
             groups = groups,
+            selectedCharacterCount = storeState.form.selectedCharacterIds.size,
             canSelectMore = canSelectMore,
             isLoading = storeState.isLoading,
             onToggleAnimeCharacter = store::selectOrDeselectCharacter,
