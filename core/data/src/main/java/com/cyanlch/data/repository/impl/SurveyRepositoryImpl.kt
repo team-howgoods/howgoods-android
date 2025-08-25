@@ -6,8 +6,7 @@ import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.repository.SurveyRepository
 import javax.inject.Inject
 
-class SurveyRepositoryImpl @Inject constructor(
-) : SurveyRepository {
+class SurveyRepositoryImpl @Inject constructor() : SurveyRepository {
     override suspend fun fetchAnimeCatalog(): List<Anime> {
         return emptyList()
     }

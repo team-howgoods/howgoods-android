@@ -6,9 +6,6 @@ import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.domain.usecase.survey.FetchAnimeCatalogUseCase
 import com.cyanlch.domain.usecase.survey.FetchCharactersByAnimeUseCase
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -41,40 +38,32 @@ class SurveyStore @Inject constructor(
     }
 
     suspend fun loadCharactersForSelectedAnime() {
-        val need = form.selectedAnimeIds.filter { it !in form.charactersByAnime }
+        val need = form.selectedAnimeIds.filter { it !in form.characterListsByAnime }
         if (need.isEmpty()) {
             pruneCharacters()
             return
         }
         setLoading(true)
-        val updated = form.charactersByAnime.toMutableMap()
-
-        coroutineScope {
-            val characters = need.map { animeId ->
-                async {
-                    fetchCharactersByAnime(animeId).fold(
-                        onSuccess = { it },
-                        onFailure = {
-                            setErrorMessage(it.message ?: "Error")
-                            emptyList()
-                        },
-                    )
-                }
-            }.awaitAll()
-            need.forEachIndexed { index, animeId ->
-                updated[animeId] = characters[index]
-            }
-        }
-
-        updateForm { it.copy(charactersByAnime = updated) }
+        fetchCharactersByAnime(need).fold(
+            onSuccess = { lists ->
+                val incoming = lists.associateBy { it.anime.id }
+                val merged = form.characterListsByAnime
+                    .toMutableMap()
+                    .apply { putAll(incoming) }
+                updateForm { it.copy(characterListsByAnime = merged) }
+                pruneCharacters()
+            },
+            onFailure = {
+                setErrorMessage(it.message ?: "Error")
+            },
+        )
         setLoading(false)
-        pruneCharacters()
     }
 
     private fun pruneCharacters() {
         val pruned = SurveySelectionPolicy.pruneCharactersNotIn(
             form.selectedAnimeIds,
-            form.charactersByAnime,
+            form.characterListsByAnime,
             form.selectedCharacterIds,
         )
         if (pruned != form.selectedCharacterIds) {
@@ -93,12 +82,13 @@ class SurveyStore @Inject constructor(
     fun selectOrDeselectCharacter(characterId: CharacterId) {
         if (!SurveySelectionPolicy.isCharacterAllowed(
                 selectedAnimeIds = form.selectedAnimeIds,
-                charactersByAnime = form.charactersByAnime,
+                characterListsByAnime = form.characterListsByAnime,
                 candidateId = characterId,
             )
         ) {
             return
         }
+
         updateForm { f ->
             val next = f.selectedCharacterIds.toMutableSet()
             if (!next.add(characterId)) next.remove(characterId)

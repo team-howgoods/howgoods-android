@@ -1,6 +1,6 @@
 package com.cyanlch.domain.policy
 
-import com.cyanlch.domain.model.anime.AnimeCharacter
+import com.cyanlch.domain.model.anime.AnimeCharacterList
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
 
@@ -12,21 +12,21 @@ object SurveySelectionPolicy {
 
     fun isCharacterAllowed(
         selectedAnimeIds: Set<AnimeId>,
-        charactersByAnime: Map<AnimeId, List<AnimeCharacter>>,
+        characterListsByAnime: Map<AnimeId, AnimeCharacterList>,
         candidateId: CharacterId,
-    ): Boolean = selectedAnimeIds.any { id ->
-        charactersByAnime[id].orEmpty().any { it.id == candidateId }
+    ): Boolean = selectedAnimeIds.any { aid ->
+        characterListsByAnime[aid]?.characters.orEmpty().any { it.id == candidateId }
     }
 
     fun pruneCharactersNotIn(
         selectedAnimeIds: Set<AnimeId>,
-        charactersByAnime: Map<AnimeId, List<AnimeCharacter>>,
+        characterListsByAnime: Map<AnimeId, AnimeCharacterList>,
         chosenCharacterIds: Set<CharacterId>,
     ): Set<CharacterId> {
-        val allowed = selectedAnimeIds
-            .flatMap { charactersByAnime[it].orEmpty() }
+        val allowed: Set<CharacterId> = selectedAnimeIds
+            .flatMap { aid -> characterListsByAnime[aid]?.characters.orEmpty() }
             .map { it.id }
             .toSet()
-        return chosenCharacterIds.intersect(allowed)
+        return chosenCharacterIds.filterTo(mutableSetOf()) { it in allowed }
     }
 }

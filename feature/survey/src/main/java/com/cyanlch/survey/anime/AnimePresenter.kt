@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.policy.SurveySelectionPolicy
+import com.cyanlch.survey.character.CharacterScreen
 import com.cyanlch.survey.model.SurveyStep
 import com.cyanlch.survey.model.SurveyStore
 import com.slack.circuit.codegen.annotations.CircuitInject
@@ -37,8 +38,7 @@ class AnimePresenter @AssistedInject constructor(
 
         fun handleNext() {
             if (store.validate(SurveyStep.Anime).isValid) {
-                // navigator.goTo(CharacterScreen)
-                TODO()
+                navigator.goTo(CharacterScreen)
             }
         }
 

@@ -14,16 +14,16 @@ class FetchAnimeCatalogUseCase @Inject constructor(
             runCatching {
                 // 테스트용 임시 데이터
                 listOf(
-                    Anime(id = "1", name = "원피스"),
-                    Anime(id = "2", name = "나루토"),
-                    Anime(id = "3", name = "드래곤볼"),
-                    Anime(id = "4", name = "데몬슬레이어"),
-                    Anime(id = "5", name = "공격의 거인"),
-                    Anime(id = "6", name = "주술회전"),
-                    Anime(id = "7", name = "헌터x헌터"),
-                    Anime(id = "8", name = "스파이 패밀리"),
-                    Anime(id = "9", name = "체인소우맨"),
-                    Anime(id = "10", name = "블리치"),
+                    Anime(id = 1, name = "원피스"),
+                    Anime(id = 2, name = "나루토"),
+                    Anime(id = 3, name = "드래곤볼"),
+                    Anime(id = 4, name = "데몬슬레이어"),
+                    Anime(id = 5, name = "공격의 거인"),
+                    Anime(id = 6, name = "주술회전"),
+                    Anime(id = 7, name = "헌터x헌터"),
+                    Anime(id = 8, name = "스파이 패밀리"),
+                    Anime(id = 9, name = "체인소우맨"),
+                    Anime(id = 10, name = "블리치"),
                 )
                 // repository.fetchAnimeCatalog()
             }
