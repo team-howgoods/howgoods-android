@@ -4,12 +4,15 @@ import com.cyanlch.domain.model.anime.Anime
 import com.cyanlch.domain.model.anime.AnimeCharacterList
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
+import com.cyanlch.domain.model.goods.GoodsType
 
 data class SurveyForm(
     val animeCatalog: List<Anime> = emptyList(),
     val selectedAnimeIds: Set<AnimeId> = emptySet(),
     val selectedCharacterIds: Set<CharacterId> = emptySet(),
     val characterListsByAnime: Map<AnimeId, AnimeCharacterList> = emptyMap(),
+    val goodsTypes: List<GoodsType> = emptyList(),
+    val selectedGoodsTypes: Set<GoodsType> = emptySet(),
 )
 
 enum class SurveyStep { Anime, Character, Goods }
