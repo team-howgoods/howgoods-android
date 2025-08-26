@@ -16,22 +16,23 @@ import androidx.compose.ui.unit.dp
 fun WhiteFadeBar(
     modifier: Modifier = Modifier,
     horizontal: Boolean = false,
-    reverse: Boolean = false
+    reverse: Boolean = false,
 ) {
     val stops = arrayOf(
-        0.0f to Color(0xFFFFFFFF).copy(alpha=0f),
+        0.0f to Color(0xFFFFFFFF).copy(alpha = 0f),
         1.0f to Color(0xFFFFFFFF),
     )
     val cs = if (reverse) stops.reversedArray() else stops
-    val brush = if (horizontal)
+    val brush = if (horizontal) {
         Brush.horizontalGradient(colorStops = cs)
-    else
+    } else {
         Brush.verticalGradient(colorStops = cs)
+    }
 
     Box(
         modifier
             .fillMaxWidth()
-            .background(brush)
+            .background(brush),
     )
 }
 
@@ -41,7 +42,7 @@ private fun WhiteFadeBarPreview() {
     Box(Modifier.background(Color.Green).height(120.dp)) {
         WhiteFadeBar(
             horizontal = false,
-            modifier = Modifier.height(82.dp).align(Alignment.BottomCenter)
+            modifier = Modifier.height(82.dp).align(Alignment.BottomCenter),
         )
     }
 }

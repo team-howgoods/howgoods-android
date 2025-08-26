@@ -57,13 +57,13 @@ class CharacterUi @Inject constructor() : Ui<CharacterScreen.State> {
                             HgSolidButton(
                                 onClick = state.onNext,
                                 enabled = state.selectedCharacterCount
-                                        >= SurveySelectionPolicy.MIN_CHARACTER,
+                                    >= SurveySelectionPolicy.MIN_CHARACTER,
                                 modifier = Modifier
                                     .weight(1f),
                             ) {
                                 HgText(
                                     text = "다음 (${state.selectedCharacterCount} " +
-                                            "/ ${SurveySelectionPolicy.MAX_CHARACTER})",
+                                        "/ ${SurveySelectionPolicy.MAX_CHARACTER})",
                                     style = HGTypography.body2SemiBold,
                                     tone = HgTextTone.Unspecified,
                                 )
@@ -75,10 +75,10 @@ class CharacterUi @Inject constructor() : Ui<CharacterScreen.State> {
                                 .align(Alignment.TopCenter)
                                 .height(24.dp)
                                 .offset(y = (-24).dp)
-                                .zIndex(1f)
+                                .zIndex(1f),
                         )
                     }
-                }
+                },
             ) { inner ->
                 AnimeCharacterContent(
                     state = state,
