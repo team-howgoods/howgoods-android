@@ -62,6 +62,7 @@ class GoodsTypeUi @Inject constructor() : Ui<GoodsTypeScreen.State> {
                         Row {
                             HgSolidButton(
                                 onClick = state.onNext,
+                                enabled = state.selectedGoodsTypes.isNotEmpty(),
                                 modifier = Modifier
                                     .weight(1f),
                             ) {
