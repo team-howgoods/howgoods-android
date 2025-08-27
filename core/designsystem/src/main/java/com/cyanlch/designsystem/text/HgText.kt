@@ -16,6 +16,7 @@ import com.cyanlch.designsystem.ui.HGTheme
 
 enum class HgTextTone {
     Unspecified,
+    White,
     Default,
     Alternative,
     Assistive,
@@ -99,6 +100,7 @@ private fun resolveTextColor(
     } else {
         when (tone) {
             HgTextTone.Unspecified -> Color.Unspecified
+            HgTextTone.White -> Color.White
             HgTextTone.Default -> HGTheme.tokens.textDefault
             HgTextTone.Alternative -> HGTheme.tokens.textAlternative
             HgTextTone.Assistive -> HGTheme.tokens.textAssistive

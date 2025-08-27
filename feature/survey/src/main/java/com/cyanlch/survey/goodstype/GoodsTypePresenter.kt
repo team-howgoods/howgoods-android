@@ -1,7 +1,9 @@
 package com.cyanlch.survey.goodstype
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.survey.model.SurveyStore
 import com.slack.circuit.codegen.annotations.CircuitInject
@@ -20,8 +22,26 @@ class GoodsTypePresenter @AssistedInject constructor(
     override fun present(): GoodsTypeScreen.State {
         val storeState by store.uiState.collectAsStateWithLifecycle()
 
+        LaunchedEffect(Unit) {
+            store.loadGoodsTypeIfEmpty()
+        }
+
+        val goodsTypes = remember(
+            storeState.form.goodsTypes,
+            storeState.form.selectedGoodsTypes,
+        ) {
+            storeState.form.goodsTypes.map { goodsType ->
+                GoodsTypeGridItem(
+                    goodsTypeId = goodsType.goodsTypeId,
+                    name = goodsType.name,
+                    imageUrl = goodsType.imageUrl,
+                    isSelected = goodsType.goodsTypeId in storeState.form.selectedGoodsTypes,
+                )
+            }
+        }
+
         fun onNext() {
-            // TODO
+            TODO()
         }
 
         fun onBack() {
@@ -29,8 +49,11 @@ class GoodsTypePresenter @AssistedInject constructor(
         }
 
         return GoodsTypeScreen.State(
-            goodsTypes = storeState.form.goodsTypes,
+            goodsTypes = goodsTypes,
+            selectedGoodsTypes = storeState.form.selectedGoodsTypes,
+            selectedGoodsTypeCount = storeState.form.selectedGoodsTypes.size,
             onToggleGoodsType = store::selectOrDeselectGoodsType,
+            onToggleAllGoodsType = store::selectOrDeselectAllGoodsType,
             onNext = ::onNext,
             onBack = ::onBack,
         )

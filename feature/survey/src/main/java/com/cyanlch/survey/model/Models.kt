@@ -12,7 +12,7 @@ data class SurveyForm(
     val selectedCharacterIds: Set<CharacterId> = emptySet(),
     val characterListsByAnime: Map<AnimeId, AnimeCharacterList> = emptyMap(),
     val goodsTypes: List<GoodsType> = emptyList(),
-    val selectedGoodsTypes: Set<GoodsType> = emptySet(),
+    val selectedGoodsTypes: Set<Int> = emptySet(),
 )
 
 enum class SurveyStep { Anime, Character, Goods }

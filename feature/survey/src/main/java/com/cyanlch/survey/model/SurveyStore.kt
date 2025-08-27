@@ -114,9 +114,20 @@ class SurveyStore @Inject constructor(
         }
     }
 
-    fun selectOrDeselectGoodsType(goodsType: GoodsType) = updateForm { f ->
+    fun selectOrDeselectGoodsType(goodsTypeId: Int) = updateForm { f ->
         val next = f.selectedGoodsTypes.toMutableSet()
-        if (!next.add(goodsType)) next.remove(goodsType)
+        if (!next.add(goodsTypeId)) next.remove(goodsTypeId)
+        f.copy(selectedGoodsTypes = next)
+    }
+
+    fun selectOrDeselectAllGoodsType() = updateForm { f ->
+        val enable = f.selectedGoodsTypes.isEmpty()
+        val next = if (enable) {
+            f.goodsTypes.map { it.goodsTypeId }.toSet()
+        } else {
+            emptySet()
+        }
+
         f.copy(selectedGoodsTypes = next)
     }
 
