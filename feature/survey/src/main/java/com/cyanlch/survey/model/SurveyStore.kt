@@ -2,9 +2,11 @@ package com.cyanlch.survey.model
 
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
+import com.cyanlch.domain.model.goods.GoodsType
 import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.domain.usecase.survey.FetchAnimeCatalogUseCase
 import com.cyanlch.domain.usecase.survey.FetchCharactersByAnimeUseCase
+import com.cyanlch.domain.usecase.survey.FetchGoodsTypeUseCase
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,6 +18,7 @@ import kotlin.collections.emptyList
 class SurveyStore @Inject constructor(
     private val fetchAnimeCatalog: FetchAnimeCatalogUseCase,
     private val fetchCharactersByAnime: FetchCharactersByAnimeUseCase,
+    private val fetchGoodsType: FetchGoodsTypeUseCase,
     // private val submitSurvey: SubmitSurveyUseCase
 ) {
     private val _uiState = MutableStateFlow(SurveyUiState())
@@ -60,6 +63,20 @@ class SurveyStore @Inject constructor(
         setLoading(false)
     }
 
+    suspend fun loadGoodsTypeIfEmpty() {
+        if (form.goodsTypes.isNotEmpty()) return
+        setLoading(true)
+        val list = fetchGoodsType().fold(
+            onSuccess = { it },
+            onFailure = {
+                setErrorMessage(it.message ?: "Error")
+                emptyList()
+            },
+        )
+        updateForm { it.copy(goodsTypes = list) }
+        setLoading(false)
+    }
+
     private fun pruneCharacters() {
         val pruned = SurveySelectionPolicy.pruneCharactersNotIn(
             form.selectedAnimeIds,
@@ -95,6 +112,23 @@ class SurveyStore @Inject constructor(
             if (next.size > SurveySelectionPolicy.MAX_CHARACTER) return@updateForm f
             f.copy(selectedCharacterIds = next)
         }
+    }
+
+    fun selectOrDeselectGoodsType(goodsTypeId: Int) = updateForm { f ->
+        val next = f.selectedGoodsTypes.toMutableSet()
+        if (!next.add(goodsTypeId)) next.remove(goodsTypeId)
+        f.copy(selectedGoodsTypes = next)
+    }
+
+    fun selectOrDeselectAllGoodsType() = updateForm { f ->
+        val shouldSelectAll = f.selectedGoodsTypes.isEmpty()
+        val next = if (shouldSelectAll) {
+            f.goodsTypes.map { it.goodsTypeId }.toSet()
+        } else {
+            emptySet()
+        }
+
+        f.copy(selectedGoodsTypes = next)
     }
 
     // ---------- Validation & Submit ----------
