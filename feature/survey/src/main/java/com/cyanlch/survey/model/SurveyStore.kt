@@ -121,8 +121,8 @@ class SurveyStore @Inject constructor(
     }
 
     fun selectOrDeselectAllGoodsType() = updateForm { f ->
-        val enable = f.selectedGoodsTypes.isEmpty()
-        val next = if (enable) {
+        val shouldSelectAll = f.selectedGoodsTypes.isEmpty()
+        val next = if (shouldSelectAll) {
             f.goodsTypes.map { it.goodsTypeId }.toSet()
         } else {
             emptySet()
