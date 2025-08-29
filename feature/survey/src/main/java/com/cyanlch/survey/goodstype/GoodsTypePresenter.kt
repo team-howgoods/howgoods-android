@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.survey.model.SurveyStore
+import com.cyanlch.survey.selection.GoodsSelectionScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -41,7 +42,7 @@ class GoodsTypePresenter @AssistedInject constructor(
         }
 
         fun onNext() {
-            TODO()
+            navigator.goTo(GoodsSelectionScreen)
         }
 
         fun onBack() {
