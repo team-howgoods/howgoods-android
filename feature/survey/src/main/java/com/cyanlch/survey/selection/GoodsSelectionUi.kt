@@ -26,7 +26,6 @@ import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 import com.cyanlch.designsystem.ui.LocalHGColors
-import com.cyanlch.survey.goodstype.GoodsTypeScreen
 import com.cyanlch.ui.topbar.HgBasicTopBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui

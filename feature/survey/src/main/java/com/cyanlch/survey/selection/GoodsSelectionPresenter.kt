@@ -31,11 +31,12 @@ class GoodsSelectionPresenter @AssistedInject constructor(
         return GoodsSelectionScreen.State(
             searchText = searchText,
             onSearchTextChange = { searchText = it },
-            onToggleGoods = {},
+            onToggleGoods = { TODO() },
             selectedGoodsIds = storeState.form.selectedGoodsIds,
             selectedGoodsCount = storeState.form.selectedGoodsIds.size,
             onNext = { TODO() },
             onBack = ::onBack,
+            onSkip = { TODO() }
         )
     }
 
