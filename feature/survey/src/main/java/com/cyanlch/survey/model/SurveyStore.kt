@@ -2,7 +2,6 @@ package com.cyanlch.survey.model
 
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
-import com.cyanlch.domain.model.goods.GoodsType
 import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.domain.usecase.survey.FetchAnimeCatalogUseCase
 import com.cyanlch.domain.usecase.survey.FetchCharactersByAnimeUseCase

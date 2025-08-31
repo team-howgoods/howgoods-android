@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -35,6 +36,7 @@ import com.cyanlch.designsystem.icons.CloseButtonBackground
 import com.cyanlch.designsystem.icons.HgCloseButton
 import com.cyanlch.designsystem.ui.HGColors
 import com.cyanlch.designsystem.ui.HGTheme
+import com.cyanlch.designsystem.ui.HGTypography
 
 @Composable
 fun HgSearchField(
@@ -60,7 +62,7 @@ fun HgSearchField(
                 BorderStroke(HgSearchFieldDefaults.borderWidth, HgSearchFieldDefaults.border),
                 HgSearchFieldDefaults.shape,
             )
-            .padding(horizontal = HgSearchFieldDefaults.horizontalPadding)
+            .padding(HgSearchFieldDefaults.padding)
             .semantics { contentDescription = "검색창" },
     ) {
         Icon(
@@ -111,15 +113,15 @@ object HgSearchFieldDefaults {
     val shape = RoundedCornerShape(8.dp)
     val container = HGColors.white
     val border: Color @Composable get() = HGTheme.tokens.lineAlternative
-    val borderWidth: Dp = 2.dp
-    val horizontalPadding: Dp = 12.dp
+    val borderWidth: Dp = 1.dp
+    val padding: PaddingValues = PaddingValues(horizontal = 10.dp, vertical = 10.dp)
     val iconTint = HGColors.gray500
 
     @Composable
-    fun textStyle(): TextStyle = HGTheme.typography.bodyMedium
+    fun textStyle(): TextStyle = HGTypography.body1Medium
 
     @Composable
-    fun placeholderStyle(): TextStyle = HGTheme.typography.bodyMedium
+    fun placeholderStyle(): TextStyle = HGTypography.body2Medium
 }
 
 @Preview(name = "SearchField - Light", showBackground = true)

@@ -4,12 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.survey.character.CharacterScreen
 import com.cyanlch.survey.model.SurveyStep
 import com.cyanlch.survey.model.SurveyStore
+import com.cyanlch.survey.noselection.NoSelectionScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -26,6 +29,7 @@ class AnimePresenter @AssistedInject constructor(
     @Composable
     override fun present(): AnimeScreen.State {
         val storeState by store.uiState.collectAsStateWithLifecycle()
+        var lastErrorMessage by remember { mutableStateOf("") }
 
         LaunchedEffect(Unit) {
             store.loadAnimeCatalogIfEmpty()
@@ -37,16 +41,22 @@ class AnimePresenter @AssistedInject constructor(
         }
 
         fun handleNext() {
-            if (store.validate(SurveyStep.Anime).isValid) {
+            val validator = store.validate(SurveyStep.Anime)
+            if (validator.isValid) {
                 navigator.goTo(CharacterScreen)
+            } else {
+                validator.errors.firstOrNull()?.let {
+                    lastErrorMessage = it.message
+                }
             }
         }
 
         fun onSkip() {
-            navigator.pop()
+            navigator.goTo(NoSelectionScreen)
         }
 
         return AnimeScreen.State(
+            lastErrorMessage = lastErrorMessage,
             animeCatalog = storeState.form.animeCatalog,
             selectedAnimeIds = storeState.form.selectedAnimeIds,
             canSelectMore = canSelectMore,

@@ -14,7 +14,10 @@ object SurveyValidator {
             ValidationResult(
                 false,
                 listOf(
-                    FieldError(FormFieldKey.AnimeSelection, "애니는 1~3개 선택"),
+                    FieldError(
+                        FormFieldKey.AnimeSelection,
+                        "애니는 ${MIN_ANIME}~${MAX_ANIME}개 선택",
+                    ),
                 ),
             )
         }

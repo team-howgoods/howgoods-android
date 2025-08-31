@@ -6,11 +6,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,16 +17,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.cyanlch.designsystem.HeightSpacer
 import com.cyanlch.designsystem.button.HgSolidButton
-import com.cyanlch.designsystem.decoration.WhiteFadeBar
 import com.cyanlch.designsystem.select.HgImageSelector
 import com.cyanlch.designsystem.text.HgText
 import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 import com.cyanlch.designsystem.ui.LocalHGColors
+import com.cyanlch.survey.component.SurveyBottomBar
 import com.cyanlch.ui.topbar.HgBasicTopBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
@@ -47,35 +43,19 @@ class GoodsTypeUi @Inject constructor() : Ui<GoodsTypeScreen.State> {
             Scaffold(
                 topBar = { HgBasicTopBar(onBackClick = state.onBack) },
                 bottomBar = {
-                    Box(
-                        modifier = Modifier
-                            .background(LocalHGColors.current.bgDefault)
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(bottom = 16.dp),
-                    ) {
-                        Row {
-                            HgSolidButton(
-                                onClick = state.onNext,
-                                enabled = state.selectedGoodsTypes.isNotEmpty(),
-                                modifier = Modifier
-                                    .weight(1f),
-                            ) {
-                                HgText(
-                                    text = "다음",
-                                    style = HGTypography.body2SemiBold,
-                                    tone = HgTextTone.Unspecified,
-                                )
-                            }
-                        }
-                        WhiteFadeBar(
-                            horizontal = false,
+                    SurveyBottomBar {
+                        HgSolidButton(
+                            onClick = state.onNext,
+                            enabled = state.selectedGoodsTypes.isNotEmpty(),
                             modifier = Modifier
-                                .align(Alignment.TopCenter)
-                                .height(24.dp)
-                                .offset(y = (-24).dp)
-                                .zIndex(1f),
-                        )
+                                .weight(1f),
+                        ) {
+                            HgText(
+                                text = "다음",
+                                style = HGTypography.body2SemiBold,
+                                tone = HgTextTone.Unspecified,
+                            )
+                        }
                     }
                 },
             ) { inner ->
@@ -102,8 +82,7 @@ private fun GoodsTypeContent(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(LocalHGColors.current.bgDefault),
+                .fillMaxWidth(),
         ) {
             HgText(
                 text = "필수 선택",
@@ -113,7 +92,7 @@ private fun GoodsTypeContent(
             HeightSpacer(8)
             HgText(
                 text = "거의 다 왔어요!\n" +
-                        "소장하고 싶은 굿즈 형태를 골라주세요",
+                    "소장하고 싶은 굿즈 형태를 골라주세요",
                 style = HGTypography.headlineSemiBold,
             )
             HeightSpacer(28)
@@ -152,7 +131,7 @@ private fun PrimaryColorButton(
             .size(108.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(HGTheme.colors.primary)
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick),
     ) {
         HgText(
             text = text,
