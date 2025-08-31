@@ -86,8 +86,7 @@ private fun GoodsSelectionContent(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(LocalHGColors.current.bgDefault),
+                .fillMaxWidth(),
         ) {
             HgText(
                 text = "최근 관심 있는 굿즈가 있다면 골라주세요!\n" +
