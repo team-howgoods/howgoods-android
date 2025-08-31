@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
@@ -41,6 +43,9 @@ class AnimeUi @Inject constructor() : Ui<AnimeScreen.State> {
     ) {
         HGTheme {
             Scaffold(
+                topBar = {
+                    Spacer(modifier = Modifier.height(44.dp))
+                },
                 bottomBar = {
                     SurveyBottomBar {
                         HgSolidButton(
@@ -101,22 +106,31 @@ fun AnimeScreenContent(
                         .background(LocalHGColors.current.bgDefault),
                 ) {
                     HgText(
-                        text = "좋아하는 굿즈, 더 똑똑하게 살 수 있어요!",
+                        text = "최저가 굿즈 찾기, 시작해볼까요?",
                         style = HGTypography.body1Medium,
+                        tone = HgTextTone.Assistive,
                     )
+                    HeightSpacer(16)
                     HgText(
-                        text = "원하는 상품의 최저가 정보를 알려드릴게요",
+                        text = "먼저 가장 좋아하는 애니메이션을 골라주세요!",
+                        style = HGTypography.headlineSemiBold,
+                    )
+                    HeightSpacer(4)
+                    HgText(
+                        text = "최대 5개 선택 가능",
                         style = HGTypography.label1Medium,
                         tone = HgTextTone.Assistive,
                     )
+
+                    if (state.lastErrorMessage.isNotEmpty()) {
+                        HeightSpacer(16)
+                        HgText(
+                            text = state.lastErrorMessage,
+                            style = HGTypography.body2Medium,
+                            tone = HgTextTone.Warning,
+                        )
+                    }
                 }
-            }
-            item { HeightSpacer(44) }
-            item {
-                HgText(
-                    text = "먼저 가장 좋아하는 애니메이션을 골라주세요!",
-                    style = HGTypography.headlineSemiBold,
-                )
             }
             item { HeightSpacer(16) }
             item {
@@ -130,7 +144,6 @@ fun AnimeScreenContent(
                         onClick = { state.onSkip() },
                         selected = false,
                     )
-
 
                     state.animeCatalog.forEach { anime ->
                         HgTextSelector(
@@ -171,6 +184,7 @@ fun AnimeScreenContentPreview() {
                 onToggleAnime = {},
                 onNext = {},
                 onSkip = {},
+                lastErrorMessage = "Test"
             ),
             modifier = Modifier,
         )

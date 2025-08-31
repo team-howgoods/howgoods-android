@@ -6,7 +6,7 @@ import com.cyanlch.domain.model.anime.CharacterId
 
 object SurveySelectionPolicy {
     const val MIN_ANIME = 1
-    const val MAX_ANIME = 3
+    const val MAX_ANIME = 5
     const val MIN_CHARACTER = 1
     const val MAX_CHARACTER = 3
 
