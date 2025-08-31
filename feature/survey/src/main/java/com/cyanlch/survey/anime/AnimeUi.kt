@@ -124,6 +124,14 @@ fun AnimeScreenContent(
                     horizontalArrangement = Arrangement.spacedBy(5.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
+                    HgTextSelector(
+                        text = "좋아하는 애니메이션이 없어요",
+                        iconVisible = false,
+                        onClick = { state.onSkip() },
+                        selected = false,
+                    )
+
+
                     state.animeCatalog.forEach { anime ->
                         HgTextSelector(
                             text = anime.name,

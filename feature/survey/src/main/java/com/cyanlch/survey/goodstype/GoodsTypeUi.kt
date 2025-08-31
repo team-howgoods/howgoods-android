@@ -83,7 +83,6 @@ private fun GoodsTypeContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(LocalHGColors.current.bgDefault),
         ) {
             HgText(
                 text = "필수 선택",
