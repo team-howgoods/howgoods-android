@@ -10,6 +10,7 @@ import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.survey.character.CharacterScreen
 import com.cyanlch.survey.model.SurveyStep
 import com.cyanlch.survey.model.SurveyStore
+import com.cyanlch.survey.noselection.NoSelectionScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -43,7 +44,7 @@ class AnimePresenter @AssistedInject constructor(
         }
 
         fun onSkip() {
-            navigator.pop()
+            navigator.goTo(NoSelectionScreen)
         }
 
         return AnimeScreen.State(

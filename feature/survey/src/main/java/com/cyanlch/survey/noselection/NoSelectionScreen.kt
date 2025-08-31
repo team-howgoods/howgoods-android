@@ -6,5 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data object NoSelectionScreen : Screen {
-    data object State : CircuitUiState
+    data class State(
+        val onHomeClick: () -> Unit,
+    ) : CircuitUiState
 }

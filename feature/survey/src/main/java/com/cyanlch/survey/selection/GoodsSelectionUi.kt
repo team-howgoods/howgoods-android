@@ -112,7 +112,7 @@ private fun GoodsSelectionContent(
         ) {
             HgText(
                 text = "최근 관심 있는 굿즈가 있다면 골라주세요!\n" +
-                        "최저가일 때 알려 드릴게요",
+                    "최저가일 때 알려 드릴게요",
                 style = HGTypography.headlineSemiBold,
             )
             HeightSpacer(8)

@@ -36,7 +36,7 @@ class GoodsSelectionPresenter @AssistedInject constructor(
             selectedGoodsCount = storeState.form.selectedGoodsIds.size,
             onNext = { TODO() },
             onBack = ::onBack,
-            onSkip = { TODO() }
+            onSkip = { TODO() },
         )
     }
 

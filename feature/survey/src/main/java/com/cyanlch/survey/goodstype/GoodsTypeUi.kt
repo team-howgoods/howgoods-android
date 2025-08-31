@@ -113,7 +113,7 @@ private fun GoodsTypeContent(
             HeightSpacer(8)
             HgText(
                 text = "거의 다 왔어요!\n" +
-                        "소장하고 싶은 굿즈 형태를 골라주세요",
+                    "소장하고 싶은 굿즈 형태를 골라주세요",
                 style = HGTypography.headlineSemiBold,
             )
             HeightSpacer(28)
@@ -152,7 +152,7 @@ private fun PrimaryColorButton(
             .size(108.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(HGTheme.colors.primary)
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick),
     ) {
         HgText(
             text = text,

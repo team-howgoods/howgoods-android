@@ -5,7 +5,7 @@ import com.slack.circuit.runtime.screen.Screen
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data object GoodsSelectionScreen : Screen  {
+data object GoodsSelectionScreen : Screen {
     data class State(
         val searchText: String,
         val onSearchTextChange: (String) -> Unit,
