@@ -34,8 +34,8 @@ object SurveyValidator {
                 add(
                     FieldError(
                         FormFieldKey.CharacterSelection,
-                        "캐릭터는 ${MIN_CHARACTER}~${MAX_CHARACTER}개 선택"
-                    )
+                        "캐릭터는 ${MIN_CHARACTER}~${MAX_CHARACTER}개 선택",
+                    ),
                 )
             }
             if (!chosen.all { it in pool }) {
@@ -52,8 +52,8 @@ object SurveyValidator {
                 add(
                     FieldError(
                         FormFieldKey.GoodsSelection,
-                        ""
-                    )
+                        "",
+                    ),
                 )
             }
         }

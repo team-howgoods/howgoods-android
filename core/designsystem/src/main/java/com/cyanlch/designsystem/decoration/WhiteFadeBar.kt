@@ -22,7 +22,7 @@ fun WhiteFadeBar(
     val stops = remember {
         arrayOf(
             0.0f to Color.White.copy(alpha = 0f),
-            1.0f to Color.White
+            1.0f to Color.White,
         )
     }
     val cs = if (reverse) stops.reversedArray() else stops
