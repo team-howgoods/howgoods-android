@@ -20,6 +20,7 @@ import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 import com.cyanlch.designsystem.ui.LocalHGColors
+import com.cyanlch.ui.topbar.HgBasicTopBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
 import dagger.hilt.android.components.ActivityRetainedComponent
@@ -32,7 +33,13 @@ class NoSelectionUi : Ui<NoSelectionScreen.State> {
         modifier: Modifier,
     ) {
         HGTheme {
-            Scaffold { inner ->
+            Scaffold(
+                topBar = {
+                    HgBasicTopBar(
+                        onBackClick = state.onBack,
+                    )
+                },
+            ) { inner ->
                 NoSelectionContent(
                     onHomeClick = state.onHomeClick,
                     modifier = Modifier

@@ -20,7 +20,12 @@ class NoSelectionPresenter @AssistedInject constructor(
             navigator.resetRoot(mainShellStarter())
         }
 
+        fun onBack() {
+            navigator.pop()
+        }
+
         return NoSelectionScreen.State(
+            onBack = ::onBack,
             onHomeClick = ::onHomeClick,
         )
     }
