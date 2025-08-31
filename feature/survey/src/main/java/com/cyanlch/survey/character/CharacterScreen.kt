@@ -1,0 +1,34 @@
+package com.cyanlch.survey.character
+
+import com.cyanlch.domain.model.anime.Anime
+import com.cyanlch.domain.model.anime.CharacterId
+import com.slack.circuit.runtime.CircuitUiState
+import com.slack.circuit.runtime.screen.Screen
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data object CharacterScreen : Screen {
+    data class State(
+        val errorMessage: String?,
+        val groups: List<AnimeCharactersGroup>,
+        val selectedCharacterCount: Int,
+        val canSelectMore: Boolean,
+        val isLoading: Boolean,
+        val onToggleAnimeCharacter: (CharacterId) -> Unit,
+        val onNext: () -> Unit,
+        val onBack: () -> Unit,
+    ) : CircuitUiState
+}
+
+data class CharacterRowItem(
+    val id: CharacterId,
+    val name: String,
+    val imageUrl: String = "",
+    val isSelected: Boolean = false,
+    val isEnabled: Boolean = false,
+)
+
+data class AnimeCharactersGroup(
+    val anime: Anime,
+    val items: List<CharacterRowItem>,
+)
