@@ -167,6 +167,7 @@ fun AnimeCharacterScreenContentPreview() {
                 onBack = {},
                 onToggleAnimeCharacter = {},
                 selectedCharacterCount = 1,
+                errorMessage = null,
             ),
             modifier = Modifier,
         )

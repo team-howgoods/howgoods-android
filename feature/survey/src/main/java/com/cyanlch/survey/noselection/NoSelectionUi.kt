@@ -42,7 +42,7 @@ class NoSelectionUi : Ui<NoSelectionScreen.State> {
             ) { inner ->
                 NoSelectionContent(
                     onHomeClick = state.onHomeClick,
-                    modifier = Modifier
+                    modifier = modifier
                         .fillMaxSize()
                         .background(LocalHGColors.current.bgDefault)
                         .padding(inner),

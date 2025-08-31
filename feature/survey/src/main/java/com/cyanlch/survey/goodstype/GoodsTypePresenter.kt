@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.cyanlch.survey.model.SurveyStep
 import com.cyanlch.survey.model.SurveyStore
 import com.cyanlch.survey.selection.GoodsSelectionScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
@@ -42,7 +43,9 @@ class GoodsTypePresenter @AssistedInject constructor(
         }
 
         fun onNext() {
-            navigator.goTo(GoodsSelectionScreen)
+            if (store.validate(SurveyStep.GoodsType).isValid) {
+                navigator.goTo(GoodsSelectionScreen)
+            }
         }
 
         fun onBack() {

@@ -10,7 +10,6 @@ data object GoodsSelectionScreen : Screen {
         val searchText: String,
         val onSearchTextChange: (String) -> Unit,
         val selectedGoodsIds: Set<Int>,
-        val selectedGoodsCount: Int,
         val onToggleGoods: (Int) -> Unit,
         val onNext: () -> Unit,
         val onSkip: () -> Unit,

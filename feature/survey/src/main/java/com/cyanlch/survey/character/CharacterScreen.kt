@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data object CharacterScreen : Screen {
     data class State(
+        val errorMessage: String?,
         val groups: List<AnimeCharactersGroup>,
         val selectedCharacterCount: Int,
         val canSelectMore: Boolean,

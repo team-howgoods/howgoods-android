@@ -29,7 +29,6 @@ class AnimePresenter @AssistedInject constructor(
     @Composable
     override fun present(): AnimeScreen.State {
         val storeState by store.uiState.collectAsStateWithLifecycle()
-        var lastErrorMessage by remember { mutableStateOf("") }
 
         LaunchedEffect(Unit) {
             store.loadAnimeCatalogIfEmpty()
@@ -44,10 +43,6 @@ class AnimePresenter @AssistedInject constructor(
             val validator = store.validate(SurveyStep.Anime)
             if (validator.isValid) {
                 navigator.goTo(CharacterScreen)
-            } else {
-                validator.errors.firstOrNull()?.let {
-                    lastErrorMessage = it.message
-                }
             }
         }
 
@@ -56,7 +51,8 @@ class AnimePresenter @AssistedInject constructor(
         }
 
         return AnimeScreen.State(
-            lastErrorMessage = lastErrorMessage,
+            errorMessage = storeState.lastErrorMessage,
+            maxSelectCount = SurveySelectionPolicy.MAX_ANIME,
             animeCatalog = storeState.form.animeCatalog,
             selectedAnimeIds = storeState.form.selectedAnimeIds,
             canSelectMore = canSelectMore,

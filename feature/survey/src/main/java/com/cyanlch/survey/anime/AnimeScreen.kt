@@ -9,7 +9,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data object AnimeScreen : Screen {
     data class State(
-        val lastErrorMessage: String,
+        val errorMessage: String?,
+        val maxSelectCount: Int,
         val animeCatalog: List<Anime>,
         val selectedAnimeIds: Set<AnimeId>,
         val canSelectMore: Boolean,

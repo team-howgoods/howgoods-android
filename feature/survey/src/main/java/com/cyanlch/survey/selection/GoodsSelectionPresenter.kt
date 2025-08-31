@@ -33,7 +33,6 @@ class GoodsSelectionPresenter @AssistedInject constructor(
             onSearchTextChange = { searchText = it },
             onToggleGoods = { TODO() },
             selectedGoodsIds = storeState.form.selectedGoodsIds,
-            selectedGoodsCount = storeState.form.selectedGoodsIds.size,
             onNext = { TODO() },
             onBack = ::onBack,
             onSkip = { TODO() },

@@ -31,7 +31,12 @@ object SurveyValidator {
         val chosen = form.selectedCharacterIds
         val errors = buildList {
             if (chosen.size !in MIN_CHARACTER..MAX_CHARACTER) {
-                add(FieldError(FormFieldKey.CharacterSelection, "캐릭터는 1~3개 선택"))
+                add(
+                    FieldError(
+                        FormFieldKey.CharacterSelection,
+                        "캐릭터는 ${MIN_CHARACTER}~${MAX_CHARACTER}개 선택"
+                    )
+                )
             }
             if (!chosen.all { it in pool }) {
                 add(FieldError(FormFieldKey.CharacterSelection, "선택한 애니의 캐릭터만 가능"))
@@ -41,7 +46,18 @@ object SurveyValidator {
     }
 
     fun validateGoods(form: SurveyForm): ValidationResult {
-        // TODO
-        return ValidationResult(true)
+        val chosen = form.selectedGoodsIds
+        val errors = buildList {
+            if (chosen.isEmpty()) {
+                add(
+                    FieldError(
+                        FormFieldKey.GoodsSelection,
+                        ""
+                    )
+                )
+            }
+        }
+
+        return ValidationResult(errors.isEmpty(), errors)
     }
 }

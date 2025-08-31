@@ -71,6 +71,7 @@ class CharacterPresenter @AssistedInject constructor(
         }
 
         return CharacterScreen.State(
+            errorMessage = storeState.lastErrorMessage,
             groups = groups,
             selectedCharacterCount = storeState.form.selectedCharacterIds.size,
             canSelectMore = canSelectMore,

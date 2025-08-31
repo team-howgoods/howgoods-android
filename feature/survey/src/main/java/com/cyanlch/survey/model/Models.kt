@@ -16,9 +16,9 @@ data class SurveyForm(
     val selectedGoodsIds: Set<Int> = emptySet(),
 )
 
-enum class SurveyStep { Anime, Character, Goods }
+enum class SurveyStep { Anime, Character, GoodsType }
 
-enum class FormFieldKey { AnimeSelection, CharacterSelection, GoodsSelection }
+enum class FormFieldKey { AnimeSelection, CharacterSelection, GoodsTypeSelection, GoodsSelection }
 
 data class FieldError(val field: FormFieldKey, val message: String)
 

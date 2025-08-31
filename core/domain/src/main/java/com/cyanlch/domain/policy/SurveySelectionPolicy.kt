@@ -27,6 +27,6 @@ object SurveySelectionPolicy {
             .flatMap { aid -> characterListsByAnime[aid]?.characters.orEmpty() }
             .map { it.id }
             .toSet()
-        return chosenCharacterIds.filterTo(mutableSetOf()) { it in allowed }
+        return chosenCharacterIds.intersect(allowed)
     }
 }

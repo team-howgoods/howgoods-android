@@ -131,10 +131,18 @@ class SurveyStore @Inject constructor(
     }
 
     // ---------- Validation & Submit ----------
-    fun validate(step: SurveyStep): ValidationResult = when (step) {
-        SurveyStep.Anime -> SurveyValidator.validateAnime(form)
-        SurveyStep.Character -> SurveyValidator.validateCharacter(form)
-        SurveyStep.Goods -> SurveyValidator.validateGoods(form)
+    fun validate(step: SurveyStep): ValidationResult {
+        val result = when (step) {
+            SurveyStep.Anime -> SurveyValidator.validateAnime(form)
+            SurveyStep.Character -> SurveyValidator.validateCharacter(form)
+            SurveyStep.GoodsType -> SurveyValidator.validateGoods(form)
+        }
+
+        result.errors.firstOrNull()?.let {
+            setErrorMessage(it.message)
+        }
+
+        return result
     }
 
    /* suspend fun submit(): Result<Unit> {

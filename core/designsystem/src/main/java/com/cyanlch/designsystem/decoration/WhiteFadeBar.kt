@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -18,10 +19,12 @@ fun WhiteFadeBar(
     horizontal: Boolean = false,
     reverse: Boolean = false,
 ) {
-    val stops = arrayOf(
-        0.0f to Color(0xFFFFFFFF).copy(alpha = 0f),
-        1.0f to Color(0xFFFFFFFF),
-    )
+    val stops = remember {
+        arrayOf(
+            0.0f to Color.White.copy(alpha = 0f),
+            1.0f to Color.White
+        )
+    }
     val cs = if (reverse) stops.reversedArray() else stops
     val brush = if (horizontal) {
         Brush.horizontalGradient(colorStops = cs)

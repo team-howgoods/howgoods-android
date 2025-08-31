@@ -115,15 +115,15 @@ fun AnimeScreenContent(
                     )
                     HeightSpacer(4)
                     HgText(
-                        text = "최대 5개 선택 가능",
+                        text = "최대 ${state.maxSelectCount}개 선택 가능",
                         style = HGTypography.label1Medium,
                         tone = HgTextTone.Assistive,
                     )
 
-                    if (state.lastErrorMessage.isNotEmpty()) {
+                    if (state.errorMessage?.isNotEmpty() == true) {
                         HeightSpacer(16)
                         HgText(
-                            text = state.lastErrorMessage,
+                            text = state.errorMessage,
                             style = HGTypography.body2Medium,
                             tone = HgTextTone.Warning,
                         )
@@ -182,7 +182,8 @@ fun AnimeScreenContentPreview() {
                 onToggleAnime = {},
                 onNext = {},
                 onSkip = {},
-                lastErrorMessage = "Test",
+                errorMessage = "Test",
+                maxSelectCount = 5,
             ),
             modifier = Modifier,
         )
