@@ -6,15 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.HeightSpacer
@@ -28,6 +26,7 @@ import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 import com.cyanlch.designsystem.ui.LocalHGColors
 import com.cyanlch.domain.model.anime.Anime
+import com.cyanlch.survey.component.SurveyBottomBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
 import dagger.hilt.android.components.ActivityRetainedComponent
@@ -41,7 +40,36 @@ class AnimeUi @Inject constructor() : Ui<AnimeScreen.State> {
         modifier: Modifier,
     ) {
         HGTheme {
-            Scaffold { inner ->
+            Scaffold(
+                bottomBar = {
+                    SurveyBottomBar {
+                        HgSolidButton(
+                            colors = HgButtonDefaults.SolidButtonUnspecifiedColors,
+                            onClick = state.onSkip,
+                        ) {
+                            HgText(
+                                text = "다음에 할게요",
+                                style = HGTypography.label1SemiBold.copy(
+                                    textDecoration = TextDecoration.Underline,
+                                ),
+                                tone = HgTextTone.Unspecified,
+                            )
+                        }
+                        WidthSpacer(4)
+                        HgSolidButton(
+                            onClick = state.onNext,
+                            modifier = Modifier
+                                .weight(1f),
+                        ) {
+                            HgText(
+                                text = "완료",
+                                style = HGTypography.body2SemiBold,
+                                tone = HgTextTone.Unspecified,
+                            )
+                        }
+                    }
+                },
+            ) { inner ->
                 AnimeScreenContent(
                     state = state,
                     modifier = modifier
@@ -105,40 +133,6 @@ fun AnimeScreenContent(
                                 state.selectedAnimeIds.contains(anime.id),
                         )
                     }
-                }
-            }
-        }
-
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .background(LocalHGColors.current.bgDefault)
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 16.dp, top = 24.dp),
-        ) {
-            Row {
-                HgSolidButton(
-                    colors = HgButtonDefaults.SolidButtonAlternativeColors,
-                    onClick = state.onSkip,
-                ) {
-                    HgText(
-                        text = "다음에 할게요",
-                        style = HGTypography.label1SemiBold,
-                        tone = HgTextTone.Unspecified,
-                    )
-                }
-                WidthSpacer(4)
-                HgSolidButton(
-                    onClick = state.onNext,
-                    modifier = Modifier
-                        .weight(1f),
-                ) {
-                    HgText(
-                        text = "완료",
-                        style = HGTypography.body2SemiBold,
-                        tone = HgTextTone.Unspecified,
-                    )
                 }
             }
         }

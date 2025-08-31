@@ -59,6 +59,14 @@ object HgButtonDefaults {
             disabledContainerColor = HGTheme.tokens.lineDefault,
             disabledContentColor = Color.White,
         )
+
+    val SolidButtonUnspecifiedColors: ButtonColors
+        @Composable get() = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = HGTheme.tokens.textAlternative,
+            disabledContainerColor = Color.Transparent,
+            disabledContentColor = HGTheme.tokens.textAlternative,
+        )
 }
 
 @Preview(

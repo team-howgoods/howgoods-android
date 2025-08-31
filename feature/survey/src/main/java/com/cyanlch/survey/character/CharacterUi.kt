@@ -3,24 +3,18 @@ package com.cyanlch.survey.character
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.cyanlch.designsystem.HeightSpacer
 import com.cyanlch.designsystem.button.HgSolidButton
-import com.cyanlch.designsystem.decoration.WhiteFadeBar
 import com.cyanlch.designsystem.text.HgText
 import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGTheme
@@ -29,6 +23,7 @@ import com.cyanlch.designsystem.ui.LocalHGColors
 import com.cyanlch.domain.model.anime.Anime
 import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.survey.character.component.AnimeCharacterSlot
+import com.cyanlch.survey.component.SurveyBottomBar
 import com.cyanlch.ui.topbar.HgBasicTopBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
@@ -46,37 +41,21 @@ class CharacterUi @Inject constructor() : Ui<CharacterScreen.State> {
             Scaffold(
                 topBar = { HgBasicTopBar(onBackClick = state.onBack) },
                 bottomBar = {
-                    Box(
-                        modifier = Modifier
-                            .background(LocalHGColors.current.bgDefault)
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(bottom = 16.dp),
-                    ) {
-                        Row {
-                            HgSolidButton(
-                                onClick = state.onNext,
-                                enabled = state.selectedCharacterCount
-                                    >= SurveySelectionPolicy.MIN_CHARACTER,
-                                modifier = Modifier
-                                    .weight(1f),
-                            ) {
-                                HgText(
-                                    text = "다음 (${state.selectedCharacterCount} " +
-                                        "/ ${SurveySelectionPolicy.MAX_CHARACTER})",
-                                    style = HGTypography.body2SemiBold,
-                                    tone = HgTextTone.Unspecified,
-                                )
-                            }
-                        }
-                        WhiteFadeBar(
-                            horizontal = false,
+                    SurveyBottomBar {
+                        HgSolidButton(
+                            onClick = state.onNext,
+                            enabled = state.selectedCharacterCount
+                                >= SurveySelectionPolicy.MIN_CHARACTER,
                             modifier = Modifier
-                                .align(Alignment.TopCenter)
-                                .height(24.dp)
-                                .offset(y = (-24).dp)
-                                .zIndex(1f),
-                        )
+                                .weight(1f),
+                        ) {
+                            HgText(
+                                text = "다음 (${state.selectedCharacterCount} " +
+                                    "/ ${SurveySelectionPolicy.MAX_CHARACTER})",
+                                style = HGTypography.body2SemiBold,
+                                tone = HgTextTone.Unspecified,
+                            )
+                        }
                     }
                 },
             ) { inner ->
