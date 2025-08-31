@@ -98,7 +98,6 @@ fun AnimeScreenContent(
         LazyColumn(
             modifier = Modifier
                 .padding(horizontal = 16.dp),
-            contentPadding = PaddingValues(top = 48.dp, bottom = 120.dp),
         ) {
             stickyHeader {
                 Column(
