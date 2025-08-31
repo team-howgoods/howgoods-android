@@ -82,7 +82,7 @@ private fun GoodsTypeContent(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
         ) {
             HgText(
                 text = "필수 선택",

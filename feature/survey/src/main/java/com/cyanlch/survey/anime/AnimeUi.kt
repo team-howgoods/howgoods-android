@@ -184,7 +184,7 @@ fun AnimeScreenContentPreview() {
                 onToggleAnime = {},
                 onNext = {},
                 onSkip = {},
-                lastErrorMessage = "Test"
+                lastErrorMessage = "Test",
             ),
             modifier = Modifier,
         )
