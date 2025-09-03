@@ -82,15 +82,12 @@ object KtorModule {
                         setBody(mapOf("refreshToken" to (oldTokens?.refreshToken ?: "")))
                         markAsRefreshTokenRequest()
                     }.body<UserToken>()
+                    userTokenDataStore.saveUserToken(res)
 
-                    val newTokens = BearerTokens(
+                    BearerTokens(
                         accessToken = res.accessToken,
                         refreshToken = res.refreshToken,
                     )
-
-                    userTokenDataStore.saveUserToken(res)
-
-                    newTokens
                 }
             }
         }
