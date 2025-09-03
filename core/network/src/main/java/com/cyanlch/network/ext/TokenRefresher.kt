@@ -12,6 +12,7 @@ import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
@@ -38,8 +39,11 @@ class TokenRefresher @Inject constructor(
 
             userTokenDataStore.saveUserToken(res)
             BearerTokens(res.accessToken, res.refreshToken)
-        } catch (_: ClientRequestException) { // 4xx
-            userTokenDataStore.clearUserToken()
+        } catch (e: ClientRequestException) { // 4xx
+            if (e.response.status == HttpStatusCode.Unauthorized ||
+                e.response.status == HttpStatusCode.Forbidden) {
+                userTokenDataStore.clearUserToken()
+            }
             null
         } catch (_: ServerResponseException) { // 5xx
             null

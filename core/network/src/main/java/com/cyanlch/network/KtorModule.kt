@@ -77,8 +77,12 @@ object KtorModule {
                     }
                 }
 
+                sendWithoutRequest { request ->
+                    request.url.host == BuildConfig.API_BASE_URL
+                }
+
                 refreshTokens {
-                        tokenRefresher.refresh(oldTokens?.refreshToken)
+                    tokenRefresher.refresh(oldTokens?.refreshToken)
                 }
             }
         }
@@ -111,6 +115,18 @@ object KtorModule {
     @Provides
     @RefreshClient
     fun provideRefreshClient(): HttpClient = HttpClient(CIO) {
+        install(ContentNegotiation) {
+            json(
+                Json {
+                    prettyPrint = true
+                    encodeDefaults = true
+                    isLenient = true
+                    explicitNulls = false
+                    ignoreUnknownKeys = true
+                },
+            )
+        }
+
         defaultRequest {
             url {
                 protocol = URLProtocol.HTTPS
