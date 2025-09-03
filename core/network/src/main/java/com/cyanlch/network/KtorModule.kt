@@ -2,13 +2,12 @@ package com.cyanlch.network
 
 import android.util.Log
 import com.cyanlch.data.datasource.auth.UserTokenDataStore
-import com.cyanlch.domain.model.auth.UserToken
+import com.cyanlch.network.ext.TokenRefresher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.engine.cio.endpoint
 import io.ktor.client.plugins.auth.Auth
@@ -20,16 +19,19 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.accept
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
+import io.ktor.client.request.headers
 import io.ktor.http.ContentType
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
-import io.ktor.http.headers
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.serialization.json.Json
+import javax.inject.Qualifier
 import javax.inject.Singleton
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RefreshClient
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -38,6 +40,7 @@ object KtorModule {
     @Singleton
     fun provideKtorClient(
         userTokenDataStore: UserTokenDataStore,
+        tokenRefresher: TokenRefresher,
     ) = HttpClient(CIO) {
         install(Logging) {
             level = if (BuildConfig.DEBUG) LogLevel.ALL else LogLevel.NONE
@@ -75,19 +78,7 @@ object KtorModule {
                 }
 
                 refreshTokens {
-                    val res = client.post(
-                        "${BuildConfig.API_BASE_URL}/${Endpoints.REFRESH_TOKEN}",
-                    ) {
-                        contentType(ContentType.Application.Json)
-                        setBody(mapOf("refreshToken" to (oldTokens?.refreshToken ?: "")))
-                        markAsRefreshTokenRequest()
-                    }.body<UserToken>()
-                    userTokenDataStore.saveUserToken(res)
-
-                    BearerTokens(
-                        accessToken = res.accessToken,
-                        refreshToken = res.refreshToken,
-                    )
+                        tokenRefresher.refresh(oldTokens?.refreshToken)
                 }
             }
         }
@@ -104,6 +95,22 @@ object KtorModule {
             }
         }
 
+        defaultRequest {
+            url {
+                protocol = URLProtocol.HTTPS
+                host = BuildConfig.API_BASE_URL
+            }
+            headers {
+                accept(ContentType.Application.Json)
+                contentType(ContentType.Application.Json)
+            }
+        }
+    }
+
+    @Singleton
+    @Provides
+    @RefreshClient
+    fun provideRefreshClient(): HttpClient = HttpClient(CIO) {
         defaultRequest {
             url {
                 protocol = URLProtocol.HTTPS
