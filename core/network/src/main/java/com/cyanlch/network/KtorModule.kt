@@ -66,12 +66,12 @@ object KtorModule {
         install(Auth) {
             bearer {
                 loadTokens {
-                    val token = userTokenDataStore.userTokenFlow.firstOrNull()
-                        ?: return@loadTokens null
-                    BearerTokens(
-                        accessToken = token.accessToken,
-                        refreshToken = token.refreshToken,
-                    )
+                    userTokenDataStore.userTokenFlow.firstOrNull()?.let { token ->
+                        BearerTokens(
+                            accessToken = token.accessToken,
+                            refreshToken = token.refreshToken,
+                        )
+                    }
                 }
 
                 refreshTokens {
@@ -87,6 +87,8 @@ object KtorModule {
                         accessToken = res.accessToken,
                         refreshToken = res.refreshToken,
                     )
+
+                    userTokenDataStore.saveUserToken(res)
 
                     newTokens
                 }
