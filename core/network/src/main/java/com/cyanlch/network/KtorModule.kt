@@ -3,7 +3,6 @@ package com.cyanlch.network
 import android.util.Log
 import com.cyanlch.data.datasource.auth.UserTokenDataStore
 import com.cyanlch.domain.model.auth.UserToken
-import com.cyanlch.domain.usecase.auth.GetUserTokenFlowUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -77,7 +76,7 @@ object KtorModule {
 
                 refreshTokens {
                     val res = client.post(
-                        "${BuildConfig.API_BASE_URL}/${Endpoints.REFRESH_TOKEN}"
+                        "${BuildConfig.API_BASE_URL}/${Endpoints.REFRESH_TOKEN}",
                     ) {
                         contentType(ContentType.Application.Json)
                         setBody(mapOf("refreshToken" to (oldTokens?.refreshToken ?: "")))
