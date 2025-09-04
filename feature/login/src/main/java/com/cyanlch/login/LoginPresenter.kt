@@ -46,7 +46,7 @@ class LoginPresenter @AssistedInject constructor(
                                 code = event.code,
                             ),
                         ).onSuccess {
-                            effect = LoginScreen.Event.Toast(it.email)
+                            effect = LoginScreen.Event.Toast(it.nickname)
                             navigator.resetRoot(postLoginDestination.screen())
                         }.onFailure {
                             effect = LoginScreen.Event.Toast(it.message.toString())
