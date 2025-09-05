@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -101,9 +102,13 @@ private fun GoodsSelectionContent(
             )
             HeightSpacer(16)
             HgSearchField(
-                value = state.searchText,
-                onValueChange = state.onSearchTextChange,
+                value = "",
+                onValueChange = {},
                 placeholder = "굿즈 이름을 입력해 주세요",
+                enabled = false,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { state.onSearchClick() },
             )
 
 /*            GoodsSelectionField()
