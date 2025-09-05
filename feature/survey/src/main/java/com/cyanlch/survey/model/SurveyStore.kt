@@ -114,9 +114,9 @@ class SurveyStore @Inject constructor(
     }
 
     fun selectOrDeselectGoodsType(goodsTypeId: Int) = updateForm { f ->
-        val next = f.selectedGoodsTypes.toMutableSet()
+        val next = f.selectedGoodsTypeIds.toMutableSet()
         if (!next.add(goodsTypeId)) next.remove(goodsTypeId)
-        f.copy(selectedGoodsTypes = next)
+        f.copy(selectedGoodsTypeIds = next)
     }
 
     fun selectOrDeselectGoods(goodsId: Int) = updateForm { f ->
@@ -127,14 +127,14 @@ class SurveyStore @Inject constructor(
     }
 
     fun selectOrDeselectAllGoodsType() = updateForm { f ->
-        val shouldSelectAll = f.selectedGoodsTypes.isEmpty()
+        val shouldSelectAll = f.selectedGoodsTypeIds.isEmpty()
         val next = if (shouldSelectAll) {
             f.goodsTypes.map { it.goodsTypeId }.toSet()
         } else {
             emptySet()
         }
 
-        f.copy(selectedGoodsTypes = next)
+        f.copy(selectedGoodsTypeIds = next)
     }
 
     // ---------- Validation & Submit ----------
@@ -142,7 +142,7 @@ class SurveyStore @Inject constructor(
         val result = when (step) {
             SurveyStep.Anime -> SurveyValidator.validateAnime(form)
             SurveyStep.Character -> SurveyValidator.validateCharacter(form)
-            SurveyStep.GoodsType -> SurveyValidator.validateGoods(form)
+            SurveyStep.GoodsType -> SurveyValidator.validateGoodsType(form)
         }
 
         result.errors.firstOrNull()?.let {

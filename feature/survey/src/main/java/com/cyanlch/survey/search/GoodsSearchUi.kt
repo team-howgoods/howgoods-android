@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
@@ -31,10 +33,9 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.snapshotFlow
 
 @CircuitInject(GoodsSearchScreen::class, ActivityRetainedComponent::class)
-internal class GoodsSearchUi : Ui<GoodsSearchScreen.State> {
+class GoodsSearchUi : Ui<GoodsSearchScreen.State> {
     @Composable
     override fun Content(state: GoodsSearchScreen.State, modifier: Modifier) {
         val context = LocalContext.current
@@ -75,9 +76,9 @@ private fun GoodsGrid(state: GoodsSearchScreen.State) {
             val info = gridState.layoutInfo
             info.visibleItemsInfo.lastOrNull()?.index
         }
-            .map { it ?: 0 }
-            .filter { state.canLoadMore && it >= state.items.lastIndex }
-            .collectLatest { state.onLoadMore() }
+        .map { it ?: 0 }
+        .filter { state.canLoadMore && it >= state.items.lastIndex }
+        .collectLatest { state.onLoadMore() }
     }
 
     LazyVerticalGrid(
@@ -89,15 +90,14 @@ private fun GoodsGrid(state: GoodsSearchScreen.State) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .padding(4.dp)
-                    .fillMaxWidth(),
+                    .padding(4.dp),
             ) {
                 HgImageSelector(
                     imageUrl = item.imageUrl,
                     contentDescription = item.name,
                     selected = item.isSelected,
                     onClick = { state.onToggleGoods(item.id) },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.size(168.dp),
                 )
                 HeightSpacer(4)
                 HgText(

@@ -1,6 +1,7 @@
 package com.cyanlch.survey.selection
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.survey.model.SurveyStore
 import com.cyanlch.survey.search.GoodsSearchScreen

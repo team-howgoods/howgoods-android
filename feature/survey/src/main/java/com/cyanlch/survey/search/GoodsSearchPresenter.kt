@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.usecase.survey.SearchGoodsUseCase
 import com.cyanlch.survey.model.SurveyStore
@@ -17,9 +18,9 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.components.ActivityRetainedComponent
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.snapshotFlow
 import kotlinx.coroutines.launch
 
 class GoodsSearchPresenter @AssistedInject constructor(
@@ -27,6 +28,7 @@ class GoodsSearchPresenter @AssistedInject constructor(
     private val store: SurveyStore,
     @Assisted private val navigator: Navigator,
 ) : Presenter<GoodsSearchScreen.State> {
+    @OptIn(FlowPreview::class)
     @Composable
     override fun present(): GoodsSearchScreen.State {
         val storeState by store.uiState.collectAsStateWithLifecycle()

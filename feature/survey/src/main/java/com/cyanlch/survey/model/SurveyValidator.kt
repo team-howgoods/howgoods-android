@@ -45,6 +45,22 @@ object SurveyValidator {
         return ValidationResult(errors.isEmpty(), errors)
     }
 
+    fun validateGoodsType(form: SurveyForm): ValidationResult {
+        val chosen = form.selectedGoodsTypeIds
+        val errors = buildList {
+            if (chosen.isEmpty()) {
+                add(
+                    FieldError(
+                        FormFieldKey.GoodsTypeSelection,
+                        "",
+                    ),
+                )
+            }
+        }
+
+        return ValidationResult(errors.isEmpty(), errors)
+    }
+
     fun validateGoods(form: SurveyForm): ValidationResult {
         val chosen = form.selectedGoodsIds
         val errors = buildList {
