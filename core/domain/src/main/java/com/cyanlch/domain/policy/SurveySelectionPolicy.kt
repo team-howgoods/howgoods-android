@@ -9,6 +9,7 @@ object SurveySelectionPolicy {
     const val MAX_ANIME = 5
     const val MIN_CHARACTER = 1
     const val MAX_CHARACTER = 3
+    const val MAX_GOODS = 3
 
     fun isCharacterAllowed(
         selectedAnimeIds: Set<AnimeId>,

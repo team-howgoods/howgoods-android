@@ -6,5 +6,23 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data object GoodsSearchScreen : Screen {
-    data object State : CircuitUiState
+    data class State(
+        val query: String,
+        val items: List<GoodsSearchItem>,
+        val isLoading: Boolean,
+        val canLoadMore: Boolean,
+        val errorMessage: String?,
+        val onQueryChange: (String) -> Unit,
+        val onToggleGoods: (Int) -> Unit,
+        val onLoadMore: () -> Unit,
+        val onBack: () -> Unit,
+        val onErrorShown: () -> Unit,
+    ) : CircuitUiState
 }
+
+data class GoodsSearchItem(
+    val id: Int,
+    val name: String,
+    val imageUrl: String,
+    val isSelected: Boolean,
+)

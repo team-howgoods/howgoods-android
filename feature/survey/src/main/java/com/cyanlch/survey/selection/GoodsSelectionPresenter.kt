@@ -1,12 +1,9 @@
 package com.cyanlch.survey.selection
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.survey.model.SurveyStore
+import com.cyanlch.survey.search.GoodsSearchScreen
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -22,20 +19,21 @@ class GoodsSelectionPresenter @AssistedInject constructor(
     @Composable
     override fun present(): GoodsSelectionScreen.State {
         val storeState by store.uiState.collectAsStateWithLifecycle()
-        var searchText by remember { mutableStateOf("") }
-
         fun onBack() {
             navigator.pop()
         }
 
+        fun onSearchClick() {
+            navigator.goTo(GoodsSearchScreen)
+        }
+
         return GoodsSelectionScreen.State(
-            searchText = searchText,
-            onSearchTextChange = { searchText = it },
-            onToggleGoods = { TODO() },
             selectedGoodsIds = storeState.form.selectedGoodsIds,
-            onNext = { TODO() },
+            onToggleGoods = store::selectOrDeselectGoods,
+            onSearchClick = ::onSearchClick,
+            onNext = {},
+            onSkip = {},
             onBack = ::onBack,
-            onSkip = { TODO() },
         )
     }
 

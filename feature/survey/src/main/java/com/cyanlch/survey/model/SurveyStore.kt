@@ -119,6 +119,13 @@ class SurveyStore @Inject constructor(
         f.copy(selectedGoodsTypes = next)
     }
 
+    fun selectOrDeselectGoods(goodsId: Int) = updateForm { f ->
+        val next = f.selectedGoodsIds.toMutableSet()
+        if (!next.add(goodsId)) next.remove(goodsId)
+        if (next.size > SurveySelectionPolicy.MAX_GOODS) return@updateForm f
+        f.copy(selectedGoodsIds = next)
+    }
+
     fun selectOrDeselectAllGoodsType() = updateForm { f ->
         val shouldSelectAll = f.selectedGoodsTypes.isEmpty()
         val next = if (shouldSelectAll) {

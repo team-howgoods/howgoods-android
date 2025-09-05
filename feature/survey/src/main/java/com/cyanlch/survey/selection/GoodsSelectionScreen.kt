@@ -7,10 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data object GoodsSelectionScreen : Screen {
     data class State(
-        val searchText: String,
-        val onSearchTextChange: (String) -> Unit,
         val selectedGoodsIds: Set<Int>,
         val onToggleGoods: (Int) -> Unit,
+        val onSearchClick: () -> Unit,
         val onNext: () -> Unit,
         val onSkip: () -> Unit,
         val onBack: () -> Unit,
