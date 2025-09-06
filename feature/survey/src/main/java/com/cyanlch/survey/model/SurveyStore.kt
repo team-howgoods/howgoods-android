@@ -128,7 +128,7 @@ class SurveyStore @Inject constructor(
             if (next.size >= SurveySelectionPolicy.MAX_GOODS) return@updateForm f
             next.add(goods)
         }
-        f.copy(selectedGoods = next)
+        f.copy(selectedGoods = next.toList())
     }
 
     fun selectOrDeselectAllGoodsType() = updateForm { f ->

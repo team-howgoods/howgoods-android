@@ -12,6 +12,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.usecase.survey.SearchGoodsUseCase
 import com.cyanlch.survey.model.SelectedGoods
 import com.cyanlch.survey.model.SurveyStore
+import com.cyanlch.survey.search.ext.mapToSearchItems
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -22,6 +23,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 class GoodsSearchPresenter @AssistedInject constructor(
@@ -34,7 +36,9 @@ class GoodsSearchPresenter @AssistedInject constructor(
     override fun present(): GoodsSearchScreen.State {
         val storeState by store.uiState.collectAsStateWithLifecycle()
         var query by remember { mutableStateOf("") }
-        var items by remember { mutableStateOf(emptyList<GoodsSearchItem>()) }
+        var items by remember {
+            mutableStateOf(emptyList<GoodsSearchItem>())
+        }
         var cursor by remember { mutableStateOf<Int?>(null) }
         var isLoading by remember { mutableStateOf(false) }
         var errorMessage by remember { mutableStateOf<String?>(null) }
@@ -43,26 +47,20 @@ class GoodsSearchPresenter @AssistedInject constructor(
         LaunchedEffect(Unit) {
             snapshotFlow { query }
                 .debounce(500)
+                .distinctUntilChanged()
                 .collectLatest { q ->
                     isLoading = true
                     cursor = null
                     searchGoods(q, null)
                         .onSuccess { result ->
-                            val selected = storeState.form.selectedGoods
-                            val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
-                            val selectedIds = selected.map { it.id }
-                            items = result.items.map {
-                                GoodsSearchItem(
-                                    id = it.id,
-                                    name = it.name,
-                                    imageUrl = it.imageUrl,
-                                    isSelected = it.id in selectedIds,
-                                    order = orderMap[it.id],
-                                )
-                            }
+                            items = mapToSearchItems(
+                                goodsSearchResult = result,
+                                selectedGoods = storeState.form.selectedGoods,
+                            )
                             cursor = result.nextCursor
                         }
                         .onFailure { errorMessage = it.message }
+                }.also {
                     isLoading = false
                 }
         }
@@ -74,18 +72,10 @@ class GoodsSearchPresenter @AssistedInject constructor(
                 isLoading = true
                 searchGoods(query, cur)
                     .onSuccess { result ->
-                        val selected = storeState.form.selectedGoods
-                        val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
-                        val selectedIds = selected.map { it.id }
-                        val more = result.items.map {
-                            GoodsSearchItem(
-                                id = it.id,
-                                name = it.name,
-                                imageUrl = it.imageUrl,
-                                isSelected = it.id in selectedIds,
-                                order = orderMap[it.id],
-                            )
-                        }
+                        val more = mapToSearchItems(
+                            goodsSearchResult = result,
+                            selectedGoods = storeState.form.selectedGoods,
+                        )
                         items = items + more
                         cursor = result.nextCursor
                     }
@@ -98,8 +88,13 @@ class GoodsSearchPresenter @AssistedInject constructor(
             store.selectOrDeselectGoods(
                 SelectedGoods(item.id, item.name, item.imageUrl),
             )
-            val selected = store.uiState.value.form.selectedGoods
-            val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
+        }
+
+        LaunchedEffect(storeState.form.selectedGoods) {
+            val selected = storeState.form.selectedGoods
+            val orderMap = selected.mapIndexed { index, g ->
+                g.id to index + 1
+            }.toMap()
             val selectedIds = selected.map { it.id }
             items = items.map { g ->
                 g.copy(

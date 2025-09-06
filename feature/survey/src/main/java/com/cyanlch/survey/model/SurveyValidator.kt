@@ -52,7 +52,7 @@ object SurveyValidator {
                 add(
                     FieldError(
                         FormFieldKey.GoodsTypeSelection,
-                        "",
+                        "굿즈 유형을 1개 이상 선택하세요",
                     ),
                 )
             }

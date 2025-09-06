@@ -32,6 +32,7 @@ import com.cyanlch.designsystem.text.HgText
 import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGColors
 import com.cyanlch.designsystem.ui.HGTypography
+import com.cyanlch.domain.policy.SurveySelectionPolicy
 import com.cyanlch.survey.model.SelectedGoods
 import com.cyanlch.survey.selection.GoodsSelectionScreen
 
@@ -47,11 +48,15 @@ fun GoodsGroup(
     var visibleCount by remember(animationName) {
         mutableIntStateOf(minOf(4, goods.size))
     }
+    val orderById = remember(selectedGoods) {
+        selectedGoods.withIndex().associate { (idx, sg) -> sg.id to (idx + 1) }
+    }
     Column(modifier = Modifier.fillMaxWidth()) {
         HgText(
             text = animationName,
             style = HGTypography.headlineMedium,
         )
+
         HeightSpacer(8)
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -62,8 +67,8 @@ fun GoodsGroup(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.width(GoodsImageSize),
                 ) {
-                    val order = selectedGoods.indexOfFirst { it.id == item.id }
-                        .takeIf { it >= 0 }?.plus(1)
+                    val order = orderById[item.id]
+
                     HgImageSelector(
                         imageUrl = item.imageUrl,
                         contentDescription = item.name,
@@ -104,10 +109,14 @@ fun GoodsGroup(
                     )
                     .padding(vertical = 12.dp)
                     .clickable {
-                        visibleCount = minOf(visibleCount + 6, goods.size)
+                        visibleCount = minOf(
+                            visibleCount + SurveySelectionPolicy.ITEMS_TO_SHOW_ON_MORE,
+                            goods.size,
+                        )
                     },
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement
+                    .spacedBy(4.dp, Alignment.CenterHorizontally),
             ) {
                 HgText(
                     text = "더보기",

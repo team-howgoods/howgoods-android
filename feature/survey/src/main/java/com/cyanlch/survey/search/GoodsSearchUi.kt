@@ -35,6 +35,7 @@ import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
 import dagger.hilt.android.components.ActivityRetainedComponent
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 
@@ -112,6 +113,7 @@ private fun GoodsGrid(state: GoodsSearchScreen.State) {
             info.visibleItemsInfo.lastOrNull()?.index
         }
             .map { it ?: 0 }
+            .distinctUntilChanged()
             .filter { state.canLoadMore && it >= state.items.lastIndex }
             .collectLatest { state.onLoadMore() }
     }

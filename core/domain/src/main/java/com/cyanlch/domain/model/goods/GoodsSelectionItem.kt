@@ -9,6 +9,6 @@ data class GoodsSelectionItem(
     val id: Int,
     val name: String,
     val imageUrl: String,
-    val animationId: AnimeId,
-    val animationName: String,
+    val animeId: AnimeId,
+    val animeName: String,
 )

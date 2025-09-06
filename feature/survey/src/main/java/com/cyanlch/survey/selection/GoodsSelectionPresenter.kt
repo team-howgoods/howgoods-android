@@ -35,8 +35,8 @@ class GoodsSelectionPresenter @AssistedInject constructor(
                         id = it.id,
                         name = it.name,
                         imageUrl = it.imageUrl,
-                        animationId = it.animationId,
-                        animationName = it.animationName,
+                        animationId = it.animeId,
+                        animationName = it.animeName,
                     )
                 }
             }
