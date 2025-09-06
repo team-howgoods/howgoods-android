@@ -10,16 +10,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.remember
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.HeightSpacer
@@ -111,16 +113,19 @@ private fun GoodsGroup(
             goods.take(visibleCount).forEach { item ->
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.width(108.dp),
                 ) {
-                    val isSelected = selectedGoods.any { it.id == item.id }
+                    val order = selectedGoods.indexOfFirst { it.id == item.id }
+                        .takeIf { it >= 0 }?.plus(1)
                     HgImageSelector(
                         imageUrl = item.imageUrl,
                         contentDescription = item.name,
-                        selected = isSelected,
+                        selected = order != null,
                         onClick = {
                             onToggleGoods(SelectedGoods(item.id, item.name, item.imageUrl))
                         },
                         modifier = Modifier.size(108.dp),
+                        cnt = order,
                     )
                     HeightSpacer(4)
                     HgText(
@@ -158,7 +163,7 @@ private fun GoodsGroup(
 private fun GoodsSelectionContent(
     state: GoodsSelectionScreen.State,
     modifier: Modifier,
-){
+) {
     Box(
         modifier = modifier
             .fillMaxSize()

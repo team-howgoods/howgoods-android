@@ -18,6 +18,9 @@ object GoodsSelectionFixtures {
         "https://animate.godohosting.com/Goods/4550621155161.jpg"
     private const val SAMPLE_JJK_IMG2 =
         "https://animate.godohosting.com/Goods/4580722007922.jpg"
+    private const val SAMPLE_JJK_IMG3 = "https://example.com/goods7.jpg"
+    private const val SAMPLE_JJK_IMG4 = "https://example.com/goods8.jpg"
+    private const val SAMPLE_JJK_IMG5 = "https://example.com/goods9.jpg"
     private const val SAMPLE_DS_IMG1 = "https://example.com/goods3.jpg"
     private const val SAMPLE_DS_IMG2 = "https://example.com/goods4.jpg"
     private const val SAMPLE_OP_IMG1 = "https://example.com/goods5.jpg"
@@ -66,6 +69,26 @@ object GoodsSelectionFixtures {
             animationId = 1,
             animationName = "원피스",
         ),
+        GoodsSelectionItem(
+            id = 7,
+            name = "주술회전 손거울 고죠 사토루",
+            imageUrl = SAMPLE_JJK_IMG3,
+            animationId = 6,
+            animationName = "주술회전",
+        ),
+        GoodsSelectionItem(
+            id = 8,
+            name = "주술회전 쿠키 세트 이타도리·후시구로·쿠기사키",
+            imageUrl = SAMPLE_JJK_IMG4,
+            animationId = 6,
+            animationName = "주술회전",
+        ),
+        GoodsSelectionItem(
+            id = 9,
+            name = "주술회전 포스트카드 컬렉션 모든 등장인물 한정판 세트",
+            imageUrl = SAMPLE_JJK_IMG5,
+            animationId = 6,
+            animationName = "주술회전",
+        ),
     )
 }
-

@@ -12,4 +12,3 @@ data class GoodsSelectionItem(
     val animationId: AnimeId,
     val animationName: String,
 )
-
