@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.HeightSpacer
 import com.cyanlch.designsystem.WidthSpacer
@@ -44,12 +45,14 @@ class GoodsSelectionUi : Ui<GoodsSelectionScreen.State> {
                 bottomBar = {
                     SurveyBottomBar {
                         HgSolidButton(
-                            colors = HgButtonDefaults.SolidButtonAlternativeColors,
+                            colors = HgButtonDefaults.SolidButtonUnspecifiedColors,
                             onClick = state.onSkip,
                         ) {
                             HgText(
                                 text = "다음에 할게요",
-                                style = HGTypography.label1SemiBold,
+                                style = HGTypography.label1SemiBold.copy(
+                                    textDecoration = TextDecoration.Underline,
+                                ),
                                 tone = HgTextTone.Unspecified,
                             )
                         }
