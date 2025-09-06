@@ -96,8 +96,9 @@ private fun GoodsGrid(state: GoodsSearchScreen.State) {
                     imageUrl = item.imageUrl,
                     contentDescription = item.name,
                     selected = item.isSelected,
-                    onClick = { state.onToggleGoods(item.id) },
+                    onClick = { state.onToggleGoods(item) },
                     modifier = Modifier.size(168.dp),
+                    cnt = item.order,
                 )
                 HeightSpacer(4)
                 HgText(

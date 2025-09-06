@@ -11,6 +11,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.usecase.survey.SearchGoodsUseCase
 import com.cyanlch.survey.model.SurveyStore
+import com.cyanlch.survey.model.SelectedGoods
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -47,12 +48,16 @@ class GoodsSearchPresenter @AssistedInject constructor(
                     cursor = null
                     searchGoods(q, null)
                         .onSuccess { result ->
+                            val selected = storeState.form.selectedGoods
+                            val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
+                            val selectedIds = selected.map { it.id }
                             items = result.items.map {
                                 GoodsSearchItem(
                                     id = it.id,
                                     name = it.name,
                                     imageUrl = it.imageUrl,
-                                    isSelected = it.id in storeState.form.selectedGoodsIds,
+                                    isSelected = it.id in selectedIds,
+                                    order = orderMap[it.id],
                                 )
                             }
                             cursor = result.nextCursor
@@ -69,12 +74,16 @@ class GoodsSearchPresenter @AssistedInject constructor(
                 isLoading = true
                 searchGoods(query, cur)
                     .onSuccess { result ->
+                        val selected = storeState.form.selectedGoods
+                        val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
+                        val selectedIds = selected.map { it.id }
                         val more = result.items.map {
                             GoodsSearchItem(
                                 id = it.id,
                                 name = it.name,
                                 imageUrl = it.imageUrl,
-                                isSelected = it.id in storeState.form.selectedGoodsIds,
+                                isSelected = it.id in selectedIds,
+                                order = orderMap[it.id],
                             )
                         }
                         items = items + more
@@ -85,11 +94,18 @@ class GoodsSearchPresenter @AssistedInject constructor(
             }
         }
 
-        fun onToggle(id: Int) {
-            store.selectOrDeselectGoods(id)
-            val isSelected = id in store.uiState.value.form.selectedGoodsIds
-            items = items.map { item ->
-                if (item.id == id) item.copy(isSelected = isSelected) else item
+        fun onToggle(item: GoodsSearchItem) {
+            store.selectOrDeselectGoods(
+                SelectedGoods(item.id, item.name, item.imageUrl)
+            )
+            val selected = store.uiState.value.form.selectedGoods
+            val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
+            val selectedIds = selected.map { it.id }
+            items = items.map { g ->
+                g.copy(
+                    isSelected = g.id in selectedIds,
+                    order = orderMap[g.id],
+                )
             }
         }
 

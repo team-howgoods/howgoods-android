@@ -29,7 +29,7 @@ class GoodsSelectionPresenter @AssistedInject constructor(
         }
 
         return GoodsSelectionScreen.State(
-            selectedGoodsIds = storeState.form.selectedGoodsIds,
+            selectedGoods = storeState.form.selectedGoods,
             onToggleGoods = store::selectOrDeselectGoods,
             onSearchClick = ::onSearchClick,
             onNext = {},
