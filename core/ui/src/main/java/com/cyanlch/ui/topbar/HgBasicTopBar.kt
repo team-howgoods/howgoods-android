@@ -25,11 +25,10 @@ fun HgBasicTopBar(
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_move_20),
+                    painter = painterResource(id = R.drawable.ic_back_30),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(24.dp)
-                        .rotate(180f),
+                        .size(30.dp),
                 )
             }
         },
