@@ -11,11 +11,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -47,24 +48,40 @@ class GoodsSearchUi : Ui<GoodsSearchScreen.State> {
         }
 
         HGTheme {
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .background(LocalHGColors.current.bgDefault)
-                    .padding(horizontal = 16.dp),
-            ) {
-                HgBasicTopBar(onBackClick = state.onBack)
-                HeightSpacer(16)
-                HgSearchField(
-                    value = state.query,
-                    onValueChange = state.onQueryChange,
-                    placeholder = "굿즈 이름을 입력해 주세요",
-                    modifier = Modifier.fillMaxWidth(),
+            Scaffold(
+                topBar = {
+                    HgBasicTopBar(onBackClick = state.onBack)
+                },
+            ) { inner ->
+                GoodsSearchContent(
+                    state = state,
+                    modifier = modifier.padding(inner),
                 )
-                HeightSpacer(16)
-                GoodsGrid(state)
             }
         }
+    }
+}
+
+@Composable
+private fun GoodsSearchContent(
+    modifier: Modifier,
+    state: GoodsSearchScreen.State,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(LocalHGColors.current.bgDefault)
+            .padding(horizontal = 16.dp),
+    ) {
+        HeightSpacer(16)
+        HgSearchField(
+            value = state.query,
+            onValueChange = state.onQueryChange,
+            placeholder = "굿즈 이름을 입력해 주세요",
+            modifier = Modifier.fillMaxWidth(),
+        )
+        HeightSpacer(16)
+        GoodsGrid(state)
     }
 }
 
@@ -76,9 +93,9 @@ private fun GoodsGrid(state: GoodsSearchScreen.State) {
             val info = gridState.layoutInfo
             info.visibleItemsInfo.lastOrNull()?.index
         }
-        .map { it ?: 0 }
-        .filter { state.canLoadMore && it >= state.items.lastIndex }
-        .collectLatest { state.onLoadMore() }
+            .map { it ?: 0 }
+            .filter { state.canLoadMore && it >= state.items.lastIndex }
+            .collectLatest { state.onLoadMore() }
     }
 
     LazyVerticalGrid(

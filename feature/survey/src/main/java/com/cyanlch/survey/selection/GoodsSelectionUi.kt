@@ -1,15 +1,12 @@
 package com.cyanlch.survey.selection
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,13 +16,13 @@ import com.cyanlch.designsystem.WidthSpacer
 import com.cyanlch.designsystem.button.HgButtonDefaults
 import com.cyanlch.designsystem.button.HgSolidButton
 import com.cyanlch.designsystem.search.HgSearchField
-import com.cyanlch.designsystem.select.HgImageSelector
 import com.cyanlch.designsystem.text.HgText
 import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 import com.cyanlch.designsystem.ui.LocalHGColors
 import com.cyanlch.survey.component.SurveyBottomBar
+import com.cyanlch.survey.selection.component.SelectedGoodsRow
 import com.cyanlch.ui.topbar.HgBasicTopBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
@@ -115,25 +112,6 @@ private fun GoodsSelectionContent(
                     .clickable { state.onSearchClick() },
             )
             SelectedGoodsRow(state)
-        }
-    }
-}
-
-@Composable
-private fun SelectedGoodsRow(state: GoodsSelectionScreen.State) {
-    if (state.selectedGoods.isEmpty()) return
-    HeightSpacer(16)
-    LazyRow {
-        items(state.selectedGoods) { goods ->
-            HgImageSelector(
-                imageUrl = goods.imageUrl,
-                contentDescription = goods.name,
-                selected = true,
-                onClick = { state.onToggleGoods(goods) },
-                modifier = Modifier.size(84.dp),
-                cnt = state.selectedGoods.indexOf(goods) + 1,
-            )
-            WidthSpacer(8)
         }
     }
 }
