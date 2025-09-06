@@ -7,7 +7,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,11 +24,10 @@ fun HgBasicTopBar(
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_move_20),
+                    painter = painterResource(id = R.drawable.ic_back_30),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(24.dp)
-                        .rotate(180f),
+                        .size(30.dp),
                 )
             }
         },

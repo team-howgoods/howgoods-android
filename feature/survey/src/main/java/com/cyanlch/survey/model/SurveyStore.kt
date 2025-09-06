@@ -114,20 +114,32 @@ class SurveyStore @Inject constructor(
     }
 
     fun selectOrDeselectGoodsType(goodsTypeId: Int) = updateForm { f ->
-        val next = f.selectedGoodsTypes.toMutableSet()
+        val next = f.selectedGoodsTypeIds.toMutableSet()
         if (!next.add(goodsTypeId)) next.remove(goodsTypeId)
-        f.copy(selectedGoodsTypes = next)
+        f.copy(selectedGoodsTypeIds = next)
+    }
+
+    fun selectOrDeselectGoods(goods: SelectedGoods) = updateForm { f ->
+        val next = f.selectedGoods.toMutableList()
+        val existingIndex = next.indexOfFirst { it.id == goods.id }
+        if (existingIndex >= 0) {
+            next.removeAt(existingIndex)
+        } else {
+            if (next.size >= SurveySelectionPolicy.MAX_GOODS) return@updateForm f
+            next.add(goods)
+        }
+        f.copy(selectedGoods = next.toList())
     }
 
     fun selectOrDeselectAllGoodsType() = updateForm { f ->
-        val shouldSelectAll = f.selectedGoodsTypes.isEmpty()
+        val shouldSelectAll = f.selectedGoodsTypeIds.isEmpty()
         val next = if (shouldSelectAll) {
             f.goodsTypes.map { it.goodsTypeId }.toSet()
         } else {
             emptySet()
         }
 
-        f.copy(selectedGoodsTypes = next)
+        f.copy(selectedGoodsTypeIds = next)
     }
 
     // ---------- Validation & Submit ----------
@@ -135,7 +147,7 @@ class SurveyStore @Inject constructor(
         val result = when (step) {
             SurveyStep.Anime -> SurveyValidator.validateAnime(form)
             SurveyStep.Character -> SurveyValidator.validateCharacter(form)
-            SurveyStep.GoodsType -> SurveyValidator.validateGoods(form)
+            SurveyStep.GoodsType -> SurveyValidator.validateGoodsType(form)
         }
 
         result.errors.firstOrNull()?.let {

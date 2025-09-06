@@ -8,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
@@ -29,6 +30,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -37,6 +39,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.ui.HGTheme
+import com.cyanlch.designsystem.ui.HGTypography
 
 @Composable
 fun HgImageSelector(
@@ -56,6 +59,7 @@ fun HgImageSelector(
     gradientCoverage: Float = 0.40f,
     gradientAlpha: Float = 0.80f,
     placeholderColor: Color = Color(0xFFD9D9D9),
+    cnt: Int? = null,
 ) {
     HgImageSelectorLayout(
         selected = selected,
@@ -71,6 +75,7 @@ fun HgImageSelector(
         gradientCoverage = gradientCoverage,
         gradientAlpha = gradientAlpha,
         placeholderColor = placeholderColor,
+        cnt = cnt,
     ) {
         Image(
             painter = painter,
@@ -103,6 +108,7 @@ fun HgImageSelector(
     error: Painter? = null,
     fallback: Painter? = null,
     crossfade: Boolean = true,
+    cnt: Int? = null,
 ) {
     HgImageSelectorLayout(
         selected = selected,
@@ -118,12 +124,12 @@ fun HgImageSelector(
         gradientCoverage = gradientCoverage,
         gradientAlpha = gradientAlpha,
         placeholderColor = placeholderColor,
+        cnt = cnt,
     ) {
         val request = ImageRequest.Builder(LocalContext.current)
             .data(imageUrl)
             .crossfade(crossfade)
             .build()
-
         AsyncImage(
             model = request,
             contentDescription = contentDescription,
@@ -151,6 +157,7 @@ private fun HgImageSelectorLayout(
     gradientCoverage: Float = 0.40f,
     gradientAlpha: Float = 0.80f,
     placeholderColor: Color = Color(0xFFD9D9D9),
+    cnt: Int? = null,
     imageContent: @Composable BoxScope.() -> Unit,
 ) {
     val colors = ImageSelectorDefaults.colors(selected)
@@ -196,6 +203,20 @@ private fun HgImageSelectorLayout(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(captionPadding),
+            )
+        }
+
+        if (cnt != null && selected) {
+            Text(
+                text = "$cnt",
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                style = HGTypography.body1SemiBold,
+                modifier = Modifier
+                    .padding(start = 12.dp, top = 12.dp)
+                    .clip(RoundedCornerShape(4.dp))
+                    .defaultMinSize(26.dp)
+                    .background(HGTheme.colors.primary),
             )
         }
     }
@@ -293,6 +314,23 @@ fun HgImageSelectorNonCaptionLargePreview() {
             imageSize = ImageSelectorSize.Large,
             onClick = {},
             modifier = Modifier.size(200.dp),
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Composable
+fun HgImageSelectorCntTextPreview() {
+    HGTheme {
+        HgImageSelector(
+            painter = painterResource(R.drawable.sample_image),
+            contentDescription = "샘플 이미지",
+            selected = true,
+            imageSize = ImageSelectorSize.Large,
+            onClick = {},
+            modifier = Modifier.size(200.dp),
+            cnt = 20,
         )
     }
 }
