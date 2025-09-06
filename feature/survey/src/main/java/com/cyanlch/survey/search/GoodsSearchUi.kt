@@ -21,12 +21,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.HeightSpacer
+import com.cyanlch.designsystem.button.HgSolidButton
 import com.cyanlch.designsystem.search.HgSearchField
 import com.cyanlch.designsystem.select.HgImageSelector
 import com.cyanlch.designsystem.text.HgText
+import com.cyanlch.designsystem.text.HgTextTone
 import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 import com.cyanlch.designsystem.ui.LocalHGColors
+import com.cyanlch.survey.component.SurveyBottomBar
 import com.cyanlch.ui.topbar.HgBasicTopBar
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.ui.Ui
@@ -52,6 +55,21 @@ class GoodsSearchUi : Ui<GoodsSearchScreen.State> {
                 topBar = {
                     HgBasicTopBar(onBackClick = state.onBack)
                 },
+                bottomBar = {
+                    SurveyBottomBar {
+                        HgSolidButton(
+                            onClick = state.onBack,
+                            modifier = Modifier
+                                .weight(1f),
+                        ) {
+                            HgText(
+                                text = "완료",
+                                style = HGTypography.body2SemiBold,
+                                tone = HgTextTone.Unspecified,
+                            )
+                        }
+                    }
+                }
             ) { inner ->
                 GoodsSearchContent(
                     state = state,
