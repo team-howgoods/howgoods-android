@@ -62,7 +62,7 @@ object SurveyValidator {
     }
 
     fun validateGoods(form: SurveyForm): ValidationResult {
-        val chosen = form.selectedGoodsIds
+        val chosen = form.selectedGoods
         val errors = buildList {
             if (chosen.isEmpty()) {
                 add(

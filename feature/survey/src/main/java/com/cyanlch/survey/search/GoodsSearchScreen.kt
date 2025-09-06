@@ -13,7 +13,7 @@ data object GoodsSearchScreen : Screen {
         val canLoadMore: Boolean,
         val errorMessage: String?,
         val onQueryChange: (String) -> Unit,
-        val onToggleGoods: (Int) -> Unit,
+        val onToggleGoods: (GoodsSearchItem) -> Unit,
         val onLoadMore: () -> Unit,
         val onBack: () -> Unit,
         val onErrorShown: () -> Unit,
@@ -25,4 +25,5 @@ data class GoodsSearchItem(
     val name: String,
     val imageUrl: String,
     val isSelected: Boolean,
+    val order: Int? = null,
 )

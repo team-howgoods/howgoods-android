@@ -6,6 +6,12 @@ import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
 import com.cyanlch.domain.model.goods.GoodsType
 
+data class SelectedGoods(
+    val id: Int,
+    val name: String,
+    val imageUrl: String,
+)
+
 data class SurveyForm(
     val animeCatalog: List<Anime> = emptyList(),
     val selectedAnimeIds: Set<AnimeId> = emptySet(),
@@ -13,7 +19,7 @@ data class SurveyForm(
     val characterListsByAnime: Map<AnimeId, AnimeCharacterList> = emptyMap(),
     val goodsTypes: List<GoodsType> = emptyList(),
     val selectedGoodsTypeIds: Set<Int> = emptySet(),
-    val selectedGoodsIds: Set<Int> = emptySet(),
+    val selectedGoods: List<SelectedGoods> = emptyList(),
 )
 
 enum class SurveyStep { Anime, Character, GoodsType }
