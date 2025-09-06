@@ -41,7 +41,8 @@ class TokenRefresher @Inject constructor(
             BearerTokens(res.accessToken, res.refreshToken)
         } catch (e: ClientRequestException) { // 4xx
             if (e.response.status == HttpStatusCode.Unauthorized ||
-                e.response.status == HttpStatusCode.Forbidden) {
+                e.response.status == HttpStatusCode.Forbidden
+            ) {
                 userTokenDataStore.clearUserToken()
             }
             null

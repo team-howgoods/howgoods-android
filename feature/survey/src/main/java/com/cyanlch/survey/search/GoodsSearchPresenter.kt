@@ -10,8 +10,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cyanlch.domain.usecase.survey.SearchGoodsUseCase
-import com.cyanlch.survey.model.SurveyStore
 import com.cyanlch.survey.model.SelectedGoods
+import com.cyanlch.survey.model.SurveyStore
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
@@ -96,7 +96,7 @@ class GoodsSearchPresenter @AssistedInject constructor(
 
         fun onToggle(item: GoodsSearchItem) {
             store.selectOrDeselectGoods(
-                SelectedGoods(item.id, item.name, item.imageUrl)
+                SelectedGoods(item.id, item.name, item.imageUrl),
             )
             val selected = store.uiState.value.form.selectedGoods
             val orderMap = selected.mapIndexed { index, g -> g.id to index + 1 }.toMap()
@@ -109,7 +109,9 @@ class GoodsSearchPresenter @AssistedInject constructor(
             }
         }
 
-        fun onBack() { navigator.pop() }
+        fun onBack() {
+            navigator.pop()
+        }
 
         return GoodsSearchScreen.State(
             query = query,

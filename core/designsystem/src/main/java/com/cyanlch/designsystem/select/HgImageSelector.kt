@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.cyanlch.designsystem.R
-import com.cyanlch.designsystem.text.HgText
 import com.cyanlch.designsystem.ui.HGTheme
 import com.cyanlch.designsystem.ui.HGTypography
 
@@ -217,7 +216,7 @@ private fun HgImageSelectorLayout(
                     .padding(start = 12.dp, top = 12.dp)
                     .clip(RoundedCornerShape(4.dp))
                     .defaultMinSize(26.dp)
-                    .background(HGTheme.colors.primary)
+                    .background(HGTheme.colors.primary),
             )
         }
     }
