@@ -3,6 +3,7 @@ package com.cyanlch.survey.selection
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -92,30 +93,34 @@ private fun GoodsSelectionContent(
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            item {
-                HgText(
-                    text = "최근 관심 있는 굿즈가 있다면 골라주세요!\n" +
-                        "최저가일 때 알려 드릴게요",
-                    style = HGTypography.headlineSemiBold,
-                )
-                HeightSpacer(8)
-                HgText(
-                    text = "최대 3개 까지만 선택 가능해요",
-                    style = HGTypography.label1Medium,
-                    tone = HgTextTone.Assistive,
-                )
-                HeightSpacer(16)
-                HgSearchField(
-                    value = "",
-                    onValueChange = {},
-                    placeholder = "굿즈 이름을 입력해 주세요",
-                    enabled = false,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { state.onSearchClick() },
-                )
-                SelectedGoodsRow(state)
-                HeightSpacer(24)
+            stickyHeader {
+                Column(
+                    modifier = Modifier.background(LocalHGColors.current.bgDefault),
+                ) {
+                    HgText(
+                        text = "최근 관심 있는 굿즈가 있다면 골라주세요!\n" +
+                            "최저가일 때 알려 드릴게요",
+                        style = HGTypography.headlineSemiBold,
+                    )
+                    HeightSpacer(8)
+                    HgText(
+                        text = "최대 3개 까지만 선택 가능해요",
+                        style = HGTypography.label1Medium,
+                        tone = HgTextTone.Assistive,
+                    )
+                    HeightSpacer(16)
+                    HgSearchField(
+                        value = "",
+                        onValueChange = {},
+                        placeholder = "굿즈 이름을 입력해 주세요",
+                        enabled = false,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { state.onSearchClick() },
+                    )
+                    SelectedGoodsRow(state)
+                    HeightSpacer(16)
+                }
             }
 
             items(goodsGroups.entries.toList()) { entry ->
