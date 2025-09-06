@@ -40,12 +40,12 @@ private val GoodsImageSize = 167.dp
 
 @Composable
 fun GoodsGroup(
-    animationName: String,
+    animeName: String,
     goods: List<GoodsSelectionScreen.GoodsItem>,
     selectedGoods: List<SelectedGoods>,
     onToggleGoods: (SelectedGoods) -> Unit,
 ) {
-    var visibleCount by remember(animationName) {
+    var visibleCount by remember(animeName) {
         mutableIntStateOf(minOf(4, goods.size))
     }
     val orderById = remember(selectedGoods) {
@@ -53,7 +53,7 @@ fun GoodsGroup(
     }
     Column(modifier = Modifier.fillMaxWidth()) {
         HgText(
-            text = animationName,
+            text = animeName,
             style = HGTypography.headlineMedium,
         )
 

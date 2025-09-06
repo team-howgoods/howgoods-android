@@ -11,8 +11,8 @@ data object GoodsSelectionScreen : Screen {
         val id: Int,
         val name: String,
         val imageUrl: String,
-        val animationId: Int,
-        val animationName: String,
+        val animeId: Int,
+        val animeName: String,
     )
 
     data class State(

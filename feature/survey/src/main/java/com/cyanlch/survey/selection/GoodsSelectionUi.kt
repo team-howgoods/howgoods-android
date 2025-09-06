@@ -92,7 +92,7 @@ private fun GoodsSelectionContent(
             .background(LocalHGColors.current.bgDefault)
             .padding(horizontal = 16.dp),
     ) {
-        val goodsGroups = state.items.groupBy { it.animationId }
+        val goodsGroups = state.items.groupBy { it.animeId }
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -127,9 +127,9 @@ private fun GoodsSelectionContent(
             }
 
             items(goodsGroups.entries.toList()) { entry ->
-                val animationName = entry.value.first().animationName
+                val animeName = entry.value.first().animeName
                 GoodsGroup(
-                    animationName = animationName,
+                    animeName = animeName,
                     goods = entry.value,
                     selectedGoods = state.selectedGoods,
                     onToggleGoods = state.onToggleGoods,
