@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
@@ -93,7 +95,9 @@ private fun GoodsGroup(
     selectedGoods: List<SelectedGoods>,
     onToggleGoods: (SelectedGoods) -> Unit,
 ) {
-    var visibleCount by remember(animationName) { mutableStateOf(minOf(4, goods.size)) }
+    var visibleCount by remember(animationName) {
+        mutableIntStateOf(minOf(4, goods.size))
+    }
     Column(modifier = Modifier.fillMaxWidth()) {
         HgText(
             text = animationName,
