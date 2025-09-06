@@ -131,22 +131,15 @@ fun HgImageSelector(
             .data(imageUrl)
             .crossfade(crossfade)
             .build()
-
-        Box {
-            Text(
-                text = "$cnt",
-                modifier = Modifier.padding(start = 12.dp, top = 12.dp)
-            )
-            AsyncImage(
-                model = request,
-                contentDescription = contentDescription,
-                placeholder = placeholder,
-                error = error,
-                fallback = fallback,
-                contentScale = contentScale,
-                modifier = Modifier.matchParentSize(),
-            )
-        }
+        AsyncImage(
+            model = request,
+            contentDescription = contentDescription,
+            placeholder = placeholder,
+            error = error,
+            fallback = fallback,
+            contentScale = contentScale,
+            modifier = Modifier.matchParentSize(),
+        )
     }
 }
 
