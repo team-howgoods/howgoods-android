@@ -69,7 +69,7 @@ class GoodsSearchUi : Ui<GoodsSearchScreen.State> {
                             )
                         }
                     }
-                }
+                },
             ) { inner ->
                 GoodsSearchContent(
                     state = state,
