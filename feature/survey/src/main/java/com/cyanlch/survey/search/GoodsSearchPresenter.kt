@@ -87,8 +87,9 @@ class GoodsSearchPresenter @AssistedInject constructor(
 
         fun onToggle(id: Int) {
             store.selectOrDeselectGoods(id)
-            items = items.map {
-                if (it.id == id) it.copy(isSelected = !it.isSelected) else it
+            val isSelected = id in store.uiState.value.form.selectedGoodsIds
+            items = items.map { item ->
+                if (item.id == id) item.copy(isSelected = isSelected) else item
             }
         }
 
