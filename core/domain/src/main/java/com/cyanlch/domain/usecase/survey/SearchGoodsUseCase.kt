@@ -34,6 +34,21 @@ private val DUMMY_GOODS = listOf(
         name = "원피스 조로 검 세트",
         imageUrl = "https://example.com/goods6.jpg",
     ),
+    Goods(
+        id = 7,
+        name = "주술회전 손거울 고죠 사토루",
+        imageUrl = "https://example.com/goods7.jpg",
+    ),
+    Goods(
+        id = 8,
+        name = "주술회전 쿠키 세트 이타도리·후시구로·쿠기사키",
+        imageUrl = "https://example.com/goods8.jpg",
+    ),
+    Goods(
+        id = 9,
+        name = "주술회전 포스트카드 컬렉션 모든 등장인물 한정판 세트",
+        imageUrl = "https://example.com/goods9.jpg",
+    ),
 )
 
 data class GoodsSearchResult(
