@@ -1,8 +1,8 @@
 package com.cyanlch.domain.policy
 
-import com.cyanlch.domain.model.anime.AnimeCharacterList
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
+import com.cyanlch.domain.model.character.AnimeCharacters
 
 object SurveySelectionPolicy {
     const val MIN_ANIME = 1
@@ -14,7 +14,7 @@ object SurveySelectionPolicy {
 
     fun isCharacterAllowed(
         selectedAnimeIds: Set<AnimeId>,
-        characterListsByAnime: Map<AnimeId, AnimeCharacterList>,
+        characterListsByAnime: Map<AnimeId, AnimeCharacters>,
         candidateId: CharacterId,
     ): Boolean = selectedAnimeIds.any { aid ->
         characterListsByAnime[aid]?.characters.orEmpty().any { it.id == candidateId }
@@ -22,7 +22,7 @@ object SurveySelectionPolicy {
 
     fun pruneCharactersNotIn(
         selectedAnimeIds: Set<AnimeId>,
-        characterListsByAnime: Map<AnimeId, AnimeCharacterList>,
+        characterListsByAnime: Map<AnimeId, AnimeCharacters>,
         chosenCharacterIds: Set<CharacterId>,
     ): Set<CharacterId> {
         val allowed: Set<CharacterId> = selectedAnimeIds

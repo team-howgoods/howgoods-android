@@ -1,9 +1,9 @@
 package com.cyanlch.survey.model
 
 import com.cyanlch.domain.model.anime.Anime
-import com.cyanlch.domain.model.anime.AnimeCharacterList
 import com.cyanlch.domain.model.anime.AnimeId
 import com.cyanlch.domain.model.anime.CharacterId
+import com.cyanlch.domain.model.character.AnimeCharacters
 import com.cyanlch.domain.model.goods.GoodsType
 
 data class SelectedGoods(
@@ -16,7 +16,7 @@ data class SurveyForm(
     val animeCatalog: List<Anime> = emptyList(),
     val selectedAnimeIds: Set<AnimeId> = emptySet(),
     val selectedCharacterIds: Set<CharacterId> = emptySet(),
-    val characterListsByAnime: Map<AnimeId, AnimeCharacterList> = emptyMap(),
+    val characterListsByAnime: Map<AnimeId, AnimeCharacters> = emptyMap(),
     val goodsTypes: List<GoodsType> = emptyList(),
     val selectedGoodsTypeIds: Set<Int> = emptySet(),
     val selectedGoods: List<SelectedGoods> = emptyList(),

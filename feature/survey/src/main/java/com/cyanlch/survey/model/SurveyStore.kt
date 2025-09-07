@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
-import kotlin.collections.emptyList
 
 @ActivityRetainedScoped
 class SurveyStore @Inject constructor(
@@ -47,8 +46,8 @@ class SurveyStore @Inject constructor(
         }
         setLoading(true)
         fetchCharactersByAnime(need).fold(
-            onSuccess = { lists ->
-                val incoming = lists.associateBy { it.anime.id }
+            onSuccess = { characters ->
+                val incoming = characters.associateBy { it.anime.id }
                 val merged = form.characterListsByAnime
                     .toMutableMap()
                     .apply { putAll(incoming) }
