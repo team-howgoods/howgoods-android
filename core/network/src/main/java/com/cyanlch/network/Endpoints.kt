@@ -8,4 +8,5 @@ object Endpoints {
 
     const val SURVEY_ANIMATIONS = "/api/survey/animations"
     const val SURVEY_CHARACTERS = "/api/survey/characters"
+    const val SURVEY_CHARACTERS_PARAMETER = "animationIds"
 }
