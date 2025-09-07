@@ -30,14 +30,14 @@ class GoodsTypePresenter @AssistedInject constructor(
 
         val goodsTypes = remember(
             storeState.form.goodsTypes,
-            storeState.form.selectedGoodsTypes,
+            storeState.form.selectedGoodsTypeIds,
         ) {
             storeState.form.goodsTypes.map { goodsType ->
                 GoodsTypeGridItem(
                     goodsTypeId = goodsType.goodsTypeId,
                     name = goodsType.name,
                     imageUrl = goodsType.imageUrl,
-                    isSelected = goodsType.goodsTypeId in storeState.form.selectedGoodsTypes,
+                    isSelected = goodsType.goodsTypeId in storeState.form.selectedGoodsTypeIds,
                 )
             }
         }
@@ -54,8 +54,8 @@ class GoodsTypePresenter @AssistedInject constructor(
 
         return GoodsTypeScreen.State(
             goodsTypes = goodsTypes,
-            selectedGoodsTypes = storeState.form.selectedGoodsTypes,
-            selectedGoodsTypeCount = storeState.form.selectedGoodsTypes.size,
+            selectedGoodsTypes = storeState.form.selectedGoodsTypeIds,
+            selectedGoodsTypeCount = storeState.form.selectedGoodsTypeIds.size,
             onToggleGoodsType = store::selectOrDeselectGoodsType,
             onToggleAllGoodsType = store::selectOrDeselectAllGoodsType,
             onNext = ::onNext,

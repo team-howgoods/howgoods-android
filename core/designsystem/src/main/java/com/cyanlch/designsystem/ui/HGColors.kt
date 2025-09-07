@@ -44,6 +44,7 @@ object HGColors {
 
     // Semantic (default)
     val bgPrimary = Color(0x1449B88A)
+    val iconDark = gray600
 
     // System
     val warning = Color(0xFFFF6F6F)

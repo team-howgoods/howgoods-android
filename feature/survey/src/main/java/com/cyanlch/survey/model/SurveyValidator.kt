@@ -45,8 +45,24 @@ object SurveyValidator {
         return ValidationResult(errors.isEmpty(), errors)
     }
 
+    fun validateGoodsType(form: SurveyForm): ValidationResult {
+        val chosen = form.selectedGoodsTypeIds
+        val errors = buildList {
+            if (chosen.isEmpty()) {
+                add(
+                    FieldError(
+                        FormFieldKey.GoodsTypeSelection,
+                        "굿즈 유형을 1개 이상 선택하세요",
+                    ),
+                )
+            }
+        }
+
+        return ValidationResult(errors.isEmpty(), errors)
+    }
+
     fun validateGoods(form: SurveyForm): ValidationResult {
-        val chosen = form.selectedGoodsIds
+        val chosen = form.selectedGoods
         val errors = buildList {
             if (chosen.isEmpty()) {
                 add(
