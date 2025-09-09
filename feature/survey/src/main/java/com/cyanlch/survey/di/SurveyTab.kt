@@ -18,6 +18,6 @@ object SurveyTab {
         root = AnimeScreen,
         labelResId = R.string.tab_survey,
         iconResId = com.cyanlch.ui.R.drawable.ic_apple,
-        order = 0,
+        order = 1,
     )
 }
