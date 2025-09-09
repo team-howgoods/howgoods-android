@@ -38,9 +38,10 @@ class MainShellUi @Inject constructor() : Ui<MainShellScreen.State> {
         val backStacks = state.tabs.map { spec ->
             rememberSaveableBackStack(root = spec.root)
         }
+        val navigators = backStacks.map { rememberCircuitNavigator(it) }
         val idx = state.currentIndex.coerceIn(0, state.tabs.lastIndex)
         val currentBackStack = backStacks[idx]
-        val currentNavigator = rememberCircuitNavigator(currentBackStack)
+        val currentNavigator = navigators[idx]
 
         Scaffold(
             bottomBar = {
