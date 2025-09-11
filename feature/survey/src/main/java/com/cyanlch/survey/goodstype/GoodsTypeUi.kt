@@ -5,19 +5,24 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.cyanlch.designsystem.HeightSpacer
+import com.cyanlch.designsystem.R
 import com.cyanlch.designsystem.button.HgSolidButton
 import com.cyanlch.designsystem.select.HgImageSelector
 import com.cyanlch.designsystem.text.HgText
@@ -96,24 +101,31 @@ private fun GoodsTypeContent(
                 style = HGTypography.headlineSemiBold,
             )
             HeightSpacer(28)
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(28.dp),
-                modifier = Modifier
-                    .fillMaxWidth(),
-            ) {
-                PrimaryColorButton(
-                    text = "전체 선택",
-                    onClick = { state.onToggleAllGoodsType() },
-                )
 
-                for (goodsType in state.goodsTypes) {
+            AllToggleButton(
+                isAllChecked = state.selectedGoodsTypes.size == state.goodsTypes.size,
+                onClick = { state.onToggleAllGoodsType() },
+                modifier = Modifier.padding(vertical = 6.dp),
+            )
+
+            HeightSpacer(8)
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                items(
+                    items = state.goodsTypes,
+                    key = { it.goodsTypeId },
+                ) { goodsType ->
                     HgImageSelector(
                         imageUrl = goodsType.imageUrl,
                         selected = goodsType.isSelected,
                         onClick = { state.onToggleGoodsType(goodsType.goodsTypeId) },
                         caption = goodsType.name,
-                        modifier = Modifier.size(108.dp),
+                        modifier = Modifier.aspectRatio(1f),
                     )
                 }
             }
@@ -122,22 +134,29 @@ private fun GoodsTypeContent(
 }
 
 @Composable
-private fun PrimaryColorButton(
-    text: String,
+private fun AllToggleButton(
+    modifier: Modifier = Modifier,
+    isAllChecked: Boolean,
     onClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .size(108.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(HGTheme.colors.primary)
-            .clickable(onClick = onClick),
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .clickable(onClick = onClick)
+            .padding(4.dp),
     ) {
+        Icon(
+            painter = if (isAllChecked) {
+                painterResource(R.drawable.ic_check_primary)
+            } else {
+                painterResource(R.drawable.ic_check_gray)
+            },
+            contentDescription = "all checked $isAllChecked",
+            tint = Color.Unspecified,
+        )
         HgText(
-            text = text,
-            style = HGTypography.body1SemiBold,
-            tone = HgTextTone.White,
-            modifier = Modifier.align(Alignment.Center),
+            text = "전체 선택",
+            style = HGTypography.label1SemiBold,
         )
     }
 }
