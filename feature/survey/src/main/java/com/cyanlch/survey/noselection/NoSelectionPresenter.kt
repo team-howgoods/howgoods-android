@@ -1,7 +1,7 @@
 package com.cyanlch.survey.noselection
 
 import androidx.compose.runtime.Composable
-import com.cyanlch.navigation.MainShellStarter
+import com.cyanlch.navigation.screenstarter.MainShellStarter
 import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter

@@ -1,7 +1,7 @@
 package com.cyanlch.main.di
 
 import com.cyanlch.main.MainShellScreen
-import com.cyanlch.navigation.MainShellStarter
+import com.cyanlch.navigation.screenstarter.MainShellStarter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
